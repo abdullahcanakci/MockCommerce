@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 
 import com.mockcommerce.R
@@ -27,11 +26,11 @@ class ExploreFragment : Fragment() {
         val v =  inflater.inflate(R.layout.explore_fragment, container, false)
 
         v.findViewById<Button>(R.id.btn_expose).setOnClickListener{
-            this.findNavController().navigate(R.id.action_dest_explore_to_dest_expose)
+            this.findNavController().navigate(R.id.action_explore_to_dest_expose)
         }
 
         v.findViewById<Button>(R.id.btn_info).setOnClickListener{
-            this.findNavController().navigate(R.id.action_dest_explore_to_dest_info)
+            this.findNavController().navigate(R.id.action_explore_to_dest_info)
         }
 
         return v
