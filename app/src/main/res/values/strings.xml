@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">mockCommerce</string>
+
+    <string name="title_categories">Kategoriler</string>
+    <string name="title_basket">Sepet</string>
+    <string name="title_explore">Keşfet</string>
+    <string name="title_orders">Şiparişlerim</string>
+    <string name="title_account">Hesap</string>
+
+</resources>
