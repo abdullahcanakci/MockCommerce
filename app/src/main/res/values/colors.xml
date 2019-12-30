@@ -3,8 +3,12 @@
     <color name="colorPrimaryLight">#ff904e</color>
     <color name="colorPrimary">#f59f28</color>
     <color name="colorPrimaryDark">#ed5f1f</color>
-    <color name="colorAccent">#47C6EB</color>
+    <color name="colorAccent">#b128f5</color>
+    <color name="colorHighlight">#28b4f5</color>
     <color name="nav_bar_background">#f5f5f5</color>
     <color name="nav_bar_selected">#ed5f1f</color>
     <color name="nav_bar_unselected">#78909c</color>
+    <color name="carousel_main_title_background">@color/colorPrimary</color>
+    <color name="carousel_main_text_color">#ffffff</color>
+    <color name="carousel_main_subtitle_background">@color/colorAccent</color>
 </resources>
