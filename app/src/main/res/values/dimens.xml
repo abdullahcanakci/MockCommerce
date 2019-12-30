@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="carousel_main_padding_horizontal">16dp</dimen>
-    <dimen name="carousel_corner_radius">8dp</dimen>
+    <dimen name="showcase_main_padding_horizontal">16dp</dimen>
+    <dimen name="showcase_corner_radius">8dp</dimen>
+    <dimen name="showcase_subtitle_size">24sp</dimen>
+    <dimen name="showcase_title_size">32sp</dimen>
 </resources>

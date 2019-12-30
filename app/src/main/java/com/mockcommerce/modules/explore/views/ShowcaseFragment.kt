@@ -7,24 +7,24 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.mockcommerce.R
-import com.mockcommerce.databinding.CarouselItemBinding
-import com.mockcommerce.models.CarouselItem
+import com.mockcommerce.databinding.ShowcaseItemBinding
+import com.mockcommerce.models.ShowcaseItem
 
-class CarouselFragment : Fragment() {
-    lateinit var binding: CarouselItemBinding
-    lateinit var model: CarouselItem
+class ShowcaseFragment : Fragment() {
+    lateinit var binding: ShowcaseItemBinding
+    lateinit var model: ShowcaseItem
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate<CarouselItemBinding>(inflater, R.layout.carousel_item, container, false)
+        binding = DataBindingUtil.inflate<ShowcaseItemBinding>(inflater, R.layout.showcase_item, container, false)
         binding.model = model
         return binding.root
     }
 
-    fun set(item: CarouselItem){
+    fun set(item: ShowcaseItem){
         model = item
     }
 }

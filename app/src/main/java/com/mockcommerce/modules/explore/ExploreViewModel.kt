@@ -2,11 +2,11 @@ package com.mockcommerce.modules.explore
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mockcommerce.models.CarouselItem
+import com.mockcommerce.models.ShowcaseItem
 
 class ExploreViewModel : ViewModel() {
-    val carouselItems: MutableLiveData<ArrayList<CarouselItem>> by lazy {
-        MutableLiveData<ArrayList<CarouselItem>>()
+    val showcaseItems: MutableLiveData<ArrayList<ShowcaseItem>> by lazy {
+        MutableLiveData<ArrayList<ShowcaseItem>>()
     }
 
 }

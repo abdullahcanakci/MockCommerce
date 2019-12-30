@@ -1,15 +1,14 @@
 package com.mockcommerce.modules.explore.views
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.mockcommerce.models.CarouselItem
+import com.mockcommerce.models.ShowcaseItem
 
-class CarouselAdapter(private var items: List<CarouselItem>, fa: FragmentActivity) : FragmentStateAdapter(fa) {
+class ShowcaseAdapter(private var items: List<ShowcaseItem>, fa: FragmentActivity) : FragmentStateAdapter(fa) {
 
     override fun createFragment(position: Int): Fragment {
-        val  v = CarouselFragment()
+        val  v = ShowcaseFragment()
         v.set(items.get(position))
         return v
     }
@@ -18,7 +17,7 @@ class CarouselAdapter(private var items: List<CarouselItem>, fa: FragmentActivit
         return items.size
     }
 
-    fun update(newItems: List<CarouselItem>){
+    fun update(newItems: List<ShowcaseItem>){
         items = newItems
         this.notifyDataSetChanged()
     }
