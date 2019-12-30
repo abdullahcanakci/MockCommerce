@@ -4,4 +4,6 @@
     <dimen name="showcase_corner_radius">8dp</dimen>
     <dimen name="showcase_subtitle_size">24sp</dimen>
     <dimen name="showcase_title_size">32sp</dimen>
+    <dimen name="carousel_title_size">32sp</dimen>
+    <dimen name="carousel_subtitle_size">16sp</dimen>
 </resources>
