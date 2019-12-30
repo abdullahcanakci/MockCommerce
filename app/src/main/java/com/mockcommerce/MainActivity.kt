@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity(){
 
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity(){
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
+
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
