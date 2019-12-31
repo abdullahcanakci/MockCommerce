@@ -25,10 +25,20 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp" />
 
-        <com.mockcommerce.modules.views.CarouselView
+        <com.mockcommerce.shared.views.carousel.CarouselView
             android:id="@+id/test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:type="promo"
+            tools:title="Başlık"
+            tools:see_more="true"
+            />
+
+        <com.mockcommerce.shared.views.carousel.CarouselView
+            android:id="@+id/test1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:type="info"
             tools:title="Başlık"
             tools:see_more="true"
             />

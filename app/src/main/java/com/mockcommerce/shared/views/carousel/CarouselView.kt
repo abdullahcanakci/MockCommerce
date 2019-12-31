@@ -1,4 +1,4 @@
-package com.mockcommerce.modules.views
+package com.mockcommerce.shared.views.carousel
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,20 +9,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
 import com.mockcommerce.models.CarouselModel
-import com.mockcommerce.modules.explore.views.CarouselAdapter
+import com.mockcommerce.shared.views.carousel.Info.CarouselInfoAdapter
+import com.mockcommerce.shared.views.carousel.promo.CarouselPromoAdapter
+import com.mockcommerce.shared.CarouselViewInterface
 
 class CarouselView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
     var title: TextView
     var seeMore: TextView
     var carousel: RecyclerView
+    var adapter: CarouselViewInterface
 
     init{
         View.inflate(context, R.layout.view_carousel, this)
 
-        title = findViewById<TextView>(R.id.title)
-        seeMore = findViewById<TextView>(R.id.see_more_button)
-        carousel = findViewById<RecyclerView>(R.id.carousel)
+        title = findViewById(R.id.title)
+        seeMore = findViewById(R.id.see_more_button)
+        carousel = findViewById(R.id.carousel)
 
 
         val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.CarouselView)
@@ -33,8 +36,16 @@ class CarouselView(context: Context, attrs: AttributeSet) : LinearLayout(context
         ) View.VISIBLE
         else View.INVISIBLE
 
+        val type = attributeSet.getInt(R.styleable.CarouselView_type, 0)
+
         attributeSet.recycle()
 
+        if(type == 0){
+            adapter = CarouselPromoAdapter()
+        } else {
+            adapter = CarouselInfoAdapter()
+        }
+        carousel.adapter = adapter.getAdapter()
         carousel.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
@@ -45,7 +56,7 @@ class CarouselView(context: Context, attrs: AttributeSet) : LinearLayout(context
         else
             seeMore.visibility = View.INVISIBLE
 
-        carousel.adapter = CarouselAdapter(model.items)
+        adapter.setItems(model.items)
     }
 
 

@@ -48,6 +48,20 @@ class ExploreFragment : Fragment() {
 
         v.test.setModel(c)
 
+        v.test1.setModel(
+            CarouselModel(
+                "Bilgi",
+                false,
+                listOf(
+                    CarouselItemModel("", "", "Detay 1", R.mipmap.info_1),
+                    CarouselItemModel("", "", "Detay 2", R.mipmap.info_2),
+                    CarouselItemModel("", "", "Detay 3", R.mipmap.info_3),
+                    CarouselItemModel("", "", "Detay 4", R.mipmap.info_4),
+                    CarouselItemModel("", "", "Detay 5", R.mipmap.info_5)
+                )
+            )
+        )
+
         return v
     }
 
