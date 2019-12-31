@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="Carousel">
+    <declare-styleable name="CarouselView">
         <attr name="title" format="string" localization="suggested"/>
         <attr name="see_more" format="boolean" />
     </declare-styleable>

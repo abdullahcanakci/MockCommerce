@@ -1,25 +1,18 @@
 package com.mockcommerce.modules.explore
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBinderMapper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
-
 import com.mockcommerce.R
-import com.mockcommerce.databinding.CarouselBinding
-import com.mockcommerce.models.Carousel
 import com.mockcommerce.models.CarouselItem
+import com.mockcommerce.models.CarouselModel
 import com.mockcommerce.models.ShowcaseItem
-import com.mockcommerce.modules.explore.views.CarouselAdapter
 import com.mockcommerce.modules.explore.views.ShowcaseAdapter
 import com.mockcommerce.shared.ZoomOutPageTransformer
-import kotlinx.android.synthetic.main.carousel.view.*
 import kotlinx.android.synthetic.main.explore_fragment.view.*
 
 class ExploreFragment : Fragment() {
@@ -41,10 +34,7 @@ class ExploreFragment : Fragment() {
 
         setupShowcase(v.showcase)
 
-        val cBind = CarouselBinding.bind(v.main_carousel)
-
-
-        val c = Carousel(
+        val c = CarouselModel(
             "Başlık",
             true,
             listOf(
@@ -56,13 +46,7 @@ class ExploreFragment : Fragment() {
                 CarouselItem("Başlık 6", "Alt Başlık 6", "Başlık 6", R.mipmap.carousel_small_6)
             ))
 
-        cBind.model = c
-
-        val cBind1 = CarouselBinding.bind(v.secondary_carousel)
-        cBind1.model = c
-
-        setupCarousel(cBind)
-        setupCarousel(cBind1)
+        v.test.setModel(c)
 
         return v
     }
@@ -80,15 +64,4 @@ class ExploreFragment : Fragment() {
 
         showcase.setPageTransformer(ZoomOutPageTransformer())
     }
-
-    private fun setupCarousel(carouselBinding: CarouselBinding){
-
-
-        val adapter = CarouselAdapter(carouselBinding.model!!.items)
-        carouselBinding.carousel.adapter = adapter
-        carouselBinding.carousel.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-
-    }
-
-
 }
