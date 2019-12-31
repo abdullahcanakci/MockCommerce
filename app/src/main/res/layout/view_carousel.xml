@@ -45,6 +45,6 @@
         android:layout_marginTop="8dp"
         android:paddingTop="8dp"
         tools:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/carousel_item_small"
+        tools:listitem="@layout/layout_carousel_item"
         tools:orientation="horizontal" />
 </LinearLayout>

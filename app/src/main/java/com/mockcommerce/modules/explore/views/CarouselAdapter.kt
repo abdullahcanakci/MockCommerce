@@ -1,25 +1,23 @@
 package com.mockcommerce.modules.explore.views
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
-import com.mockcommerce.databinding.CarouselItemSmallBinding
-import com.mockcommerce.models.CarouselItem
+import com.mockcommerce.models.CarouselItemModel
+import com.mockcommerce.modules.views.CarouselItemView
 
-class CarouselAdapter(private val items: List<CarouselItem>) : RecyclerView.Adapter<CarouselAdapter.CarouselItemViewHolder>(){
+class CarouselAdapter(private val items: List<CarouselItemModel>) : RecyclerView.Adapter<CarouselAdapter.CarouselItemViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselItemViewHolder {
-        val binding: CarouselItemSmallBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            R.layout.carousel_item_small,
+
+        val view: CarouselItemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.view_carousel_item,
             parent,
             false
-        )
+        ) as CarouselItemView
 
-        return CarouselItemViewHolder(binding)
+        return CarouselItemViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -30,9 +28,9 @@ class CarouselAdapter(private val items: List<CarouselItem>) : RecyclerView.Adap
         holder.bind(items.get(position))
     }
 
-    inner class CarouselItemViewHolder(private val binding: CarouselItemSmallBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(item: CarouselItem){
-            binding.model = item
+    inner class CarouselItemViewHolder(private val view: CarouselItemView) : RecyclerView.ViewHolder(view){
+        fun bind(item: CarouselItemModel){
+            view.setModel(item)
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.mockcommerce.models
 
-data class CarouselItem(
+data class CarouselItemModel(
     val title: String,
     val subtitle: String,
     val description: String,
