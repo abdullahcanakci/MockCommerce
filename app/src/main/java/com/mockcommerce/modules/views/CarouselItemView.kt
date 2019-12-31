@@ -33,7 +33,7 @@ class CarouselItemView(context: Context, attrs: AttributeSet) : LinearLayout(con
         image.contentDescription = description.text
         image.setImageResource(attributeSet.getResourceId(R.styleable.CarouselItemView_imageSrc, R.drawable.ic_launcher_background))
 
-
+        attributeSet.recycle()
     }
 
     fun setModel(model: CarouselItemModel){
