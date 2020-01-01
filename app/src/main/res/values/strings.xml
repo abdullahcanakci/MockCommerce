@@ -6,5 +6,6 @@
     <string name="title_explore">Keşfet</string>
     <string name="title_orders">Şiparişlerim</string>
     <string name="title_account">Hesap</string>
+    <string name="sepete_ekle">Sepete Ekle</string>
 
 </resources>

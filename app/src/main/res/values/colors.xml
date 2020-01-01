@@ -14,4 +14,10 @@
     <color name="showcase_image_text_color">#ffffff</color>
     <color name="showcase_description_color">#6B6A6A</color>
     <color name="carousel_title">#6B6a6a</color>
+
+    <color name="text_main">#6B6a6a</color>
+    <color name="text_faint">#979696</color>
+    <color name="text_white">#eeeeee</color>
+    <color name="promotion_background_red">#E53935</color>
+    <color name="status_bar_color">#ffffff</color>
 </resources>

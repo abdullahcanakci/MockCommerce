@@ -9,5 +9,14 @@
         android:id="@+id/categories"
         android:name="com.mockcommerce.modules.categories.CategoriesFragment"
         android:label="categories_fragment"
-        tools:layout="@layout/categories_fragment" />
+        tools:layout="@layout/categories_fragment" >
+        <action
+            android:id="@+id/action_categories_to_dest_product_list"
+            app:destination="@id/dest_product_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/dest_product_list"
+        android:name="com.mockcommerce.shared.views.productlist.ProductListFragment"
+        android:label="product_list_fragment"
+        tools:layout="@layout/product_list_fragment" />
 </navigation>
