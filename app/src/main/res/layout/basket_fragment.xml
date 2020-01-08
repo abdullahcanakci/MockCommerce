@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.basket.BasketFragment">
+    tools:context=".modules.basket.BasketFragment"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
 
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Basket" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        >
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="5"
+            tools:listitem="@layout/basket_list_item"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_postpone"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            tools:orientation="horizontal"
+            tools:listitem="@layout/basket_postponed_list_item"
+            tools:itemCount="5"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
