@@ -25,6 +25,9 @@ class PostponedListAdapter(val listener: ((product: ProductModel, action: Basket
     }
 
     override fun onBindViewHolder(holder: PostponedViewHolder, position: Int) {
+        if(position >= itemCount){
+            return
+        }
         holder.bind(items[position])
         holder.binding.buttonDelete.setOnClickListener{
             listener(items[position], BasketFragment.ADAPTER_ACTION.DELETE)
@@ -36,49 +39,30 @@ class PostponedListAdapter(val listener: ((product: ProductModel, action: Basket
     }
 
     fun updateItems(newItems: ArrayList<ProductModel>){
-        val diffUtil = PostponeDiffCallback(items, newItems)
-        val result = DiffUtil.calculateDiff(diffUtil)
+        if(items.isEmpty()){
+            items.addAll(newItems)
+            notifyDataSetChanged()
+        }
+        else if(newItems.isEmpty()){
+            items.clear()
+            notifyDataSetChanged()
+        }
+        else {
+            val diffUtil = ProductModelDiffCallback(items, newItems)
+            val result = DiffUtil.calculateDiff(diffUtil)
 
-        items.clear()
-        items.addAll(newItems)
-        result.dispatchUpdatesTo(this)
-    }
-
-    private fun deleteItem(position: Int){
-        items.removeAt(position)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, items.size)
+            items.clear()
+            items.addAll(newItems)
+            result.dispatchUpdatesTo(this)
+        }
+        //Don't change, for some reason result.dispatchUpdates won't update itemrange and will
+        //cause indexOutOfRangeException
+        notifyItemRangeChanged(0, itemCount)
     }
 
     inner class PostponedViewHolder(val binding: BasketPostponedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(i: ProductModel){
             binding.model = i
-        }
-    }
-
-    inner class PostponeDiffCallback(val old: ArrayList<ProductModel>,val new: ArrayList<ProductModel>) : DiffUtil.Callback() {
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return old[oldItemPosition].id == new[newItemPosition].id
-        }
-
-        override fun getOldListSize(): Int {
-            return old.size
-        }
-
-        override fun getNewListSize(): Int {
-            return new.size
-        }
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            val o = old[oldItemPosition]
-            val  n = new[newItemPosition]
-            return (o.name == n.name &&
-                    o.price == n.price &&
-                    o.oldPrice == n.oldPrice)
-        }
-
-        override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-            return super.getChangePayload(oldItemPosition, newItemPosition)
         }
     }
 }

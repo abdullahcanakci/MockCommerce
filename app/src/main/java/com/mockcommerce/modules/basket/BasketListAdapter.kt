@@ -2,6 +2,7 @@ package com.mockcommerce.modules.basket
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.databinding.BasketListItemBinding
 import com.mockcommerce.models.ProductModel
@@ -40,22 +41,31 @@ class BasketListAdapter(val listener: ((product: ProductModel, action: BasketFra
     }
 
     fun updateItems(newItems: ArrayList<ProductModel>){
-        items.clear()
-        items.addAll(newItems)
-        items.trimToSize()
-        notifyDataSetChanged()
-    }
+        if(items.isEmpty()){
+            items.addAll(newItems)
+            notifyDataSetChanged()
+        }
+        else if(newItems.isEmpty()){
+            items.clear()
+            notifyDataSetChanged()
+        }
+        else {
+            val diffUtil = ProductModelDiffCallback(items, newItems)
+            val result = DiffUtil.calculateDiff(diffUtil)
 
-    private fun deleteItem(position: Int){
-        items.removeAt(position)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, items.size)
+            items.clear()
+            items.addAll(newItems)
+            result.dispatchUpdatesTo(this)
+        }
+        //Don't change, for some reason result.dispatchUpdates won't update itemrange and will
+        //cause indexOutOfRangeException
+        notifyItemRangeChanged(0, itemCount)
     }
-
 
     inner class BasketListItemHolder(val binding: BasketListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(model: ProductModel) {
             binding.model = model
         }
     }
+
 }
