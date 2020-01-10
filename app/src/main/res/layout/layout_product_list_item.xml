@@ -84,7 +84,7 @@
                     android:id="@+id/product_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_main"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:text="@{model.price}"
                     tools:text="99.90 TL" />

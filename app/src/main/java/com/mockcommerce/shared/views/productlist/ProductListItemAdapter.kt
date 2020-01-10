@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.databinding.LayoutProductListItemBinding
 import com.mockcommerce.models.ProductListModel
 
-class ProductListItemAdapter(private var items: List<ProductListModel>) : RecyclerView.Adapter<ProductListItemAdapter.ProductListViewHolder>() {
+class ProductListItemAdapter(private var items: List<ProductListModel>, val listener: () -> Unit) : RecyclerView.Adapter<ProductListItemAdapter.ProductListViewHolder>() {
     override fun getItemCount(): Int {
         return items.size
     }
@@ -21,6 +21,10 @@ class ProductListItemAdapter(private var items: List<ProductListModel>) : Recycl
             parent,
             false
         )
+
+        b.root.setOnClickListener{
+            listener()
+        }
 
         return ProductListViewHolder(b)
     }

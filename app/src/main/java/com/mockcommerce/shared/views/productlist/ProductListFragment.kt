@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -38,8 +39,9 @@ class ProductListFragment : Fragment() {
             ProductListModel(5, "Ürün 6", 10.0F, null)
         )
 
-        v.product_list.adapter = ProductListItemAdapter(m)
-
+        v.product_list.adapter = ProductListItemAdapter(m){
+            findNavController().navigate(R.id.action_dest_product_list_to_productFragment)
+        }
 
         return v
     }
