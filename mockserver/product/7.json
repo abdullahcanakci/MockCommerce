@@ -2,7 +2,7 @@
   "id": 7,
   "name": "Dune",
   "price": 15,
-  "oldprice": null,
+  "oldPrice": null,
   "favourite": false,
   "images": [
     "images/i_1.png",

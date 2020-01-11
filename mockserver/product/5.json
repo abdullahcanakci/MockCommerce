@@ -2,7 +2,7 @@
   "id": 5,
   "name": "Ring Of Flies",
   "price": 19.9,
-  "oldprice": null,
+  "oldPrice": null,
   "favourite": false,
   "images": [
     "images/i_1.png",

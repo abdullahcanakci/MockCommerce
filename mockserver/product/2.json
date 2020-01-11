@@ -2,7 +2,7 @@
   "id": 2,
   "name": "Homy Yatak Örtüsü",
   "price": 60,
-  "oldprice": null,
+  "oldPrice": null,
   "favourite": true,
   "images": [
     "images/i_2.png",

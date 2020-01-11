@@ -2,7 +2,7 @@
   "id": 6,
   "name": "Golden Letter",
   "price": 60,
-  "oldprice": 75.9,
+  "oldPrice": 75.9,
   "favourite": false,
   "images": [
     "images/i_6.png"

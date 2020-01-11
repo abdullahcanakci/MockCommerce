@@ -2,7 +2,7 @@
   "id": 1,
   "name": "Bambung 49\" Televizyon",
   "price": 1650,
-  "oldprice": 1900,
+  "oldPrice": 1900,
   "favourite": false,
   "images": [
     "images/i_1.png",

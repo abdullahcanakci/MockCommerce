@@ -2,7 +2,7 @@
   "id": 4,
   "name": "Bandana Akıllı Bileklik",
   "price": 175.5,
-  "oldprice": 200.99,
+  "oldPrice": 200.99,
   "favourite": false,
   "images": [
     "images/i_1.png",
