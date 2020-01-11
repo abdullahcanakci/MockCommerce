@@ -1,4 +1,4 @@
-package com.mockcommerce.modules.shared.product_page
+package com.mockcommerce.modules.shared.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,23 +6,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
-import kotlinx.android.synthetic.main.view_image.view.*
 
-class ProductImageAdapter : RecyclerView.Adapter<ProductImageAdapter.ProductImageViewHolder>() {
+class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
     private val imageUrls: ArrayList<String> = ArrayList()
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductImageViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(
             R.layout.view_image,
             parent,
             false
         )
 
-        return ProductImageViewHolder(view)
+        return ImageViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ProductImageViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         holder.itemView.findViewById<ImageView>(R.id.product_image).setImageResource(R.drawable.ic_product_image)
     }
 
@@ -36,6 +35,6 @@ class ProductImageAdapter : RecyclerView.Adapter<ProductImageAdapter.ProductImag
         return imageUrls.size
     }
 
-    inner class ProductImageViewHolder(val view: View) : RecyclerView.ViewHolder(view){
+    inner class ImageViewHolder(val view: View) : RecyclerView.ViewHolder(view){
     }
 }

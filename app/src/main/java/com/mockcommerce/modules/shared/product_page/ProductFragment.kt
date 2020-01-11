@@ -7,11 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import com.mockcommerce.R
 import com.mockcommerce.databinding.ProductFragmentBinding
 import com.mockcommerce.models.ProductModel
+import com.mockcommerce.modules.shared.adapters.ImageAdapter
 import com.mockcommerce.shared.ZoomOutPageTransformer
-import kotlinx.android.synthetic.main.product_fragment.view.*
 
 class ProductFragment : Fragment() {
 
@@ -27,7 +26,7 @@ class ProductFragment : Fragment() {
     ): View? {
         val binding = ProductFragmentBinding.inflate(inflater)
 
-        val adapter = ProductImageAdapter()
+        val adapter = ImageAdapter()
         binding.imageCarousel.adapter = adapter
         adapter.update(ArrayList(listOf("a", "b", "c", "d", "e")))
         binding.imageCarousel.setPageTransformer(ZoomOutPageTransformer())

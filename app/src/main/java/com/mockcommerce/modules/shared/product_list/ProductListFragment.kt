@@ -1,4 +1,4 @@
-package com.mockcommerce.shared.views.productlist
+package com.mockcommerce.modules.shared.product_list
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.mockcommerce.R
-import com.mockcommerce.models.ProductListModel
+import com.mockcommerce.models.ProductModel
 import kotlinx.android.synthetic.main.product_list_fragment.view.*
 
 class ProductListFragment : Fragment() {
@@ -31,12 +31,12 @@ class ProductListFragment : Fragment() {
         v.product_list.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL,false)
 
         val m = listOf(
-            ProductListModel(0, "Ürün 1", 10.0F, null),
-            ProductListModel(1, "Ürün 2", 10.0F, 15.5F),
-            ProductListModel(2, "Ürün 3", 10.0F, 20.0F),
-            ProductListModel(3, "Ürün 4", 75.50F, 120.0F),
-            ProductListModel(4, "Ürün 5", 65.90F, null),
-            ProductListModel(5, "Ürün 6", 10.0F, null)
+            ProductModel(0, "Ürün 1", 10.0F, null),
+            ProductModel(1, "Ürün 2", 10.0F, 15.5F),
+            ProductModel(2, "Ürün 3", 10.0F, 20.0F),
+            ProductModel(3, "Ürün 4", 75.50F, 120.0F),
+            ProductModel(4, "Ürün 5", 65.90F, null),
+            ProductModel(5, "Ürün 6", 10.0F, null)
         )
 
         v.product_list.adapter = ProductListItemAdapter(m){

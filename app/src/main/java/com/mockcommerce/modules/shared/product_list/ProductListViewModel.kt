@@ -1,4 +1,4 @@
-package com.mockcommerce.shared.views.productlist
+package com.mockcommerce.modules.shared.product_list
 
 import androidx.lifecycle.ViewModel
 

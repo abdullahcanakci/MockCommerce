@@ -1,12 +1,12 @@
-package com.mockcommerce.shared.views.productlist
+package com.mockcommerce.modules.shared.product_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.databinding.LayoutProductListItemBinding
-import com.mockcommerce.models.ProductListModel
+import com.mockcommerce.models.ProductModel
 
-class ProductListItemAdapter(private var items: List<ProductListModel>, val listener: () -> Unit) : RecyclerView.Adapter<ProductListItemAdapter.ProductListViewHolder>() {
+class ProductListItemAdapter(private var items: List<ProductModel>, val listener: () -> Unit) : RecyclerView.Adapter<ProductListItemAdapter.ProductListViewHolder>() {
     override fun getItemCount(): Int {
         return items.size
     }
@@ -31,7 +31,7 @@ class ProductListItemAdapter(private var items: List<ProductListModel>, val list
 
     inner class ProductListViewHolder(private val v: LayoutProductListItemBinding) :
         RecyclerView.ViewHolder(v.root) {
-        fun bind(m: ProductListModel) {
+        fun bind(m: ProductModel) {
             v.model = m
         }
     }
