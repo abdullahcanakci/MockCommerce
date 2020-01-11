@@ -8,8 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mockcommerce.modules.shared.product_list.ProductListViewModel
+import com.mockcommerce.modules.shared.product_page.ProductViewModel
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import timber.log.Timber
@@ -39,6 +42,8 @@ class MainActivity : AppCompatActivity(){
         val dataModule = module {
             single {OkHttpClient()}
             single {AppRepository(get())}
+            viewModel {ProductViewModel(get())}
+            viewModel {ProductListViewModel(get())}
         }
 
         startKoin {
