@@ -1,0 +1,11 @@
+{
+  "id": 3,
+  "name": "EarBuds Kablosuz Kulaklık",
+  "price": 50,
+  "oldprice": 900,
+  "favourite": true,
+  "images": [
+    "images/i_4.png",
+    "images/i_5.png"
+  ]
+}

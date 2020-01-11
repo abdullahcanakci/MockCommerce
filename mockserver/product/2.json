@@ -1,0 +1,12 @@
+{
+  "id": 2,
+  "name": "Homy Yatak Örtüsü",
+  "price": 60,
+  "oldprice": null,
+  "favourite": true,
+  "images": [
+    "images/i_2.png",
+    "images/i_4.png",
+    "images/i_5.png"
+  ]
+}

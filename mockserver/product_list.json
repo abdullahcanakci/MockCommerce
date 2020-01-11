@@ -1,0 +1,95 @@
+{
+  "category": 1,
+  "products": [
+    {
+      "id": 1,
+      "name": "Bambung 49\" Televizyon",
+      "price": 1650,
+      "oldprice": 1900,
+      "favourite": false,
+      "images": 
+      [
+        "images/i_1.png",
+        "images/i_3.png",
+        "images/i_5.png",
+        "images/i_7.png"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Homy Yatak Örtüsü",
+      "price": 60,
+      "oldprice": null,
+      "favourite": true,
+      "images": 
+      [
+        "images/i_2.png",
+        "images/i_4.png",
+        "images/i_5.png"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "EarBuds Kablosuz Kulaklık",
+      "price": 50,
+      "oldprice": 900,
+      "favourite": true,      
+      "images": 
+      [
+        "images/i_4.png",
+        "images/i_5.png"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Bandana Akıllı Bileklik",
+      "price": 175.5,
+      "oldprice": 200.99,
+      "favourite": false,
+      "images": 
+      [
+        "images/i_1.png",
+        "images/i_4.png",
+        "images/i_5.png"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Ring Of Flies",
+      "price": 19.9,
+      "oldprice": null,
+      "favourite": false,
+      "images": 
+      [
+        "images/i_1.png",
+        "images/i_3.png",
+        "images/i_4.png",
+        "images/i_7.png"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Golden Letter",
+      "price": 60,
+      "oldprice": 75.9,
+      "favourite": false,
+      "images": 
+      [
+        "images/i_6.png"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Dune",
+      "price": 15,
+      "oldprice": null,
+      "favourite": false,
+            "images": 
+      [
+        "images/i_1.png",
+        "images/i_5.png",
+        "images/i_6.png"
+      ]
+    }
+  ]
+}
