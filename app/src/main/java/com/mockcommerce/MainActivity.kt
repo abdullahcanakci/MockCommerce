@@ -8,6 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import org.koin.dsl.module
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(){
@@ -31,6 +35,18 @@ class MainActivity : AppCompatActivity(){
         }
 
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+
+        val dataModule = module {
+            single {OkHttpClient()}
+            single {AppRepository(get())}
+        }
+
+        startKoin {
+            androidContext(applicationContext)
+            modules(dataModule)
+        }
+
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {

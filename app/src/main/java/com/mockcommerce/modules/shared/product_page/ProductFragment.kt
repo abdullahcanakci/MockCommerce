@@ -6,13 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
+import com.mockcommerce.AppRepository
 
 import com.mockcommerce.databinding.ProductFragmentBinding
 import com.mockcommerce.models.ProductModel
 import com.mockcommerce.modules.shared.adapters.ImageAdapter
 import com.mockcommerce.shared.ZoomOutPageTransformer
+import org.koin.android.ext.android.inject
 
 class ProductFragment : Fragment() {
+
+    val appRepository : AppRepository by inject()
+    val args: ProductFragmentArgs by navArgs()
+
 
     companion object {
         fun newInstance() = ProductFragment()
@@ -26,20 +34,27 @@ class ProductFragment : Fragment() {
     ): View? {
         val binding = ProductFragmentBinding.inflate(inflater)
 
+        viewModel = ViewModelProviders.of(this).get(ProductViewModel::class.java)
+
         val adapter = ImageAdapter()
         binding.imageCarousel.adapter = adapter
-        adapter.update(ArrayList(listOf("a", "b", "c", "d", "e")))
         binding.imageCarousel.setPageTransformer(ZoomOutPageTransformer())
 
-        val productModel = ProductModel(0, "Ürün adı", 50.0f, 120.0f, 0)
-        binding.model = productModel
+        viewModel.product.observe(this.viewLifecycleOwner, Observer { t ->
+            adapter.update(t.images)
+            binding.model = t
+        })
+
+        val id = args.productId
+        appRepository.getProduct(id) {
+            viewModel.product.postValue(it)
+        }
 
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ProductViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

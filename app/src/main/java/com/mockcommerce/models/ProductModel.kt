@@ -7,7 +7,8 @@ open class ProductModel(
     val name: String,
     val price: Float,
     val oldPrice: Float? = null,
-    var numbersInBasket: Int = 0
+    var numbersInBasket: Int = 0,
+    val images: ArrayList<String>
 ) {
 
     fun getPrice(): String {

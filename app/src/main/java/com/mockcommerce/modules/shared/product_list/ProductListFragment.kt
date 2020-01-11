@@ -6,15 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.mockcommerce.AppRepository
 
 import com.mockcommerce.R
 import com.mockcommerce.models.ProductModel
 import kotlinx.android.synthetic.main.product_list_fragment.view.*
+import okhttp3.*
+import org.koin.android.ext.android.inject
+import timber.log.Timber
+import java.io.IOException
+import java.lang.reflect.Type
+
+//import okhttp3.RequestBody.Companion.toRequestBody
 
 class ProductListFragment : Fragment() {
+
+    val appRepository : AppRepository by inject()
 
     companion object {
         fun newInstance() = ProductListFragment()
@@ -27,28 +40,29 @@ class ProductListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.product_list_fragment, container, false)
+        viewModel = ViewModelProviders.of(this).get(ProductListViewModel::class.java)
 
         v.product_list.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL,false)
 
-        val m = listOf(
-            ProductModel(0, "Ürün 1", 10.0F, null),
-            ProductModel(1, "Ürün 2", 10.0F, 15.5F),
-            ProductModel(2, "Ürün 3", 10.0F, 20.0F),
-            ProductModel(3, "Ürün 4", 75.50F, 120.0F),
-            ProductModel(4, "Ürün 5", 65.90F, null),
-            ProductModel(5, "Ürün 6", 10.0F, null)
-        )
-
-        v.product_list.adapter = ProductListItemAdapter(m){
-            findNavController().navigate(R.id.action_dest_product_list_to_productFragment)
+        val adapter = ProductListItemAdapter{id ->
+            val action = ProductListFragmentDirections.actionDestProductListToProductFragment(id)
+            findNavController().navigate(action)
         }
+        v.product_list.adapter = adapter
 
+        viewModel.productList.observe(this.viewLifecycleOwner, Observer { t ->
+            adapter.update(t)
+        })
+
+        appRepository.getProductList {
+            viewModel.productList.postValue(it)
+        }
         return v
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ProductListViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

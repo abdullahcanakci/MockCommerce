@@ -7,3 +7,8 @@ import androidx.databinding.BindingAdapter
 fun setText(view: TextView, value: Int) {
     view.text = value.toString()
 }
+
+@BindingAdapter("android:text")
+fun setText(view: TextView, value: Float) {
+    view.text = "$value TL"
+}

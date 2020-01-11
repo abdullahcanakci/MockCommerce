@@ -4,3 +4,7 @@
 
 ![Product Showcase](media/product.gif)
 
+For clearing logcat
+^((?!.*(Cubic|HwuiUseBinaryProgram|art).*).)*$
+^((?!.*(keyword|keyword|keyword).*).)*$
+
