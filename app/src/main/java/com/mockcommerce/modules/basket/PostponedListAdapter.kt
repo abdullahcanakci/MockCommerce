@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.mockcommerce.R
 import com.mockcommerce.databinding.BasketPostponedListItemBinding
 import com.mockcommerce.models.ProductModel
 
@@ -61,8 +63,12 @@ class PostponedListAdapter(val listener: ((product: ProductModel, action: Basket
     }
 
     inner class PostponedViewHolder(val binding: BasketPostponedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(i: ProductModel){
-            binding.model = i
+        fun bind(model: ProductModel){
+            binding.model = model
+            Glide.with(binding.root)
+                .load("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/" + model.images[0])
+                .placeholder(R.drawable.ic_product_image)
+                .into(binding.productImage)
         }
     }
 }

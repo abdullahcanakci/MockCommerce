@@ -6,41 +6,39 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
+import com.mockcommerce.modules.shared.product_list.ProductListItemAdapter
 import kotlinx.android.synthetic.main.basket_fragment.view.*
 import timber.log.Timber
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BasketFragment : Fragment() {
 
     enum class ADAPTER_ACTION {DELETE, ADD, SUBSTRACT, POSTPONE, ADD_TO_CART}
 
-    lateinit var basketRecycler: RecyclerView
-    lateinit var postponedRecycler: RecyclerView
+    lateinit var basketAdapter: BasketListAdapter
+    lateinit var postponedAdapter: PostponedListAdapter
+
+    val viewModel: BasketViewModel by viewModel()
 
     companion object {
         fun newInstance() = BasketFragment()
     }
 
-    private lateinit var viewModel: BasketViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        viewModel = ViewModelProviders.of(this).get(BasketViewModel::class.java)
-
         val v = inflater.inflate(R.layout.basket_fragment, container, false)
 
-        basketRecycler = v.list
+        val basketRecycler = v.list
         basketRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-
-        basketRecycler.adapter = BasketListAdapter() {product, action ->
-            val basket_temp = viewModel.basket_items.value
+        basketRecycler.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+        basketAdapter = BasketListAdapter() {product, action ->
+            val basket_temp = viewModel.basketItems.value
             val index = basket_temp!!.indexOf(product)
 
             when(action) {
@@ -61,46 +59,43 @@ class BasketFragment : Fragment() {
                 }
                 ADAPTER_ACTION.POSTPONE -> {
                     basket_temp.remove(product)
-                    val post_temp = viewModel.postponed_items.value
+                    val post_temp = viewModel.postponedItems.value
                     post_temp!!.add(product)
-                    viewModel.postponed_items.postValue(post_temp)
+                    viewModel.postponedItems.postValue(post_temp)
                 }
                 else -> Timber.d("Invalid operation %i", action)
             }
 
-            viewModel.basket_items.postValue(basket_temp)
+            viewModel.basketItems.postValue(basket_temp)
         }
+        basketRecycler.adapter = basketAdapter
 
-        basketRecycler.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
-
-        viewModel.basket_items.observe(this.viewLifecycleOwner, Observer { t ->
-            (basketRecycler.adapter as BasketListAdapter).updateItems(t)
+        viewModel.basketItems.observe(this.viewLifecycleOwner, Observer { t ->
+            basketAdapter.updateItems(t)
         })
 
-
-        postponedRecycler = v.list_postpone
+        val postponedRecycler = v.list_postpone
         postponedRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-
-        postponedRecycler.adapter = PostponedListAdapter() { product, action ->
-            val post_temp = viewModel.postponed_items.value
+        postponedAdapter = PostponedListAdapter() { product, action ->
+            val post_temp = viewModel.postponedItems.value
             if(post_temp != null) {
                 post_temp.remove(product)
-                viewModel.postponed_items.postValue(post_temp)
+                viewModel.postponedItems.postValue(post_temp)
             }
 
             if(action == ADAPTER_ACTION.ADD_TO_CART){
-                val basket_temp = viewModel.basket_items.value
+                val basket_temp = viewModel.basketItems.value
                 if(basket_temp != null) {
                     basket_temp.add(product)
-                    viewModel.basket_items.postValue(basket_temp)
+                    viewModel.basketItems.postValue(basket_temp)
                 }
             }
         }
+        postponedRecycler.adapter = postponedAdapter
 
-        viewModel.postponed_items.observe(this.viewLifecycleOwner, Observer { t ->
-            (postponedRecycler.adapter as PostponedListAdapter).updateItems(t)
+        viewModel.postponedItems.observe(this.viewLifecycleOwner, Observer { t ->
+            postponedAdapter.updateItems(t)
         })
-
 
         return v
     }

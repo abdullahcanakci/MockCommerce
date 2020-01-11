@@ -57,6 +57,54 @@ class AppRepository(val client: OkHttpClient) {
         return
     }
 
+    fun getBasket(callback: (ArrayList<ProductModel>) -> Unit) {
+        val request = Request.Builder()
+            .url("$root/basket.json")
+            .cacheControl(CACHE_POLICY)
+            .build()
+
+        val call = client.newCall(request)
+
+        Timber.d("Requesting basket info")
+
+        call.enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Timber.d("Basket request is unsuccessful")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val str = response.body!!.string()
+                val model : ArrayList<ProductModel> = Gson().fromJson(str)
+                callback(model)
+            }
+        })
+        return
+    }
+
+    fun getBasketPostponed(callback: (ArrayList<ProductModel>) -> Unit) {
+        val request = Request.Builder()
+            .url("$root/basket_postponed.json")
+            .cacheControl(CACHE_POLICY)
+            .build()
+
+        val call = client.newCall(request)
+
+        Timber.d("Requesting basket info")
+
+        call.enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Timber.d("Basket request is unsuccessful")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val str = response.body!!.string()
+                val model : ArrayList<ProductModel> = Gson().fromJson(str)
+                callback(model)
+            }
+        })
+        return
+    }
+
     inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
 
 }
