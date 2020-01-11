@@ -1,6 +1,5 @@
 package com.mockcommerce
 
-import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mockcommerce.models.ProductModel

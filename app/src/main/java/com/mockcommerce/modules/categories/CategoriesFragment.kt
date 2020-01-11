@@ -1,14 +1,12 @@
 package com.mockcommerce.modules.categories
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-
 import com.mockcommerce.R
 import kotlinx.android.synthetic.main.categories_fragment.view.*
 

@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
 import com.mockcommerce.models.CarouselItemModel
-import com.mockcommerce.shared.views.carousel.CarouselItemViewHolder
 import com.mockcommerce.shared.CarouselViewInterface
+import com.mockcommerce.shared.views.carousel.CarouselItemViewHolder
 
 class CarouselInfoAdapter() : RecyclerView.Adapter<CarouselItemViewHolder>(),
     CarouselViewInterface {

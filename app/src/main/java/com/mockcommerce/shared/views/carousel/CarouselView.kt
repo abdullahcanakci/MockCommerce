@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
 import com.mockcommerce.models.CarouselModel
+import com.mockcommerce.shared.CarouselViewInterface
 import com.mockcommerce.shared.views.carousel.Info.CarouselInfoAdapter
 import com.mockcommerce.shared.views.carousel.promo.CarouselPromoAdapter
-import com.mockcommerce.shared.CarouselViewInterface
 
 class CarouselView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
