@@ -5,11 +5,10 @@ root is
 https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/
 ```
 
+/showcase.json
 
 /product_list.json
 
-/product/$id.json
+/products/n.json
 
 /basket.json
-
-/images/$name.png
