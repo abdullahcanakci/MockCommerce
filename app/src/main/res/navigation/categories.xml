@@ -11,22 +11,14 @@
         android:label="categories_fragment"
         tools:layout="@layout/categories_fragment" >
         <action
-            android:id="@+id/action_categories_to_dest_product_list"
-            app:destination="@id/dest_product_list" />
-    </fragment>
-    <fragment
-        android:id="@+id/dest_product_list"
-        android:name="com.mockcommerce.modules.shared.product_list.ProductListFragment"
-        android:label="product_list_fragment"
-        tools:layout="@layout/product_list_fragment" >
-        <action
-            android:id="@+id/action_dest_product_list_to_product"
-            app:destination="@id/product" >
+            android:id="@+id/action_categories_to_product_list"
+            app:destination="@id/product_list" >
             <argument
-                android:name="productId"
-                app:argType="integer" />
+                android:name="listIdentifier"
+                app:argType="integer"
+                android:defaultValue="0"/>
         </action>
     </fragment>
-    <include app:graph="@navigation/product">
-    </include>
+    <include app:graph="@navigation/product_list" />
+
 </navigation>

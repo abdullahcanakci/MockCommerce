@@ -25,7 +25,8 @@ class CategoriesFragment : Fragment() {
         val v = inflater.inflate(R.layout.categories_fragment, container, false)
 
         v.product_list_button.setOnClickListener{
-            this.findNavController().navigate(R.id.action_categories_to_dest_product_list)
+            val action = CategoriesFragmentDirections.actionCategoriesToProductList(0)
+            this.findNavController().navigate(action)
         }
 
 
