@@ -39,7 +39,9 @@ class BasketListAdapter(val listener: ((product: ProductModel, action: BasketFra
         holder.binding.buttonPostpone.setOnClickListener{
             listener(items[position], BasketFragment.ADAPTER_ACTION.POSTPONE)
         }
-
+        holder.binding.root.setOnClickListener{
+            listener(items[position], BasketFragment.ADAPTER_ACTION.VIEW)
+        }
     }
 
     fun updateItems(newItems: ArrayList<ProductModel>){

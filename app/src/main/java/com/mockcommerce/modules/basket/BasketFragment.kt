@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BasketFragment : Fragment() {
 
-    enum class ADAPTER_ACTION {DELETE, ADD, SUBSTRACT, POSTPONE, ADD_TO_CART}
+    enum class ADAPTER_ACTION {DELETE, ADD, SUBSTRACT, POSTPONE, ADD_TO_CART, VIEW}
 
     lateinit var basketAdapter: BasketListAdapter
     lateinit var postponedAdapter: PostponedListAdapter
@@ -63,6 +64,11 @@ class BasketFragment : Fragment() {
                     post_temp!!.add(product)
                     viewModel.postponedItems.postValue(post_temp)
                 }
+                ADAPTER_ACTION.VIEW -> {
+                    val action = BasketFragmentDirections.actionBasketToProduct2(product.id )
+                    findNavController().navigate(action)
+                }
+
                 else -> Timber.d("Invalid operation %i", action)
             }
 
@@ -76,19 +82,33 @@ class BasketFragment : Fragment() {
 
         val postponedRecycler = v.list_postpone
         postponedRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        postponedAdapter = PostponedListAdapter() { product, action ->
-            val post_temp = viewModel.postponedItems.value
-            if(post_temp != null) {
-                post_temp.remove(product)
-                viewModel.postponedItems.postValue(post_temp)
-            }
+        postponedAdapter = PostponedListAdapter { product, action ->
+            when (action){
+                ADAPTER_ACTION.ADD_TO_CART -> {
+                    val post_temp = viewModel.postponedItems.value
+                    if(post_temp != null) {
+                        post_temp.remove(product)
+                        viewModel.postponedItems.postValue(post_temp)
+                    }
 
-            if(action == ADAPTER_ACTION.ADD_TO_CART){
-                val basket_temp = viewModel.basketItems.value
-                if(basket_temp != null) {
-                    basket_temp.add(product)
-                    viewModel.basketItems.postValue(basket_temp)
+                    val basket_temp = viewModel.basketItems.value
+                    if(basket_temp != null) {
+                        basket_temp.add(product)
+                        viewModel.basketItems.postValue(basket_temp)
+                    }
                 }
+                ADAPTER_ACTION.DELETE -> {
+                    val post_temp = viewModel.postponedItems.value
+                    if(post_temp != null) {
+                        post_temp.remove(product)
+                        viewModel.postponedItems.postValue(post_temp)
+                    }
+                }
+                ADAPTER_ACTION.VIEW -> {
+                    val action = BasketFragmentDirections.actionBasketToProduct2(product.id )
+                    findNavController().navigate(action)
+                }
+                else -> Timber.d("Invalid operation %i", action)
             }
         }
         postponedRecycler.adapter = postponedAdapter

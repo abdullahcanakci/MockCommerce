@@ -38,6 +38,9 @@ class PostponedListAdapter(val listener: ((product: ProductModel, action: Basket
             val temp = items[position]
             listener(temp, BasketFragment.ADAPTER_ACTION.ADD_TO_CART)
         }
+        holder.binding.root.setOnClickListener{
+            listener(items[position], BasketFragment.ADAPTER_ACTION.VIEW)
+        }
     }
 
     fun updateItems(newItems: ArrayList<ProductModel>){

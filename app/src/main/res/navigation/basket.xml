@@ -9,5 +9,14 @@
         android:id="@+id/basket"
         android:name="com.mockcommerce.modules.basket.BasketFragment"
         android:label="basket_fragment"
-        tools:layout="@layout/basket_fragment" />
+        tools:layout="@layout/basket_fragment" >
+        <action
+            android:id="@+id/action_basket_to_product2"
+            app:destination="@id/product" >
+            <argument
+                android:name="productId"
+                app:argType="integer"/>
+        </action>
+    </fragment>
+    <include app:graph="@navigation/product" />
 </navigation>
