@@ -32,7 +32,7 @@ class ProductListFragment : Fragment() {
         v.product_list.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
 
         adapter = ProductListItemAdapter { id ->
-            val action = ProductListFragmentDirections.actionDestProductListToProductFragment(id)
+            val action = ProductListFragmentDirections.actionDestProductListToProduct(id)
             findNavController().navigate(action)
         }
         v.product_list.adapter = adapter

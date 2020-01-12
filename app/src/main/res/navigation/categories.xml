@@ -20,19 +20,13 @@
         android:label="product_list_fragment"
         tools:layout="@layout/product_list_fragment" >
         <action
-            android:id="@+id/action_dest_product_list_to_productFragment"
-            app:destination="@id/productFragment" />
+            android:id="@+id/action_dest_product_list_to_product"
+            app:destination="@id/product" >
+            <argument
+                android:name="productId"
+                app:argType="integer" />
+        </action>
     </fragment>
-    <fragment
-        android:id="@+id/productFragment"
-        android:name="com.mockcommerce.modules.shared.product_page.ProductFragment"
-        android:label="product_fragment"
-        tools:layout="@layout/product_fragment" >
-        <action
-            android:id="@+id/action_productFragment_self"
-            app:destination="@id/productFragment" />
-        <argument
-            android:name="product_id"
-            app:argType="integer" />
-    </fragment>
+    <include app:graph="@navigation/product">
+    </include>
 </navigation>

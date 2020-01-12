@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product"
+    app:startDestination="@id/productFragment">
+
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.mockcommerce.modules.shared.product_page.ProductFragment"
+        android:label="product_fragment"
+        tools:layout="@layout/product_fragment" >
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_productFragment_self"
+            app:destination="@id/productFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_productFragment2"
+        app:destination="@id/productFragment" />
+</navigation>
