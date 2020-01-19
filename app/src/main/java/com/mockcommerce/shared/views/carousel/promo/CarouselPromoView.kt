@@ -20,7 +20,7 @@ class CarouselPromoView(context: Context, attrs: AttributeSet) : LinearLayout(co
 
 
     init {
-        View.inflate(context, R.layout.layout_carousel_promo, this)
+        View.inflate(context, R.layout.item_explore_carousel_promo, this)
 
         title = findViewById(R.id.title)
         subtitle = findViewById(R.id.subtitle)

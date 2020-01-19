@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mockcommerce.R
-import com.mockcommerce.databinding.BasketListItemBinding
+import com.mockcommerce.databinding.ItemBasketMainBinding
 import com.mockcommerce.models.ProductModel
 
 class BasketListAdapter(val listener: ((product: ProductModel, action: BasketFragment.ADAPTER_ACTION) -> Unit)) : RecyclerView.Adapter<BasketListAdapter.BasketListItemHolder>() {
     private val items: ArrayList<ProductModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketListItemHolder {
-        val b = BasketListItemBinding.inflate(
+        val b = ItemBasketMainBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -66,7 +66,8 @@ class BasketListAdapter(val listener: ((product: ProductModel, action: BasketFra
         notifyItemRangeChanged(0, itemCount)
     }
 
-    inner class BasketListItemHolder(val binding: BasketListItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class BasketListItemHolder(val binding: ItemBasketMainBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(model: ProductModel) {
             binding.model = model
             Glide.with(binding.root)

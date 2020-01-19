@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
-import kotlinx.android.synthetic.main.product_list_fragment.view.*
+import kotlinx.android.synthetic.main.fragment_productlist.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProductListFragment : Fragment() {
@@ -27,7 +27,7 @@ class ProductListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v = inflater.inflate(R.layout.product_list_fragment, container, false)
+        val v = inflater.inflate(R.layout.fragment_productlist, container, false)
 
         v.product_list.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
 

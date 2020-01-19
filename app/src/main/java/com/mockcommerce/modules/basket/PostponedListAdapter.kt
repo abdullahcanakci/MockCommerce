@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mockcommerce.R
-import com.mockcommerce.databinding.BasketPostponedListItemBinding
+import com.mockcommerce.databinding.ItemBasketPostponedBinding
 import com.mockcommerce.models.ProductModel
 
 class PostponedListAdapter(val listener: ((product: ProductModel, action: BasketFragment.ADAPTER_ACTION) -> Unit)) : RecyclerView.Adapter<PostponedListAdapter.PostponedViewHolder>() {
     private val items: ArrayList<ProductModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostponedViewHolder {
-        val b = BasketPostponedListItemBinding.inflate(
+        val b = ItemBasketPostponedBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -65,7 +65,8 @@ class PostponedListAdapter(val listener: ((product: ProductModel, action: Basket
         notifyItemRangeChanged(0, itemCount)
     }
 
-    inner class PostponedViewHolder(val binding: BasketPostponedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class PostponedViewHolder(val binding: ItemBasketPostponedBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(model: ProductModel){
             binding.model = model
             Glide.with(binding.root)

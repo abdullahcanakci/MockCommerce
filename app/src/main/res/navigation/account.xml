@@ -9,5 +9,5 @@
         android:id="@+id/account"
         android:name="com.mockcommerce.modules.account.AccountFragment"
         android:label="account_fragment"
-        tools:layout="@layout/account_fragment" />
+        tools:layout="@layout/fragment_account" />
 </navigation>

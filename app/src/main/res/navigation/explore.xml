@@ -9,22 +9,6 @@
         android:id="@+id/explore"
         android:name="com.mockcommerce.modules.explore.ExploreFragment"
         android:label="explore_fragment"
-        tools:layout="@layout/explore_fragment">
-        <action
-            android:id="@+id/action_explore_to_dest_expose"
-            app:destination="@id/dest_expose" />
-        <action
-            android:id="@+id/action_explore_to_dest_info"
-            app:destination="@id/dest_info" />
+        tools:layout="@layout/fragment_explore">
     </fragment>
-    <fragment
-        android:id="@+id/dest_expose"
-        android:name="com.mockcommerce.modules.explore.ExposeFragment"
-        android:label="expose_fragment"
-        tools:layout="@layout/expose_fragment" />
-    <fragment
-        android:id="@+id/dest_info"
-        android:name="com.mockcommerce.modules.explore.InfoFragment"
-        android:label="info_fragment"
-        tools:layout="@layout/info_fragment" />
 </navigation>

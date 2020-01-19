@@ -17,7 +17,7 @@ class CarouselInfoView(context: Context, attrs: AttributeSet) : LinearLayout(con
     var image: ImageView
 
     init {
-        View.inflate(context, R.layout.layout_carousel_info, this)
+        View.inflate(context, R.layout.item_explore_carousel_info, this)
 
         description = findViewById(R.id.description)
         image = findViewById(R.id.image)

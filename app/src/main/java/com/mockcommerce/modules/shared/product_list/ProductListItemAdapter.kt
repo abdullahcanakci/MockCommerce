@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mockcommerce.R
-import com.mockcommerce.databinding.LayoutProductListItemBinding
+import com.mockcommerce.databinding.ItemProductlistBinding
 import com.mockcommerce.models.ProductModel
 import timber.log.Timber
 
@@ -25,7 +25,7 @@ class ProductListItemAdapter(val listener: (id: Int) -> Unit) : RecyclerView.Ada
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
-        val b = LayoutProductListItemBinding.inflate(
+        val b = ItemProductlistBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -41,7 +41,7 @@ class ProductListItemAdapter(val listener: (id: Int) -> Unit) : RecyclerView.Ada
         Timber.d("Layout Completed")
     }
 
-    inner class ProductListViewHolder(val binding: LayoutProductListItemBinding) :
+    inner class ProductListViewHolder(val binding: ItemProductlistBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(m: ProductModel) {
             binding.model = m

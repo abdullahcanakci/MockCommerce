@@ -9,5 +9,5 @@
         android:id="@+id/order"
         android:name="com.mockcommerce.modules.orders.OrdersFragment"
         android:label="orders_fragment"
-        tools:layout="@layout/orders_fragment" />
+        tools:layout="@layout/fragment_orders" />
 </navigation>

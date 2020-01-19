@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
-import kotlinx.android.synthetic.main.basket_fragment.view.*
+import kotlinx.android.synthetic.main.fragment_basket.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -32,7 +32,7 @@ class BasketFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v = inflater.inflate(R.layout.basket_fragment, container, false)
+        val v = inflater.inflate(R.layout.fragment_basket, container, false)
 
         val basketRecycler = v.list
         basketRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -84,7 +84,7 @@ class BasketFragment : Fragment() {
                 else -> Timber.d("Invalid operation %i", action)
             }
         }
-        
+
         postponedRecycler.adapter = postponedAdapter
 
         viewModel.postponedItems.observe(this.viewLifecycleOwner, Observer { t ->

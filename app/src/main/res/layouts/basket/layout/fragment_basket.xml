@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:itemCount="5"
-                        tools:listitem="@layout/basket_list_item" />
+                        tools:listitem="@layout/item_basket_main" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -84,7 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:itemCount="5"
-                        tools:listitem="@layout/basket_postponed_list_item"
+                        tools:listitem="@layout/item_basket_postponed"
                         tools:orientation="horizontal" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

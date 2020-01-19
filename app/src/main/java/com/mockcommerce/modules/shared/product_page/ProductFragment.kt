@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import com.mockcommerce.databinding.ProductFragmentBinding
+import com.mockcommerce.databinding.FragmentProductBinding
 import com.mockcommerce.modules.shared.adapters.ImageAdapter
 import com.mockcommerce.shared.ZoomOutPageTransformer
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -17,7 +17,7 @@ class ProductFragment : Fragment() {
     val args: ProductFragmentArgs by navArgs()
     val viewModel: ProductViewModel by viewModel()
 
-    lateinit var binding: ProductFragmentBinding
+    lateinit var binding: FragmentProductBinding
     lateinit var adapter: ImageAdapter
 
     companion object {
@@ -29,7 +29,7 @@ class ProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = ProductFragmentBinding.inflate(inflater)
+        binding = FragmentProductBinding.inflate(inflater)
         adapter = ImageAdapter()
 
         binding.imageCarousel.adapter = adapter

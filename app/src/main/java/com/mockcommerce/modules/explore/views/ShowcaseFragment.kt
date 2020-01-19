@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.mockcommerce.R
-import com.mockcommerce.databinding.ShowcaseItemBinding
+import com.mockcommerce.databinding.ItemExploreShowcaseBinding
 import com.mockcommerce.models.ShowcaseItem
 
 class ShowcaseFragment : Fragment() {
-    lateinit var binding: ShowcaseItemBinding
+    lateinit var binding: ItemExploreShowcaseBinding
     lateinit var model: ShowcaseItem
 
     override fun onCreateView(
@@ -19,7 +19,12 @@ class ShowcaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate<ShowcaseItemBinding>(inflater, R.layout.showcase_item, container, false)
+        binding = DataBindingUtil.inflate<ItemExploreShowcaseBinding>(
+            inflater,
+            R.layout.item_explore_showcase,
+            container,
+            false
+        )
         binding.model = model
         return binding.root
     }

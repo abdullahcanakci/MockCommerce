@@ -20,7 +20,7 @@ class OrdersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.orders_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_orders, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

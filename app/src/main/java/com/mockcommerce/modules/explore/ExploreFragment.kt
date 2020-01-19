@@ -13,7 +13,7 @@ import com.mockcommerce.models.CarouselModel
 import com.mockcommerce.models.ShowcaseItem
 import com.mockcommerce.modules.explore.views.ShowcaseAdapter
 import com.mockcommerce.shared.ZoomOutPageTransformer
-import kotlinx.android.synthetic.main.explore_fragment.view.*
+import kotlinx.android.synthetic.main.fragment_explore.view.*
 
 class ExploreFragment : Fragment() {
 
@@ -29,7 +29,7 @@ class ExploreFragment : Fragment() {
     ): View? {
         viewModel = ViewModelProviders.of(this).get(ExploreViewModel::class.java)
 
-        val v =  inflater.inflate(R.layout.explore_fragment, container, false)
+        val v = inflater.inflate(R.layout.fragment_explore, container, false)
 
 
         setupShowcase(v.showcase)

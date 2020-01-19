@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.mockcommerce.R
-import kotlinx.android.synthetic.main.categories_fragment.view.*
+import kotlinx.android.synthetic.main.fragment_categories.view.*
 
 class CategoriesFragment : Fragment() {
 
@@ -22,7 +22,7 @@ class CategoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v = inflater.inflate(R.layout.categories_fragment, container, false)
+        val v = inflater.inflate(R.layout.fragment_categories, container, false)
 
         v.product_list_button.setOnClickListener{
             val action = CategoriesFragmentDirections.actionCategoriesToProductList(0)
