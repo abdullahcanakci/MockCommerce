@@ -94,16 +94,12 @@
         </LinearLayout>
 
         <Button
+            style="@style/ButtonPrimary"
             android:id="@+id/add_to_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:text="@string/sepete_ekle"
-            android:textColor="@color/text_white"
-            android:textStyle="bold" />
+            android:text="@string/sepete_ekle" />
         />
 
     </LinearLayout>

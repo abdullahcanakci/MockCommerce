@@ -8,4 +8,8 @@
     <string name="title_account">Hesap</string>
     <string name="sepete_ekle">Sepete Ekle</string>
 
+    <string name="purchase">Satın Al</string>
+    <string name="basketSummaryDesc">Özet aç, kapa</string>
+    <string name="select_address">Adres Seç</string>
+
 </resources>
