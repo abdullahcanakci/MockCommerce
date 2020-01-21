@@ -42,8 +42,9 @@ android {
                     'src/main/res/layouts/orders',
                     'src/main/res/layouts/basket',
                     'src/main/res/layouts/categories',
-                    'src/main/res/layouts/explore'
-                    , 'src/main/res/layouts/shared']
+                    'src/main/res/layouts/explore',
+                    'src/main/res/layouts/checkout',
+                    'src/main/res/layouts/shared']
         }
     }
 }

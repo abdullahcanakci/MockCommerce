@@ -1,2 +1,2 @@
-include ':app', ':checkout'
+include ':app'
 rootProject.name='mockCommerce'
