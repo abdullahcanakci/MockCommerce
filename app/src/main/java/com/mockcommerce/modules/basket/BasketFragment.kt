@@ -1,5 +1,6 @@
 package com.mockcommerce.modules.basket
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
+import com.mockcommerce.modules.checkout.CheckoutActivity
 import kotlinx.android.synthetic.main.fragment_basket.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -94,6 +96,11 @@ class BasketFragment : Fragment() {
         viewModel.basketTotal.observe(this.viewLifecycleOwner, Observer { t ->
             v.basket_total.text = t
         })
+
+        v.basket_purchase.setOnClickListener {
+            val intent = Intent(context, CheckoutActivity::class.java).apply {}
+            startActivity(intent)
+        }
 
         return v
     }

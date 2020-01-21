@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/payment"
+    app:startDestination="@id/checkoutSummaryFragment">
+
+    <fragment
+        android:id="@+id/checkoutPaymentFragment"
+        android:name="com.mockcommerce.modules.checkout.CheckoutPaymentFragment"
+        android:label="fragment_checkout_payment"
+        tools:layout="@layout/fragment_checkout_payment">
+        <action
+            android:id="@+id/action_checkoutPaymentFragment_to_checkoutCompleteFragment"
+            app:destination="@id/checkoutCompleteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutSummaryFragment"
+        android:name="com.mockcommerce.modules.checkout.CheckoutSummaryFragment"
+        android:label="fragment_checkout_summary"
+        tools:layout="@layout/fragment_checkout_summary">
+        <action
+            android:id="@+id/action_checkoutSummaryFragment_to_checkoutPaymentFragment"
+            app:destination="@id/checkoutPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutCompleteFragment"
+        android:name="com.mockcommerce.modules.checkout.CheckoutCompleteFragment"
+        android:label="fragment_checkout_complete"
+        tools:layout="@layout/fragment_checkout_complete">
+        <action
+            android:id="@+id/action_checkoutCompleteFragment_to_checkoutEndFragment"
+            app:destination="@id/checkoutEndFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutEndFragment"
+        android:name="com.mockcommerce.modules.checkout.CheckoutEndFragment"
+        android:label="fragment_checkout_end"
+        tools:layout="@layout/fragment_checkout_end" />
+</navigation>
