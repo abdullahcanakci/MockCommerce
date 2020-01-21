@@ -8,5 +8,5 @@ data class ShipmentAddressModel(
     val phoneNumber: String,
     val city: String,
     val district: String,
-    val default: Boolean = false
+    var selected: Boolean = false
 )

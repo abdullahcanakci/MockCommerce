@@ -16,9 +16,4 @@ class CheckoutActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        getViewModelStore().clear()
-    }
 }

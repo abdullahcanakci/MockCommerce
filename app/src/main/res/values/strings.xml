@@ -13,7 +13,14 @@
     <string name="select_address">Adres Seç</string>
     <string name="title_activity_payment">PaymentActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delivery_address">Teslimat Adresim</string>
+    <string name="add_address_description">Yeni adres ekleme butonu</string>
+    <string name="other_addresses">DİĞER ADRESLERİM</string>
+    <string name="billing_address">Fatura Adresim</string>
+    <string name="product_image_description">Ürün resmi</string>
+    <string name="checkout_product_list_title">Ürünler</string>
+    <string name="order_total">Toplam</string>
+
+    <string name="price">"%1$.2f TL</string>
 
 </resources>
