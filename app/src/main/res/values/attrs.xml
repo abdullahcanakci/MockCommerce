@@ -34,5 +34,12 @@
         <attr name="title" />
     </declare-styleable>
 
+    <declare-styleable name="Header">
+        <attr name="header_title" format="string" localization="suggested" />
+        <attr name="icon" format="reference" />
+        <attr name="button_icon" format="reference" />
+        <attr name="button_color" format="color" />
+    </declare-styleable>
+
 
 </resources>

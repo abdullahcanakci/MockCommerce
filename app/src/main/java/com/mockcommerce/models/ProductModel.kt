@@ -11,21 +11,11 @@ open class ProductModel(
     val images: ArrayList<String>
 ) {
 
-    fun getPrice(): String {
-        return price.toString()
-    }
-
     fun getOldPrice(): String {
         return oldPrice.toString()
     }
 
     fun getDiscountVisibility(): Int {
-        if (oldPrice != null)
-            return View.VISIBLE
-        return View.GONE
-    }
-
-    fun getDiscountPercent(): Int {
         if (oldPrice != null)
             return View.VISIBLE
         return View.INVISIBLE
@@ -35,7 +25,9 @@ open class ProductModel(
         if (oldPrice == null)
             return "0"
 
-        return "%" + ((1 - (price / oldPrice)) * 100).toInt().toString()
+        val p = ((1 - (price / oldPrice)) * 100).toInt().toString()
+
+        return "%$p"
     }
 
 }

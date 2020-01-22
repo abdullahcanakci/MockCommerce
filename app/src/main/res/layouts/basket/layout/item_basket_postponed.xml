@@ -10,8 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/product_image"
@@ -42,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_secondary"
             android:text="@{model.price}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_image"
@@ -58,18 +57,20 @@
             android:ellipsize="end"
             android:text="@{model.name}"
             android:textAlignment="center"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_primary"
             app:layout_constraintTop_toBottomOf="@id/product_price"
             tools:text="Product Name"
             />
 
         <Button
-            style="@style/ButtonPrimary"
+            style="@style/ButtonPrimarySmall"
             android:id="@+id/add_to_cart"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sepete Ekle"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/product_name" />
 
 

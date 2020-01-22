@@ -7,10 +7,12 @@
     <dimen name="carousel_title_size">32sp</dimen>
     <dimen name="carousel_subtitle_size">16sp</dimen>
 
+    <dimen name="text_primary">16sp</dimen>
+    <dimen name="text_secondary">12sp</dimen>
 
-    <dimen name="buttonPrimaryPaddingHorizontal">16dp</dimen>
-    <dimen name="buttonPrimaryPaddingVertical">8dp</dimen>
-    <dimen name="buttonPrimaryTextSize">16sp</dimen>
+
+    <dimen name="paddingHorizontal">16dp</dimen>
+    <dimen name="paddingVertical">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="cardview_radius">4dp</dimen>
     <dimen name="form_box_padding_horizontal">16sp</dimen>

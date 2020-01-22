@@ -29,7 +29,8 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
 
         val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.AddressSelectorView)
 
-        address_box_title.text = attributeSet.getText(R.styleable.AddressSelectorView_title)
+        selector_header.setTitle(attributeSet.getString(R.styleable.AddressSelectorView_title))
+        selector_header.setActionIcon(R.drawable.ic_add)
 
         show_more_addr.setOnClickListener {
             isCollapsed = !isCollapsed

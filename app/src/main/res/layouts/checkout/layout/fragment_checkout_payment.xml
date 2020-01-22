@@ -32,27 +32,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    style="@style/HeaderBar"
+                <com.mockcommerce.shared.views.Header
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:header_title="@string/checkout_payment_title"
+                    app:icon="@drawable/ic_credit_card" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/ic_credit_card"
-                        android:tint="@color/colorPrimary" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="16dp"
-                        android:text="@string/checkout_payment_title"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -181,30 +166,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
-                <LinearLayout
-                    style="@style/HeaderBar"
+                <com.mockcommerce.shared.views.Header
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    app:header_title="@string/checkout_payment_sozlesme_title"
+                    app:icon="@drawable/ic_aggrement" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/ic_aggrement"
-                        android:tint="@color/colorPrimary" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="16dp"
-                        android:text="@string/checkout_payment_sozlesme_title"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/card_header_text_size" />
-
-                </LinearLayout>
 
                 <Button
                     style="@style/ButtonSecondary"

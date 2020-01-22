@@ -37,17 +37,10 @@
                 android:orientation="vertical">
 
 
-                <TextView
+                <com.mockcommerce.shared.views.Header
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="4dp"
-                    android:paddingRight="16dp"
-                    android:paddingBottom="4dp"
-                    android:text="@string/checkout_product_list_title"
-                    android:textColor="@color/text_white"
-                    android:textSize="20sp" />
+                    app:header_title="@string/checkout_product_list_title" />
 
                 <LinearLayout
                     android:id="@+id/checkout_product_list"

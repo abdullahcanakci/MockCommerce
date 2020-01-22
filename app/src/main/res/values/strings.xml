@@ -10,6 +10,8 @@
 
     <string name="purchase">Satın Al</string>
     <string name="basketSummaryDesc">Özet aç, kapa</string>
+    <string name="basket_products_title">Sepetim</string>
+    <string name="basket_postponed_title">Daha Sonra Alacaklarım</string>
     <string name="select_address">Adres Seç</string>
     <string name="title_activity_payment">PaymentActivity</string>
 
@@ -31,6 +33,11 @@
     <string name="checkout_btn_sozlesme_form">Satoş Sözleşmesi</string>
     <string name="payment_aggrement">Kabul ediyorum.</string>
     <string name="checkout_confirm_checkout">ÖDEMEYİ GERÇEKLEŞTİR</string>
+    <string name="sort">SIRALA</string>
+    <string name="filter">FİLTRELE</string>
+    <string name="promotions">Kampanyalar</string>
+    <string name="add_to_basket">SEPETE_EKLE</string>
+    <string name="add_to_basket_together">BİRLİKTE EKLE</string>
 
     <string-array name="card_expiration_month">
         <item>Ay</item>

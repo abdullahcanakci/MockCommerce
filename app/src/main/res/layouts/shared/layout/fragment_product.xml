@@ -34,7 +34,7 @@
                 android:paddingBottom="8dp"
                 android:text="@{model.name}"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_primary"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -80,16 +80,13 @@
                                 android:id="@+id/product_discount"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="8dp"
+                                android:layout_margin="8dp"
                                 android:background="@drawable/square"
                                 android:backgroundTint="@color/promotion_background_red"
-                                android:gravity="center_vertical"
+                                android:gravity="center"
                                 android:text="@{model.discount}"
-                                android:textAlignment="center"
                                 android:textColor="@color/text_white"
-                                android:textSize="16sp"
+                                android:textSize="@dimen/text_secondary"
                                 android:visibility="@{model.discountVisibility}"
                                 tools:text="%50" />
 
@@ -112,7 +109,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@{model.oldPrice}"
                                     android:textColor="@color/text_faint"
-                                    android:textSize="12sp"
+                                    android:textSize="@dimen/text_secondary"
                                     android:visibility="@{model.discountVisibility}"
                                     tools:text="169.90 TL" />
 
@@ -122,23 +119,20 @@
                                     android:layout_height="wrap_content"
                                     android:text="@{model.price}"
                                     android:textColor="@color/black"
-                                    android:textSize="20sp"
+                                    android:textSize="@dimen/text_primary"
                                     tools:text="99.90 TL" />
                             </LinearLayout>
 
                             <Button
+                                style="@style/ButtonPrimary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:backgroundTint="@color/colorPrimaryDark"
-                                android:paddingLeft="24dp"
-                                android:paddingRight="24dp"
-                                android:text="SEPETE EKLE"
-                                android:textColor="@color/text_white"
-                                android:textStyle="bold" />
+                                android:text="@string/add_to_basket"
+                                android:textColor="@color/text_white" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@drawable/ic_arrow_forward"
@@ -146,7 +140,8 @@
                         android:padding="4dp"
                         android:text="33.30₺ x 3 ay'a varan taksit seçenekleri"
                         android:textColor="#000000"
-                        android:textSize="16sp" />
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/text_secondary" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -159,32 +154,33 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/price_box"
-                card_view:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageButton
+                        style="@style/ButtonSecondary"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent"
+
                         android:src="@drawable/ic_favorite_border" />
 
                     <ImageButton
+                        style="@style/ButtonSecondary"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent"
                         android:src="@drawable/ic_share" />
 
                     <ImageButton
+                        style="@style/ButtonSecondary"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent"
                         android:src="@drawable/ic_compare_arrows" />
 
                 </LinearLayout>
@@ -205,17 +201,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.mockcommerce.shared.views.Header
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="4dp"
-                        android:paddingEnd="16dp"
-                        android:paddingBottom="4dp"
-                        android:text="Kampanyalar"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        app:header_title="@string/promotions"
+                        app:icon="@drawable/ic_hot" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -224,15 +214,16 @@
                         android:orientation="horizontal">
 
                         <ImageButton
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
                             android:layout_margin="4dp"
                             android:adjustViewBounds="true"
                             android:background="@mipmap/carousel_small_1" />
 
                         <ImageButton
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:adjustViewBounds="true"
                             android:layout_margin="4dp"
                             android:background="@mipmap/carousel_small_2" />
 
@@ -251,7 +242,7 @@
                             android:text="Toplam Fiyat:"
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/text_secondary" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -261,19 +252,15 @@
                             android:text="120.50 TL"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/text_secondary" />
                     </LinearLayout>
 
                     <Button
+                        style="@style/ButtonPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:backgroundTint="@color/colorPrimaryDark"
-                        android:paddingLeft="28dp"
-                        android:paddingRight="24dp"
-                        android:text="BİRLİKTE EKLE"
-                        android:textColor="@color/text_white"
-                        android:textStyle="bold" />
+                        android:text="@string/add_to_basket_together" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -299,8 +286,8 @@
                         android:background="@android:color/transparent"
                         android:drawableEnd="@drawable/ic_arrow_forward"
                         android:drawableTint="@color/colorPrimary"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
+                        android:paddingStart="@dimen/paddingHorizontal"
+                        android:paddingEnd="@dimen/paddingHorizontal"
                         android:text="Ürün Açıklamaları"
                         android:textAlignment="textStart" />
 
@@ -310,8 +297,8 @@
                         android:background="@android:color/transparent"
                         android:drawableEnd="@drawable/ic_arrow_forward"
                         android:drawableTint="@color/colorPrimary"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
+                        android:paddingStart="@dimen/paddingHorizontal"
+                        android:paddingEnd="@dimen/paddingHorizontal"
                         android:text="Ürün Özellikleri"
                         android:textAlignment="textStart" />
 
@@ -321,8 +308,8 @@
                         android:background="@android:color/transparent"
                         android:drawableEnd="@drawable/ic_arrow_forward"
                         android:drawableTint="@color/colorPrimary"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
+                        android:paddingStart="@dimen/paddingHorizontal"
+                        android:paddingEnd="@dimen/paddingHorizontal"
                         android:text="Ürün Yorumlar"
                         android:textAlignment="textStart" />
                 </LinearLayout>
