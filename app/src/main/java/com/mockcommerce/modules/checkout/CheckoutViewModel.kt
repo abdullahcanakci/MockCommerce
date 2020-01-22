@@ -16,6 +16,8 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
 
     var productInBasket = MutableLiveData<ArrayList<ProductModel>>(ArrayList())
 
+    var basketTotal = MutableLiveData<Float>(0.0F)
+
     var shipmentAddresses = MutableLiveData<ArrayList<ShipmentAddressModel>>(
         ArrayList(
             listOf(
@@ -113,6 +115,12 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
     fun getProducts() {
         appRepository.getBasket {
             productInBasket.postValue(it)
+            var total = 0.0F
+            it.forEach { p ->
+                total += p.numbersInBasket * p.price
+            }
+            basketTotal.postValue(total)
+
         }
     }
 

@@ -24,11 +24,30 @@
         <item name="android:paddingTop">@dimen/buttonPrimaryPaddingVertical</item>
         <item name="android:paddingBottom">@dimen/buttonPrimaryPaddingVertical</item>
         <item name="android:textColor">@color/text_white</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/buttonPrimaryTextSize</item>
         <item name="android:backgroundTint">@color/colorPrimary</item>
     </style>
 
+    <style name="ButtonSecondary" parent="Widget.AppCompat.Button">
+        <item name="android:paddingLeft">@dimen/buttonPrimaryPaddingHorizontal</item>
+        <item name="android:paddingRight">@dimen/buttonPrimaryPaddingHorizontal</item>
+        <item name="android:paddingTop">@dimen/buttonPrimaryPaddingVertical</item>
+        <item name="android:paddingBottom">@dimen/buttonPrimaryPaddingVertical</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/buttonPrimaryTextSize</item>
+        <item name="android:background">@android:color/background_light</item>
+    </style>
+
+    <style name="HeaderBar">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/header_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/header_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/header_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/header_padding_vertical</item>
+    </style>
 
 
+    <dimen name="header_padding_horizontal">16dp</dimen>
+    <dimen name="header_padding_vertical">8dp</dimen>
 </resources>

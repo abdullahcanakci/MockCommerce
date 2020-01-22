@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".modules.checkout.CheckoutEndFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="End" />
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_tick"
+        android:tint="@color/success" />
+
 
     <Button
         android:id="@+id/checkout_end"
         style="@style/ButtonPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="16dp"
         android:text="Geri Dön" />
 
 
-</LinearLayout>
+</FrameLayout>

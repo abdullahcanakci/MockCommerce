@@ -20,6 +20,10 @@
     <color name="text_white">#eeeeee</color>
     <color name="promotion_background_red">#E53935</color>
     <color name="status_bar_color">#ffffff</color>
-    <color name="button_delete">#EF5350</color>
+    <color name="button_delete">@color/failure</color>
     <color name="black">#000000</color>
+
+
+    <color name="failure">#EF5350</color>
+    <color name="success">#9CCC65</color>
 </resources>

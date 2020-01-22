@@ -22,5 +22,42 @@
     <string name="order_total">Toplam</string>
 
     <string name="price">"%1$.2f TL</string>
+    <string name="checkout_payment_title">Kredi / Banka Kartı</string>
+    <string name="checkout_payment_label_cardno">Kart Numarası</string>
+    <string name="checkout_payment_label_cardholder">Kart Sahibi</string>
+    <string name="checkout_payment_label_securitycode">Güvenlik Kodu</string>
+    <string name="checkout_payment_sozlesme_title">Sözleşmeler ve Formlar</string>
+    <string name="checkout_btn_on_bilgi_form">Ön Bilgilendirme Formu</string>
+    <string name="checkout_btn_sozlesme_form">Satoş Sözleşmesi</string>
+    <string name="payment_aggrement">Kabul ediyorum.</string>
+    <string name="checkout_confirm_checkout">ÖDEMEYİ GERÇEKLEŞTİR</string>
+
+    <string-array name="card_expiration_month">
+        <item>Ay</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+
+    <string-array name="card_expiration_year">
+        <item>Yıl</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+    </string-array>
+
 
 </resources>

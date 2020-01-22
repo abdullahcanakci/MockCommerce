@@ -1,21 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".modules.checkout.CheckoutPaymentFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Payment Options" />
+    <data>
 
-    <Button
-        android:id="@+id/checkout_complete"
-        style="@style/ButtonPrimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sonraki Adım" />
+        <variable
+            name="model"
+            type="com.mockcommerce.modules.checkout.CheckoutViewModel" />
+    </data>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".modules.checkout.CheckoutPaymentFragment">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_margin="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:cardCornerRadius="@dimen/cardview_radius"
+            app:cardPreventCornerOverlap="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/HeaderBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_credit_card"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="16dp"
+                        android:text="@string/checkout_payment_title"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/form_box_padding_horizontal"
+                    android:paddingRight="@dimen/form_box_padding_horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@id/checkout_card_no"
+                        android:text="@string/checkout_payment_label_cardno"
+                        android:textSize="@dimen/form_label_text_size" />
+
+                    <EditText
+                        android:id="@+id/checkout_card_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="AUTOFILL_HINT_CREDIT_CARD_NUMBER"
+                        android:inputType="number"
+                        android:maxLength="16"
+                        android:singleLine="true"
+                        android:text="@={model.paymentCardNumber}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@id/checkout_card_holder"
+                        android:text="@string/checkout_payment_label_cardholder"
+                        android:textSize="@dimen/form_label_text_size" />
+
+                    <EditText
+                        android:id="@+id/checkout_card_holder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="AUTOFILL_HINT_NAME"
+                        android:inputType="textPersonName"
+                        android:singleLine="true"
+                        android:text="@={model.paymentCardHolder}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@id/checkout_card_expiration_date"
+                        android:text="@string/checkout_payment_label_cardno"
+                        android:textSize="@dimen/form_label_text_size" />
+
+                    <LinearLayout
+                        android:id="@+id/checkout_card_expiration_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="8dp">
+
+                        <Spinner
+                            android:id="@+id/checkout_card_expiration_month"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:autofillHints="AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_MONTH"
+                            android:entries="@array/card_expiration_month" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/checkout_card_expiration_year"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:autofillHints="AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_YEAR"
+                            android:entries="@array/card_expiration_year" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@id/checkout_card_expiration_securitycode"
+                        android:text="@string/checkout_payment_label_securitycode"
+                        android:textSize="@dimen/form_label_text_size" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/checkout_card_expiration_securitycode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:autofillHints="AUTOFILL_HINT_CREDIT_CARD_SECURITY_CODE"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:singleLine="true"
+                            android:text="@={model.paymentCardCode}" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            app:cardCornerRadius="@dimen/cardview_radius"
+            app:cardPreventCornerOverlap="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    style="@style/HeaderBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_aggrement"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="16dp"
+                        android:text="@string/checkout_payment_sozlesme_title"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/card_header_text_size" />
+
+                </LinearLayout>
+
+                <Button
+                    style="@style/ButtonSecondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checkout_btn_on_bilgi_form"
+                    android:textAllCaps="false" />
+
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+                <Button
+                    style="@style/ButtonSecondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checkout_btn_sozlesme_form"
+                    android:textAllCaps="false" />
+
+                <CheckBox
+                    android:id="@+id/checkout_checkbox_aggrement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/payment_aggrement" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            app:cardCornerRadius="@dimen/cardview_radius"
+            app:cardPreventCornerOverlap="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/order_total"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/checkout_total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{model.basketTotal}"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/checkout_complete"
+                    style="@style/ButtonPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:enabled="false"
+                    android:text="@string/checkout_confirm_checkout" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</layout>
