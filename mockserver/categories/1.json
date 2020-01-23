@@ -1,0 +1,14 @@
+[
+  {
+    "id": 2,
+    "name": "Kategori 2",
+    "image": "images/s_2.png",
+    "destinationCategoryId": 3
+  },
+  {
+    "id": 3,
+    "name": "Kategori 3",
+    "image": "images/s_3.png",
+    "destinationCategoryId": 3
+  }
+]
