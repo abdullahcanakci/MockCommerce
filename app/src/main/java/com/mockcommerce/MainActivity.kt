@@ -15,6 +15,7 @@ import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
+import org.koin.core.error.KoinAppAlreadyStartedException
 import org.koin.dsl.module
 import timber.log.Timber
 
@@ -51,10 +52,15 @@ class MainActivity : AppCompatActivity(){
             viewModel { CategoriesViewModel(get()) }
         }
 
-        startKoin {
-            androidContext(applicationContext)
-            modules(dataModule)
+        try {
+            startKoin {
+                androidContext(applicationContext)
+                modules(dataModule)
+            }
+        } catch (e: KoinAppAlreadyStartedException) {
+            Timber.e("Koin already started")
         }
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {

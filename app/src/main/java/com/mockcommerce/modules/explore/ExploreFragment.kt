@@ -11,7 +11,6 @@ import com.mockcommerce.R
 import com.mockcommerce.models.CarouselItemModel
 import com.mockcommerce.models.CarouselModel
 import com.mockcommerce.models.ShowcaseItem
-import com.mockcommerce.modules.explore.views.ShowcaseAdapter
 import com.mockcommerce.shared.ZoomOutPageTransformer
 import kotlinx.android.synthetic.main.fragment_explore.view.*
 
@@ -66,16 +65,19 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setupShowcase(showcase: ViewPager2){
-        val adapter = ShowcaseAdapter(listOf(
-            ShowcaseItem("Başlık 1", "Alt Başlık 1", "Başlık 1", R.mipmap.showcase_1),
-            ShowcaseItem("Başlık 2", "Alt Başlık 2", "Başlık 2", R.mipmap.showcase_2),
-            ShowcaseItem("Başlık 3", "Alt Başlık 3", "Başlık 3", R.mipmap.showcase_3),
-            ShowcaseItem("Başlık 4", "Alt Başlık 4", "Başlık 4", R.mipmap.showcase_4)
-        ),
-            this.activity!!)
+        val adapter = ShowcaseAdapter()
+        adapter.update(
+            ArrayList(
+                listOf(
+                    ShowcaseItem("Başlık 1", "Alt Başlık 1", "Başlık 1", R.mipmap.showcase_1),
+                    ShowcaseItem("Başlık 2", "Alt Başlık 2", "Başlık 2", R.mipmap.showcase_2),
+                    ShowcaseItem("Başlık 3", "Alt Başlık 3", "Başlık 3", R.mipmap.showcase_3),
+                    ShowcaseItem("Başlık 4", "Alt Başlık 4", "Başlık 4", R.mipmap.showcase_4)
+                )
+            )
+        )
 
         showcase.adapter = adapter
-
         showcase.setPageTransformer(ZoomOutPageTransformer())
     }
 }
