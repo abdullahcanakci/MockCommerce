@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mockcommerce.modules.basket.BasketViewModel
+import com.mockcommerce.modules.categories.CategoriesViewModel
 import com.mockcommerce.modules.checkout.CheckoutViewModel
 import com.mockcommerce.modules.shared.product_list.ProductListViewModel
 import com.mockcommerce.modules.shared.product_page.ProductViewModel
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity(){
             viewModel {ProductListViewModel(get())}
             viewModel {BasketViewModel(get())}
             viewModel { CheckoutViewModel(get()) }
+            viewModel { CategoriesViewModel(get()) }
         }
 
         startKoin {

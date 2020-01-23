@@ -18,6 +18,13 @@
                 app:argType="integer"
                 android:defaultValue="0"/>
         </action>
+        <action
+            android:id="@+id/action_categories_self"
+            app:destination="@id/categories" />
+        <argument
+            android:name="categoryId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <include app:graph="@navigation/product_list" />
 

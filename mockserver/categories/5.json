@@ -5,17 +5,10 @@
     "image": "images/s_1.png",
     "destinationListId": 1
   },
-  
   {
     "id": 3,
     "name": "Kategori 3",
     "image": "images/s_3.png",
     "destinationListId": 3
-  },
-  {
-    "id": 5,
-    "name": "Kategori 5",
-    "image": "images/s_5.png",
-    "destinationListId": 5
   }
 ]

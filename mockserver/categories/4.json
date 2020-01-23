@@ -6,12 +6,6 @@
     "destinationCategoryId": 5
   },
   {
-    "id": 4,
-    "name": "Kategori 4",
-    "image": "images/s_4.png",
-    "destinationCategoryId": 3
-  },
-  {
     "id": 5,
     "name": "Kategori 5",
     "image": "images/s_5.png",
