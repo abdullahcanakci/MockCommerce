@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.header.view.*
 
 class Header(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
-    val actionListener: (((v: View) -> Unit))? = null
+    var actionListener: (((v: View) -> Unit))? = null
 
     init {
         View.inflate(context, R.layout.header, this)

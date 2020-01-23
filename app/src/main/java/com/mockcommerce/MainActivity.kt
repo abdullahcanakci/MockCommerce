@@ -8,6 +8,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mockcommerce.modules.basket.BasketViewModel
 import com.mockcommerce.modules.categories.CategoriesViewModel
 import com.mockcommerce.modules.checkout.CheckoutViewModel
+import com.mockcommerce.modules.shared.newaddress.NewAddressViewModel
 import com.mockcommerce.modules.shared.product_list.ProductListViewModel
 import com.mockcommerce.modules.shared.product_page.ProductViewModel
 import okhttp3.OkHttpClient
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity(){
             viewModel {ProductListViewModel(get())}
             viewModel {BasketViewModel(get())}
             viewModel { CheckoutViewModel(get()) }
+            viewModel { NewAddressViewModel(get()) }
             viewModel { CategoriesViewModel(get()) }
         }
 
@@ -53,8 +55,6 @@ class MainActivity : AppCompatActivity(){
             androidContext(applicationContext)
             modules(dataModule)
         }
-
-
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {

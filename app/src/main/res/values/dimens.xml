@@ -19,4 +19,9 @@
     <dimen name="form_label_text_size">12sp</dimen>
     <dimen name="card_header_text_size">16sp</dimen>
     <dimen name="category_image_size">64dp</dimen>
+
+    <dimen name="header_padding_horizontal">16dp</dimen>
+    <dimen name="header_padding_vertical">8dp</dimen>
+    <dimen name="paddingHorizontalSmall">8dp</dimen>
+    <dimen name="paddingVerticalSmall">4dp</dimen>
 </resources>

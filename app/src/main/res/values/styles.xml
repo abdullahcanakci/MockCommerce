@@ -55,9 +55,13 @@
         <item name="android:paddingBottom">@dimen/header_padding_vertical</item>
     </style>
 
+    <style name="Card">
+        <item name="android:layout_margin">@dimen/paddingVertical</item>
+        <item name="android:paddingTop">@dimen/paddingVertical</item>
+        <item name="android:paddingBottom">@dimen/paddingVertical</item>
+        <item name="cardCornerRadius">@dimen/cardview_radius</item>
+        <item name="cardPreventCornerOverlap">false</item>
+    </style>
 
-    <dimen name="header_padding_horizontal">16dp</dimen>
-    <dimen name="header_padding_vertical">8dp</dimen>
-    <dimen name="paddingHorizontalSmall">8dp</dimen>
-    <dimen name="paddingVerticalSmall">4dp</dimen>
+
 </resources>

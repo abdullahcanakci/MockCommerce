@@ -24,12 +24,9 @@
             app:title="@string/billing_address" />
 
         <androidx.cardview.widget.CardView
+            style="@style/Card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            app:cardCornerRadius="@dimen/cardview_radius"
-            app:cardPreventCornerOverlap="false">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +43,8 @@
                     android:id="@+id/checkout_product_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
+                    android:orientation="vertical"
+                    android:padding="8dp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

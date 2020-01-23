@@ -22,6 +22,8 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
 
     private var onAddressSelectedListener: ((String) -> Unit)? = null
 
+    private var newAddressListener: (() -> Unit)? = null
+
     init {
         View.inflate(context, R.layout.view_address_selector, this)
 
@@ -31,6 +33,9 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
 
         selector_header.setTitle(attributeSet.getString(R.styleable.AddressSelectorView_title))
         selector_header.setActionIcon(R.drawable.ic_add)
+        selector_header.actionListener = {
+            newAddressListener?.invoke()
+        }
 
         show_more_addr.setOnClickListener {
             isCollapsed = !isCollapsed
@@ -82,6 +87,10 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
 
     fun setOnSelectedListener(listener: ((id: String) -> Unit)) {
         onAddressSelectedListener = listener
+    }
+
+    fun setNewAddressListener(listener: () -> Unit) {
+        newAddressListener = listener
     }
 
     private fun collapse() {

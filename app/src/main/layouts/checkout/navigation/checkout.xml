@@ -24,10 +24,19 @@
         <action
             android:id="@+id/action_checkoutSummaryFragment_to_checkoutPaymentFragment"
             app:destination="@id/checkoutPaymentFragment" />
+        <action
+            android:id="@+id/action_checkoutSummaryFragment_to_newAddressFragment"
+            app:destination="@id/newAddressFragment"
+            app:popUpTo="@+id/checkoutSummaryFragment" />
     </fragment>
     <fragment
         android:id="@+id/checkoutEndFragment"
         android:name="com.mockcommerce.modules.checkout.CheckoutEndFragment"
         android:label="fragment_checkout_end"
         tools:layout="@layout/fragment_checkout_end" />
+    <fragment
+        android:id="@+id/newAddressFragment"
+        android:name="com.mockcommerce.modules.shared.newaddress.NewAddressFragment"
+        android:label="fragment_new_address"
+        tools:layout="@layout/fragment_new_address" />
 </navigation>

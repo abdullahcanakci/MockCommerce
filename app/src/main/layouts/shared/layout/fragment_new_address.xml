@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".modules.shared.newaddress.NewAddressFragment">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.mockcommerce.modules.shared.newaddress.NewAddressViewModel" />
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                style="@style/Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.mockcommerce.shared.views.Header
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:header_title="@string/shipment_receiver"
+                        app:icon="@drawable/ic_person" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/paddingHorizontal"
+                        android:paddingRight="@dimen/paddingHorizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/new_address_name"
+                            android:text="@string/name_person"
+                            android:textSize="@dimen/form_label_text_size" />
+
+                        <EditText
+                            android:id="@+id/new_address_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="AUTOFILL_HINT_NAME"
+                            android:inputType="textPersonName"
+                            android:singleLine="true"
+                            android:text="@={model.name}" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/new_address_surname"
+                            android:text="@string/surname_person"
+                            android:textSize="@dimen/form_label_text_size" />
+
+                        <EditText
+                            android:id="@+id/new_address_surname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="AUTOFILL_HINT_SURNAME"
+                            android:inputType="textPersonName"
+                            android:singleLine="true"
+                            android:text="@={model.surname}" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/new_address_phone"
+                            android:text="@string/phone"
+                            android:textSize="@dimen/form_label_text_size" />
+
+                        <EditText
+                            android:id="@+id/new_address_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="AUTOFILL_HINT_PHONE_NUMBER"
+                            android:inputType="phone"
+                            android:singleLine="true"
+                            android:text="@={model.phone}" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                style="@style/Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.mockcommerce.shared.views.Header
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:header_title="@string/shipment_address"
+                        app:icon="@drawable/ic_home" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/paddingHorizontal"
+                        android:paddingRight="@dimen/paddingHorizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/new_address_addr_name"
+                            android:text="@string/address_name"
+                            android:textSize="@dimen/form_label_text_size" />
+
+                        <EditText
+                            android:id="@+id/new_address_addr_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textAutoCorrect"
+                            android:singleLine="true"
+                            android:text="@={model.addressName}" />
+
+                        <Spinner
+                            android:id="@+id/city_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/paddingVertical"
+                            android:paddingBottom="@dimen/paddingVertical"
+                            tools:listitem="@layout/item_spinner" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/new_address_district"
+                            android:text="@string/district"
+                            android:textSize="@dimen/form_label_text_size" />
+
+                        <EditText
+                            android:id="@+id/new_address_district"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="AUTOFILL_HINT_POSTAL_ADDRESS_REGION"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:text="@={model.district}" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/new_address_address"
+                            android:text="@string/address"
+                            android:textSize="@dimen/form_label_text_size" />
+
+                        <EditText
+                            android:id="@+id/new_address_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="AUTOFILL_HINT_POSTAL_ADDRESS"
+                            android:inputType="textMultiLine"
+                            android:isScrollContainer="false"
+                            android:lines="3"
+                            android:maxLines="3"
+                            android:text="@={model.address}" />
+
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="@={model.billing}"
+                            android:paddingTop="@dimen/paddingVertical"
+                            android:paddingBottom="@dimen/paddingVertical"
+                            android:text="@string/address_as_billing"
+                            android:textColor="@color/text_faint"
+                            android:textSize="@dimen/text_primary" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/button_address_save"
+                style="@style/ButtonPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/save_address" />
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

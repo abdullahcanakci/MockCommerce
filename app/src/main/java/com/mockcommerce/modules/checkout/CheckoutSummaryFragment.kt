@@ -39,12 +39,20 @@ class CheckoutSummaryFragment : Fragment() {
             sharedViewModel.shipmentAddressSelected(it)
         }
 
+        view.shipment_address_selector.setNewAddressListener {
+            findNavController().navigate(R.id.action_checkoutSummaryFragment_to_newAddressFragment)
+        }
+
         sharedViewModel.billingAddresses.observe(viewLifecycleOwner, Observer {
             view.billing_address_selector.setModel((it))
         })
 
         view.billing_address_selector.setOnSelectedListener {
             sharedViewModel.billingAddressSelected(it)
+        }
+
+        view.billing_address_selector.setNewAddressListener {
+            findNavController().navigate(R.id.action_checkoutSummaryFragment_to_newAddressFragment)
         }
 
         sharedViewModel.productInBasket.observe(viewLifecycleOwner, Observer { list ->
