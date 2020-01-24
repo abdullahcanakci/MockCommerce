@@ -1,6 +1,6 @@
 package com.mockcommerce.models
 
-data class ShipmentAddressModel(
+data class AddressModel(
     val id: String,
     val title: String,
     val address: String,

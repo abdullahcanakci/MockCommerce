@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.mockcommerce.models.ShipmentAddressModel" />
+            type="com.mockcommerce.models.AddressModel" />
     </data>
 
 

@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.mockcommerce.models.AddressModel
 import com.mockcommerce.models.CategoryModel
 import com.mockcommerce.models.ProductModel
-import com.mockcommerce.models.ShipmentAddressModel
 import okhttp3.*
 import timber.log.Timber
 import java.io.IOException
@@ -19,7 +19,7 @@ class AppRepository(val client: OkHttpClient) {
     private val categories = "/categories"
 
 
-    private var addresses: MutableLiveData<ArrayList<ShipmentAddressModel>>? = null
+    private var addresses: MutableLiveData<ArrayList<AddressModel>>? = null
     private var products = ArrayList<ProductModel>()
     private var basket: MutableLiveData<ArrayList<ProductModel>>? = null
     private var postponed: MutableLiveData<ArrayList<ProductModel>>? = null
@@ -186,7 +186,7 @@ class AppRepository(val client: OkHttpClient) {
         return false
     }
 
-    fun addToAddress(address: ShipmentAddressModel): Boolean {
+    fun addToAddress(address: AddressModel): Boolean {
         addresses?.let {
             val temp = it.value
             var added = false
@@ -205,7 +205,7 @@ class AppRepository(val client: OkHttpClient) {
     }
 
     fun getCategory(id: Int?, callback: (ArrayList<CategoryModel>) -> Unit) {
-        var path: String
+        val path: String
         if(id == null) {
             path = "$root/categories.json"
         } else {

@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.mockcommerce.R
 import com.mockcommerce.databinding.LayoutAddressBinding
-import com.mockcommerce.models.ShipmentAddressModel
+import com.mockcommerce.models.AddressModel
 import kotlinx.android.synthetic.main.view_address_selector.view.*
 import timber.log.Timber
 
@@ -18,7 +18,7 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
 
     private var isCollapsed: Boolean = true
 
-    private val models = ArrayList<ShipmentAddressModel>(listOf())
+    private val models = ArrayList<AddressModel>(listOf())
 
     private var onAddressSelectedListener: ((String) -> Unit)? = null
 
@@ -79,7 +79,7 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
         listLayout.requestLayout()
     }
 
-    fun setModel(model: ArrayList<ShipmentAddressModel>) {
+    fun setModel(model: ArrayList<AddressModel>) {
         models.clear()
         models.addAll(model)
         layoutAddresses()

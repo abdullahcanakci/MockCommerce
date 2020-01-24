@@ -1,12 +1,11 @@
 package com.mockcommerce.modules.checkout
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.mockcommerce.AppRepository
+import com.mockcommerce.models.AddressModel
 import com.mockcommerce.models.ProductModel
-import com.mockcommerce.models.ShipmentAddressModel
 
 class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
     var userId: String = ""
@@ -20,10 +19,10 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
 
     var basketTotal = MutableLiveData<Float>(0.0F)
 
-    var shipmentAddresses = MutableLiveData<ArrayList<ShipmentAddressModel>>(
+    var shipmentAddresses = MutableLiveData<ArrayList<AddressModel>>(
         ArrayList(
             listOf(
-                ShipmentAddressModel(
+                AddressModel(
                     "1",
                     "title 1",
                     "address 1",
@@ -33,7 +32,7 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
                     "district 1",
                     true
                 ),
-                ShipmentAddressModel(
+                AddressModel(
                     "2",
                     "title 2",
                     "address 2",
@@ -43,7 +42,7 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
                     "district 2",
                     false
                 ),
-                ShipmentAddressModel(
+                AddressModel(
                     "3",
                     "title 3",
                     "address 3",
@@ -60,10 +59,10 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
     var shipmentAddressesCollapsed = MutableLiveData<Boolean>(true)
 
 
-    var billingAddresses = MutableLiveData<ArrayList<ShipmentAddressModel>>(
+    var billingAddresses = MutableLiveData<ArrayList<AddressModel>>(
         ArrayList(
             listOf(
-                ShipmentAddressModel(
+                AddressModel(
                     "1",
                     "title 1",
                     "address 1",
@@ -73,7 +72,7 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
                     "district 1",
                     true
                 ),
-                ShipmentAddressModel(
+                AddressModel(
                     "2",
                     "title 2",
                     "address 2",
@@ -83,7 +82,7 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
                     "district 2",
                     false
                 ),
-                ShipmentAddressModel(
+                AddressModel(
                     "3",
                     "title 3",
                     "address 3",
