@@ -1,84 +1,55 @@
 package com.mockcommerce.modules.basket
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.mockcommerce.AppRepository
 import com.mockcommerce.models.ProductModel
+import timber.log.Timber
 
 class BasketViewModel(val appRepository: AppRepository) : ViewModel() {
-    val basketItems: MutableLiveData<ArrayList<ProductModel>> = MutableLiveData(ArrayList())
+    val basketItems: LiveData<ArrayList<ProductModel>> = appRepository.getBasket()
 
-    var postponedItems: MutableLiveData<ArrayList<ProductModel>> = MutableLiveData(ArrayList())
+    var postponedItems: LiveData<ArrayList<ProductModel>> = appRepository.getBasketPostponed()
 
-    var basketTotal: MutableLiveData<String> = MutableLiveData("0 TL")
+    var basketTotal: MutableLiveData<Float> = MutableLiveData(0.0F)
 
     init {
-        appRepository.getBasket {
-            basketItems.postValue(it)
-            calculateTotal(it)
-        }
-        appRepository.getBasketPostponed {
-            postponedItems.postValue(it)
+        Transformations.map(
+            basketItems
+        ) {
+            var temp = 0.0F
+            for (productModel in it) {
+                temp += productModel.numbersInBasket * productModel.price
+            }
+            Timber.d("Basket total $temp")
+            basketTotal.postValue(temp)
         }
     }
 
-    fun calculateTotal(products: ArrayList<ProductModel>) {
-        var total: Float = 0.0F
-
-        products.forEach {
-            total += it.numbersInBasket * it.price
-        }
-
-        basketTotal.postValue("Tutar %.2f TL".format(total))
-    }
-
-    fun removeFromPostPoned(product: ProductModel) {
-        val temp = postponedItems.value
-        temp!!.remove(product)
-        postponedItems.postValue(temp)
+    fun removeFromPostponed(product: ProductModel) {
+        appRepository.removeFromPostponed(product.id)
     }
 
     fun removeFromBasket(product: ProductModel) {
-        val temp = basketItems.value
-        temp!!.remove(product)
-        basketItems.postValue(temp)
-        calculateTotal(temp)
+        appRepository.removeFromBasket(product.id)
     }
 
     fun postpone(product: ProductModel) {
-        val temp = postponedItems.value
-        product.numbersInBasket = 1
-        temp!!.add(product)
-        postponedItems.postValue(temp)
-        removeFromBasket(product)
+        appRepository.moveToPostponed(product.id)
     }
 
     fun addToBasket(product: ProductModel) {
-        val temp = basketItems.value
-        product.numbersInBasket = 1
-        temp!!.add(product)
-        basketItems.postValue(temp)
-        removeFromPostPoned(product)
-        calculateTotal(temp)
+        appRepository.moveToBasket(product.id)
     }
 
     fun add(product: ProductModel) {
-        val temp = basketItems.value
-        val index = temp!!.indexOf(product)
-        product.numbersInBasket += 1
-        temp[index] = product
-        basketItems.postValue(temp)
-        calculateTotal(temp)
+        appRepository.addToBasket(product.id)
     }
 
-    fun substract(product: ProductModel) {
-        val temp = basketItems.value
-        val index = temp!!.indexOf(product)
-        product.numbersInBasket =
-            if (product.numbersInBasket == 1) 1 else product.numbersInBasket - 1
-        temp[index] = product
-        basketItems.postValue(temp)
-        calculateTotal(temp)
+    fun subtract(product: ProductModel) {
+        Timber.d("Subtract not implemented")
     }
 
 }

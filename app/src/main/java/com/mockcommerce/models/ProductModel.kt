@@ -30,4 +30,10 @@ open class ProductModel(
         return "%$p"
     }
 
+    fun copy() : ProductModel {
+        return ProductModel(
+            id, name,price, oldPrice, numbersInBasket, images
+        )
+    }
+
 }

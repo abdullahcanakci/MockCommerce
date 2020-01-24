@@ -1,6 +1,8 @@
 package com.mockcommerce.modules.checkout
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.mockcommerce.AppRepository
 import com.mockcommerce.models.ProductModel
@@ -113,14 +115,15 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
     var selectedShipmentAddressId: String? = null
 
     fun getProducts() {
-        appRepository.getBasket {
-            productInBasket.postValue(it)
-            var total = 0.0F
-            it.forEach { p ->
-                total += p.numbersInBasket * p.price
+        productInBasket = appRepository.getBasket() as MutableLiveData<ArrayList<ProductModel>>
+        Transformations.map(
+            productInBasket
+        ) {
+            var temp = 0.0F
+            for (productModel in it) {
+                temp += productModel.numbersInBasket * productModel.price
             }
-            basketTotal.postValue(total)
-
+            basketTotal.postValue(temp)
         }
     }
 

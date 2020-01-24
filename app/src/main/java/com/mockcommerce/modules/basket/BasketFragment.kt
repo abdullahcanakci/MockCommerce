@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -43,13 +44,12 @@ class BasketFragment : Fragment() {
             when(action) {
                 ADAPTER_ACTION.DELETE -> {
                     viewModel.removeFromBasket(product)
-
                 }
                 ADAPTER_ACTION.ADD -> {
                     viewModel.add(product)
                 }
                 ADAPTER_ACTION.SUBSTRACT -> {
-                    viewModel.substract(product)
+                    viewModel.subtract(product)
                 }
                 ADAPTER_ACTION.POSTPONE -> {
                     viewModel.postpone(product)
@@ -77,7 +77,7 @@ class BasketFragment : Fragment() {
                     viewModel.addToBasket(product)
                 }
                 ADAPTER_ACTION.DELETE -> {
-                    viewModel.removeFromPostPoned(product)
+                    viewModel.removeFromPostponed(product)
                 }
                 ADAPTER_ACTION.VIEW -> {
                     val action = BasketFragmentDirections.actionBasketToProduct2(product.id)
@@ -94,7 +94,8 @@ class BasketFragment : Fragment() {
         })
 
         viewModel.basketTotal.observe(this.viewLifecycleOwner, Observer { t ->
-            v.basket_total.text = t
+            v.basket_total.text = v.context!!.getString(R.string.price, t)
+            // TODO extract formatting to external method
         })
 
         v.basket_purchase.setOnClickListener {

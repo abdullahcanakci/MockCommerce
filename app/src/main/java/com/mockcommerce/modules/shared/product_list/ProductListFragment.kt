@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
 import kotlinx.android.synthetic.main.fragment_productlist.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class ProductListFragment : Fragment() {
 
@@ -38,6 +39,7 @@ class ProductListFragment : Fragment() {
         v.product_list.adapter = adapter
 
         viewModel.productList.observe(this.viewLifecycleOwner, Observer { t ->
+            Timber.d("Number of elements in the productlist is ${t.size}")
             adapter.update(t)
         })
 

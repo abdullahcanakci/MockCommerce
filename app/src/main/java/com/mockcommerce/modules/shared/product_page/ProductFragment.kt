@@ -10,6 +10,8 @@ import androidx.navigation.fragment.navArgs
 import com.mockcommerce.databinding.FragmentProductBinding
 import com.mockcommerce.modules.shared.adapters.ImageAdapter
 import com.mockcommerce.shared.ZoomOutPageTransformer
+import kotlinx.android.synthetic.main.fragment_product.view.*
+import kotlinx.android.synthetic.main.item_basket_postponed.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProductFragment : Fragment() {
@@ -46,5 +48,9 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val id = args.productId
         viewModel.productId = id
+
+        view.add_to_basket.setOnClickListener{
+            viewModel.addToBasket()
+        }
     }
 }
