@@ -9,9 +9,9 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mockcommerce.R
+import com.mockcommerce.databinding.FragmentNewAddressBinding
 import kotlinx.android.synthetic.main.fragment_new_address.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class NewAddressFragment() : Fragment() {
 
@@ -26,6 +26,9 @@ class NewAddressFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val v = FragmentNewAddressBinding.bind(view)
+        v.model = viewModel
 
         ArrayAdapter.createFromResource(
             view.context,
@@ -53,7 +56,7 @@ class NewAddressFragment() : Fragment() {
         }
 
         view.button_address_save.setOnClickListener {
-            Timber.d("Button Click")
+            viewModel.saveAddress()
             findNavController().navigateUp()
         }
     }

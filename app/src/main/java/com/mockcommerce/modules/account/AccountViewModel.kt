@@ -1,7 +1,12 @@
 package com.mockcommerce.modules.account
 
 import androidx.lifecycle.ViewModel
+import com.mockcommerce.AppRepository
 
-class AccountViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class AccountViewModel(val repository: AppRepository) : ViewModel() {
+    val user = repository.getUser()
+
+    fun logout() {
+        repository.logout()
+    }
 }

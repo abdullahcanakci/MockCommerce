@@ -18,32 +18,39 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="ButtonPrimary" parent="Widget.AppCompat.Button">
+    <style name="BaseButton" parent="Widget.AppCompat.Button">
         <item name="android:paddingLeft">@dimen/paddingHorizontal</item>
         <item name="android:paddingRight">@dimen/paddingHorizontal</item>
         <item name="android:paddingTop">@dimen/paddingVertical</item>
         <item name="android:paddingBottom">@dimen/paddingVertical</item>
-        <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">@dimen/text_primary</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="ButtonPrimary" parent="BaseButton">
+        <item name="android:textColor">@color/text_white</item>
         <item name="android:backgroundTint">@color/colorPrimary</item>
     </style>
 
     <style name="ButtonPrimarySmall" parent="ButtonPrimary">
-        <item name="android:paddingLeft">@dimen/paddingHorizontal</item>
-        <item name="android:paddingRight">@dimen/paddingHorizontal</item>
         <item name="android:paddingTop">@dimen/paddingVerticalSmall</item>
         <item name="android:paddingBottom">@dimen/paddingVerticalSmall</item>
         <item name="android:textSize">@dimen/text_secondary</item>
     </style>
 
-    <style name="ButtonSecondary" parent="Widget.AppCompat.Button">
-        <item name="android:paddingLeft">@dimen/paddingHorizontal</item>
-        <item name="android:paddingRight">@dimen/paddingHorizontal</item>
-        <item name="android:paddingTop">@dimen/paddingVertical</item>
-        <item name="android:paddingBottom">@dimen/paddingVertical</item>
+    <style name="ButtonSecondary" parent="BaseButton">
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/text_primary</item>
-        <item name="android:background">@android:color/background_light</item>
+        <item name="android:backgroundTint">@android:color/background_light</item>
+    </style>
+
+    <style name="WideButton" parent="BaseButton">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:drawableEnd">@drawable/ic_arrow_forward</item>
+        <item name="android:drawablePadding">@dimen/paddingHorizontal</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="HeaderBar">

@@ -5,16 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.mockcommerce.R
+import kotlinx.android.synthetic.main.fragment_account.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountFragment : Fragment() {
+
+    val viewModel by viewModel<AccountViewModel>()
 
     companion object {
         fun newInstance() = AccountFragment()
     }
-
-    private lateinit var viewModel: AccountViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,10 +25,34 @@ class AccountFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_account, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AccountViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.user_name.text = viewModel.user?.name
+
+        view.button_logout.setOnClickListener {
+            onLogout()
+        }
+
+        view.button_favourite.setOnClickListener {
+            onFavourite()
+        }
+    }
+
+    fun onLogout() {
+        viewModel.logout()
+        findNavController().navigate(AccountFragmentDirections.actionAccountLandingFragmentToAccount())
+    }
+
+    fun onFavourite() {
+    }
+
+    fun onAddress() {
+
+    }
+
+    fun onSettings() {
+
     }
 
 }

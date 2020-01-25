@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.mockcommerce.modules.account.RegisterViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/paddingHorizontal"
+        android:paddingRight="@dimen/paddingHorizontal"
+        tools:context=".modules.account.RegisterFragment">
+
+        <EditText
+            android:id="@+id/first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="AUTOFILL_HINT_EMAIL_ADDRESS"
+            android:hint="@string/name_person"
+            android:inputType="textPersonName"
+            android:text="@={model.name}" />
+
+        <EditText
+            android:id="@+id/surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="AUTOFILL_HINT_EMAIL_ADDRESS"
+            android:hint="@string/surname_person"
+            android:inputType="textPersonName"
+            android:text="@={model.surname}" />
+
+
+        <EditText
+            android:id="@+id/usermail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="AUTOFILL_HINT_EMAIL_ADDRESS"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:text="@={model.email}" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="AUTOFILL_HINT_PASSWORD"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:text="@={model.password}" />
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="AUTOFILL_HINT_PHONE_NATIONAL"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:text="@={model.phone}" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_cancel"
+                style="@style/ButtonSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/go_back" />
+
+            <Button
+                android:id="@+id/button_register"
+                style="@style/ButtonPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

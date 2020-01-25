@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 import com.mockcommerce.models.AddressModel
 import com.mockcommerce.models.CategoryModel
 import com.mockcommerce.models.ProductModel
+import com.mockcommerce.models.UserModel
 import okhttp3.*
 import timber.log.Timber
 import java.io.IOException
@@ -14,7 +15,8 @@ import java.io.IOException
 class AppRepository(val client: OkHttpClient) {
     private val CACHE_POLICY = CacheControl.FORCE_NETWORK
 
-    private val root = "https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver"
+    private val root =
+        "https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver"
     private val images = "/images"
     private val categories = "/categories"
 
@@ -23,6 +25,27 @@ class AppRepository(val client: OkHttpClient) {
     private var products = ArrayList<ProductModel>()
     private var basket: MutableLiveData<ArrayList<ProductModel>>? = null
     private var postponed: MutableLiveData<ArrayList<ProductModel>>? = null
+
+    private var loggedInUser: UserModel? = null
+
+    private var users: ArrayList<UserModel> = ArrayList(
+        listOf(
+            UserModel(
+                "Empty",
+                "User",
+                "",
+                "",
+                "333 123 98 12"
+            ),
+            UserModel(
+                "Admin",
+                "Adminson",
+                "123456",
+                "admin",
+                "500 123 45 67"
+            )
+        )
+    )
 
     init {
         getProductList()
@@ -69,26 +92,26 @@ class AppRepository(val client: OkHttpClient) {
         if (basket == null) {
             basket = MutableLiveData()
 
-        val request = Request.Builder()
-            .url("$root/basket.json")
-            .cacheControl(CACHE_POLICY)
-            .build()
+            val request = Request.Builder()
+                .url("$root/basket.json")
+                .cacheControl(CACHE_POLICY)
+                .build()
 
-        val call = client.newCall(request)
+            val call = client.newCall(request)
 
-        Timber.d("Requesting basket info")
+            Timber.d("Requesting basket info")
 
-        call.enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Timber.d("Basket request is unsuccessful")
-            }
+            call.enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Timber.d("Basket request is unsuccessful")
+                }
 
-            override fun onResponse(call: Call, response: Response) {
-                val str = response.body!!.string()
-                val model: ArrayList<ProductModel> = Gson().fromJson(str)
-                basket!!.postValue(model)
-            }
-        })
+                override fun onResponse(call: Call, response: Response) {
+                    val str = response.body!!.string()
+                    val model: ArrayList<ProductModel> = Gson().fromJson(str)
+                    basket!!.postValue(model)
+                }
+            })
         }
         return basket as LiveData<ArrayList<ProductModel>>
     }
@@ -96,26 +119,26 @@ class AppRepository(val client: OkHttpClient) {
     fun getBasketPostponed(): LiveData<ArrayList<ProductModel>> {
         if (postponed == null) {
             postponed = MutableLiveData()
-        val request = Request.Builder()
-            .url("$root/basket_postponed.json")
-            .cacheControl(CACHE_POLICY)
-            .build()
+            val request = Request.Builder()
+                .url("$root/basket_postponed.json")
+                .cacheControl(CACHE_POLICY)
+                .build()
 
-        val call = client.newCall(request)
+            val call = client.newCall(request)
 
-        Timber.d("Requesting basket info")
+            Timber.d("Requesting basket info")
 
-        call.enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Timber.d("Basket request is unsuccessful")
-            }
+            call.enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Timber.d("Basket request is unsuccessful")
+                }
 
-            override fun onResponse(call: Call, response: Response) {
-                val str = response.body!!.string()
-                val model: ArrayList<ProductModel> = Gson().fromJson(str)
-                postponed!!.postValue(model)
-            }
-        })
+                override fun onResponse(call: Call, response: Response) {
+                    val str = response.body!!.string()
+                    val model: ArrayList<ProductModel> = Gson().fromJson(str)
+                    postponed!!.postValue(model)
+                }
+            })
         }
         return postponed as LiveData<ArrayList<ProductModel>>
     }
@@ -206,7 +229,7 @@ class AppRepository(val client: OkHttpClient) {
 
     fun getCategory(id: Int?, callback: (ArrayList<CategoryModel>) -> Unit) {
         val path: String
-        if(id == null) {
+        if (id == null) {
             path = "$root/categories.json"
         } else {
             path = "$root$categories/$id.json"
@@ -223,14 +246,51 @@ class AppRepository(val client: OkHttpClient) {
             override fun onFailure(call: Call, e: IOException) {
                 Timber.d("No response received")
             }
+
             override fun onResponse(call: Call, response: Response) {
                 val str = response.body!!.string()
-                val list : ArrayList<CategoryModel> = Gson().fromJson(str)
+                val list: ArrayList<CategoryModel> = Gson().fromJson(str)
                 callback(list)
             }
         })
     }
 
-    inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
+    fun savedLogin(): Boolean {
+        return loggedInUser != null
+    }
+
+    fun login(email: String, password: String): Boolean {
+        users.forEach { user ->
+            if (user.email == email && user.password == password) {
+                loggedInUser = user
+                return true
+            }
+        }
+
+        return false
+    }
+
+    fun logout(): Boolean {
+        Timber.d("User logged out.")
+        loggedInUser = null
+        return true
+    }
+
+    fun register(user: UserModel): Boolean {
+        users.add(user)
+        Timber.d(user.toString())
+        return true
+    }
+
+    fun addAddress(address: AddressModel) {
+        loggedInUser?.addresses!!.add(address)
+    }
+
+    fun getUser(): UserModel? {
+        return loggedInUser?.copy()
+    }
+
+    inline fun <reified T> Gson.fromJson(json: String) =
+        this.fromJson<T>(json, object : TypeToken<T>() {}.type)
 
 }

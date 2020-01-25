@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mockcommerce.modules.account.AccountViewModel
+import com.mockcommerce.modules.account.RegisterViewModel
 import com.mockcommerce.modules.basket.BasketViewModel
 import com.mockcommerce.modules.categories.CategoriesViewModel
 import com.mockcommerce.modules.checkout.CheckoutViewModel
@@ -19,7 +21,7 @@ import org.koin.core.error.KoinAppAlreadyStartedException
 import org.koin.dsl.module
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
 
@@ -42,14 +44,16 @@ class MainActivity : AppCompatActivity(){
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
 
         val dataModule = module {
-            single {OkHttpClient()}
-            single {AppRepository(get())}
-            viewModel {ProductViewModel(get())}
-            viewModel {ProductListViewModel(get())}
-            viewModel {BasketViewModel(get())}
+            single { OkHttpClient() }
+            single { AppRepository(get()) }
+            viewModel { ProductViewModel(get()) }
+            viewModel { ProductListViewModel(get()) }
+            viewModel { BasketViewModel(get()) }
             viewModel { CheckoutViewModel(get()) }
             viewModel { NewAddressViewModel(get()) }
             viewModel { CategoriesViewModel(get()) }
+            viewModel { RegisterViewModel(get()) }
+            viewModel { AccountViewModel(get()) }
         }
 
         try {
@@ -98,9 +102,6 @@ class MainActivity : AppCompatActivity(){
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
     }
-
-
-
 
 
 }
