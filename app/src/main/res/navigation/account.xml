@@ -14,6 +14,9 @@
             android:id="@+id/action_accountLandingFragment_to_account"
             app:destination="@id/account"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_accountLandingFragment_to_addressesFragment"
+            app:destination="@id/addressesFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -34,6 +37,20 @@
             app:popUpTo="@+id/account"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/addressesFragment"
+        android:name="com.mockcommerce.modules.account.AddressesFragment"
+        android:label="addresses_fragment"
+        tools:layout="@layout/addresses_fragment">
+        <action
+            android:id="@+id/action_addressesFragment_to_newAddressFragment2"
+            app:destination="@id/newAddressFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/newAddressFragment2"
+        android:name="com.mockcommerce.modules.shared.newaddress.NewAddressFragment"
+        android:label="fragment_new_address"
+        tools:layout="@layout/fragment_new_address" />
 
 
 </navigation>

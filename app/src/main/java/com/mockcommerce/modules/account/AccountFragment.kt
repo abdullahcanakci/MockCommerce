@@ -28,14 +28,18 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.user_name.text = viewModel.user?.name
-
         view.button_logout.setOnClickListener {
             onLogout()
         }
 
         view.button_favourite.setOnClickListener {
             onFavourite()
+        }
+        view.button_addresses.setOnClickListener {
+            onAddress()
+        }
+        view.button_settings.setOnClickListener {
+            onSettings()
         }
     }
 
@@ -48,7 +52,7 @@ class AccountFragment : Fragment() {
     }
 
     fun onAddress() {
-
+        findNavController().navigate(AccountFragmentDirections.actionAccountLandingFragmentToAddressesFragment())
     }
 
     fun onSettings() {

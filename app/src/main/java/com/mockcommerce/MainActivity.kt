@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mockcommerce.modules.account.AccountViewModel
+import com.mockcommerce.modules.account.AddressesViewModel
 import com.mockcommerce.modules.account.RegisterViewModel
 import com.mockcommerce.modules.basket.BasketViewModel
 import com.mockcommerce.modules.categories.CategoriesViewModel
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             viewModel { CategoriesViewModel(get()) }
             viewModel { RegisterViewModel(get()) }
             viewModel { AccountViewModel(get()) }
+            viewModel { AddressesViewModel(get()) }
         }
 
         try {

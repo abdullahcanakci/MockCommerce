@@ -42,9 +42,7 @@ class Header(context: Context, attrs: AttributeSet) : LinearLayout(context, attr
             actionButton.setColorFilter(actionColor)
         }
 
-        val title = attributeSet.getString(R.styleable.Header_header_title)
-
-        header_title.text = title
+        header_title.text = attributeSet.getString(R.styleable.Header_header_title)
 
         attributeSet.recycle()
     }

@@ -26,7 +26,7 @@ class AppRepository(val client: OkHttpClient) {
     private var basket: MutableLiveData<ArrayList<ProductModel>>? = null
     private var postponed: MutableLiveData<ArrayList<ProductModel>>? = null
 
-    private var loggedInUser: UserModel? = null
+    private var loggedInUser: MutableLiveData<UserModel?> = MutableLiveData(null)
 
     private var users: ArrayList<UserModel> = ArrayList(
         listOf(
@@ -256,13 +256,13 @@ class AppRepository(val client: OkHttpClient) {
     }
 
     fun savedLogin(): Boolean {
-        return loggedInUser != null
+        return loggedInUser.value != null
     }
 
     fun login(email: String, password: String): Boolean {
         users.forEach { user ->
             if (user.email == email && user.password == password) {
-                loggedInUser = user
+                loggedInUser.postValue(user)
                 return true
             }
         }
@@ -272,7 +272,7 @@ class AppRepository(val client: OkHttpClient) {
 
     fun logout(): Boolean {
         Timber.d("User logged out.")
-        loggedInUser = null
+        loggedInUser.postValue(null)
         return true
     }
 
@@ -283,14 +283,28 @@ class AppRepository(val client: OkHttpClient) {
     }
 
     fun addAddress(address: AddressModel) {
-        loggedInUser?.addresses!!.add(address)
+        val user = loggedInUser.value
+        if (user != null) {
+            user.addresses.add(address)
+            loggedInUser.postValue(user)
+        }
     }
 
-    fun getUser(): UserModel? {
-        return loggedInUser?.copy()
+    fun getUser(): LiveData<UserModel?> {
+        return loggedInUser
     }
 
     inline fun <reified T> Gson.fromJson(json: String) =
         this.fromJson<T>(json, object : TypeToken<T>() {}.type)
+
+    fun setDefaultAddress(id: String) {
+        val user = loggedInUser.value
+        if (user != null) {
+            user.addresses.forEach {
+                it.selected = it.id == id
+            }
+            loggedInUser.postValue(user)
+        }
+    }
 
 }
