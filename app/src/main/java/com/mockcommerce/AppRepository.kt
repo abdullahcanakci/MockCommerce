@@ -17,16 +17,15 @@ class AppRepository(val client: OkHttpClient) {
 
     private val root =
         "https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver"
-    private val images = "/images"
     private val categories = "/categories"
 
-
-    private var addresses: MutableLiveData<ArrayList<AddressModel>>? = null
     private var products = ArrayList<ProductModel>()
-    private var basket: MutableLiveData<ArrayList<ProductModel>>? = null
-    private var postponed: MutableLiveData<ArrayList<ProductModel>>? = null
 
-    private var loggedInUser: MutableLiveData<UserModel?> = MutableLiveData(null)
+    private var addresses = MutableLiveData<ArrayList<AddressModel>>()
+    private var basket = MutableLiveData<ArrayList<ProductModel>>()
+    private var postponed = MutableLiveData<ArrayList<ProductModel>>()
+
+    private var loggedInUser: UserModel? = null
 
     private var users: ArrayList<UserModel> = ArrayList(
         listOf(
@@ -89,58 +88,13 @@ class AppRepository(val client: OkHttpClient) {
     }
 
     fun getBasket(): LiveData<ArrayList<ProductModel>> {
-        if (basket == null) {
-            basket = MutableLiveData()
-
-            val request = Request.Builder()
-                .url("$root/basket.json")
-                .cacheControl(CACHE_POLICY)
-                .build()
-
-            val call = client.newCall(request)
-
-            Timber.d("Requesting basket info")
-
-            call.enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Timber.d("Basket request is unsuccessful")
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    val str = response.body!!.string()
-                    val model: ArrayList<ProductModel> = Gson().fromJson(str)
-                    basket!!.postValue(model)
-                }
-            })
-        }
-        return basket as LiveData<ArrayList<ProductModel>>
+        return basket
+        // Removed network request for more streamlined user feel for demo
     }
 
     fun getBasketPostponed(): LiveData<ArrayList<ProductModel>> {
-        if (postponed == null) {
-            postponed = MutableLiveData()
-            val request = Request.Builder()
-                .url("$root/basket_postponed.json")
-                .cacheControl(CACHE_POLICY)
-                .build()
-
-            val call = client.newCall(request)
-
-            Timber.d("Requesting basket info")
-
-            call.enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Timber.d("Basket request is unsuccessful")
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    val str = response.body!!.string()
-                    val model: ArrayList<ProductModel> = Gson().fromJson(str)
-                    postponed!!.postValue(model)
-                }
-            })
-        }
-        return postponed as LiveData<ArrayList<ProductModel>>
+        return postponed
+        // Removed network request for more streamlined user feel for demo
     }
 
     fun addToBasket(id: Int): Boolean {
@@ -159,72 +113,50 @@ class AppRepository(val client: OkHttpClient) {
         return removeFromPostponed(id) && addToBasket(id)
     }
 
-    private fun addToList(id: Int, list: MutableLiveData<ArrayList<ProductModel>>?): Boolean {
-        list?.let {
-            val temp = it.value
-            var added = false
-            temp!!.forEach {
-                if (it.id == id) {
-                    it.numbersInBasket++
-                    added = true
-                }
+    private fun addToList(id: Int, list: MutableLiveData<ArrayList<ProductModel>>): Boolean {
+
+        val temp = list.value
+        var added = false
+        temp!!.forEach {
+            if (it.id == id) {
+                it.numbersInBasket++
+                added = true
             }
-            if (!added) {
-                getProduct(id)?.let { product ->
-                    product.numbersInBasket = 1
-                    temp.add(product)
-                }
-            }
-            it.postValue(temp)
-            return true
         }
-        return false
+        if (!added) {
+            getProduct(id)?.let { product ->
+                product.numbersInBasket = 1
+                temp.add(product)
+            }
+        }
+        list.postValue(temp)
+        return true
+
     }
 
+
     fun removeFromBasket(id: Int): Boolean {
-        basket?.let {
-            val temp = it.value
-            temp!!.forEach { product ->
-                if (product.id == id) {
-                    temp.remove(product)
-                    it.postValue(temp)
-                    return true
-                }
+        val temp = basket.value
+        temp!!.forEach { product ->
+            if (product.id == id) {
+                temp.remove(product)
+                basket.postValue(temp)
+                return true
             }
         }
         return false
     }
 
     fun removeFromPostponed(id: Int): Boolean {
-        postponed?.let {
-            val temp = it.value
-            temp!!.forEach { product ->
-                if (product.id == id) {
-                    temp.remove(product)
-                    it.postValue(temp)
-                    return true
-                }
+        val temp = postponed.value
+        temp!!.forEach { product ->
+            if (product.id == id) {
+                temp.remove(product)
+                postponed.postValue(temp)
+                return true
             }
         }
         return false
-    }
-
-    fun addToAddress(address: AddressModel): Boolean {
-        addresses?.let {
-            val temp = it.value
-            var added = false
-            temp!!.forEach {
-                if (it.id == address.id) {
-                    added = true
-                }
-            }
-            if (!added) {
-                temp.add(address)
-            }
-
-            it.postValue(temp)
-        }
-        return true
     }
 
     fun getCategory(id: Int?, callback: (ArrayList<CategoryModel>) -> Unit) {
@@ -255,14 +187,13 @@ class AppRepository(val client: OkHttpClient) {
         })
     }
 
-    fun savedLogin(): Boolean {
-        return loggedInUser.value != null
-    }
-
     fun login(email: String, password: String): Boolean {
         users.forEach { user ->
             if (user.email == email && user.password == password) {
-                loggedInUser.postValue(user)
+                loggedInUser = user
+                addresses.postValue(loggedInUser!!.addresses)
+                basket.postValue(loggedInUser!!.basket)
+                postponed.postValue(loggedInUser!!.postponed)
                 return true
             }
         }
@@ -272,8 +203,22 @@ class AppRepository(val client: OkHttpClient) {
 
     fun logout(): Boolean {
         Timber.d("User logged out.")
-        loggedInUser.postValue(null)
+        if (!isLoggedIn()) {
+            return false
+        }
+
+        loggedInUser!!.basket = basket.value!!
+        loggedInUser!!.addresses = addresses.value!!
+        loggedInUser!!.postponed = postponed.value!!
+        addresses.postValue(ArrayList())
+        basket.postValue(ArrayList())
+        postponed.postValue(ArrayList())
+        loggedInUser = null
         return true
+    }
+
+    fun isLoggedIn(): Boolean {
+        return loggedInUser != null
     }
 
     fun register(user: UserModel): Boolean {
@@ -283,28 +228,38 @@ class AppRepository(val client: OkHttpClient) {
     }
 
     fun addAddress(address: AddressModel) {
-        val user = loggedInUser.value
-        if (user != null) {
-            user.addresses.add(address)
-            loggedInUser.postValue(user)
+        val temp = addresses.value
+        var added = false
+
+        if (temp!!.size == 0) {
+            address.selected = true
+        }
+
+        for (addressModel in temp) {
+            if (addressModel.id == address.id) {
+                added = true
+            }
+        }
+
+        if (!added) {
+            temp.add(address)
+            addresses.postValue(temp)
         }
     }
 
-    fun getUser(): LiveData<UserModel?> {
-        return loggedInUser
+    fun getAddresses(): LiveData<ArrayList<AddressModel>> {
+        return addresses
+    }
+
+    fun setDefaultAddress(id: String) {
+        val addr = addresses.value
+        addr!!.forEach { address ->
+            address.selected = address.id == id
+        }
+        addresses.postValue(addr)
     }
 
     inline fun <reified T> Gson.fromJson(json: String) =
         this.fromJson<T>(json, object : TypeToken<T>() {}.type)
-
-    fun setDefaultAddress(id: String) {
-        val user = loggedInUser.value
-        if (user != null) {
-            user.addresses.forEach {
-                it.selected = it.id == id
-            }
-            loggedInUser.postValue(user)
-        }
-    }
 
 }

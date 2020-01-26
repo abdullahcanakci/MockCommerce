@@ -42,10 +42,8 @@ class AddressesFragment : Fragment() {
             viewModel.addressSelected(it)
         }
 
-        viewModel.userModel.observe(viewLifecycleOwner, Observer { userModel ->
-            if (userModel != null) {
-                adapter.update(userModel.addresses)
-            }
+        viewModel.addresses.observe(viewLifecycleOwner, Observer {
+            adapter.update(it)
         })
 
         view.addresses.layoutManager =

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -99,8 +99,16 @@ class BasketFragment : Fragment() {
         })
 
         v.basket_purchase.setOnClickListener {
-            val intent = Intent(context, CheckoutActivity::class.java).apply {}
-            startActivity(intent)
+            if (viewModel.isLoggedIn()) {
+                val intent = Intent(context, CheckoutActivity::class.java).apply {}
+                startActivity(intent)
+            } else {
+                Toast.makeText(
+                    context,
+                    "Kullanıcı oturumu açık değil. Oturum açın",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         return v

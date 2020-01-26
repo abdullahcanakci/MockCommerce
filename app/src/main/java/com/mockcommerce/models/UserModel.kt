@@ -6,5 +6,7 @@ data class UserModel(
     val password: String,
     val email: String,
     val phone: String,
-    val addresses: ArrayList<AddressModel> = ArrayList()
+    var addresses: ArrayList<AddressModel> = ArrayList(),
+    var basket: ArrayList<ProductModel> = ArrayList(),
+    var postponed: ArrayList<ProductModel> = ArrayList()
 )

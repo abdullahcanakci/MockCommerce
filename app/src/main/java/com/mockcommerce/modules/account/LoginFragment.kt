@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (repo.savedLogin()) {
+        if (repo.isLoggedIn()) {
             findNavController().navigate(LoginFragmentDirections.actionAccountToAccountLandingFragment())
         }
 

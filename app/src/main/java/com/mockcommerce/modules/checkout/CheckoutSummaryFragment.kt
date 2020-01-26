@@ -31,9 +31,14 @@ class CheckoutSummaryFragment : Fragment() {
             findNavController().navigate(R.id.action_checkoutSummaryFragment_to_checkoutPaymentFragment)
         }
 
-        sharedViewModel.shipmentAddresses.observe(viewLifecycleOwner, Observer {
-            view.shipment_address_selector.setModel(it)
+        sharedViewModel.addresses.observe(viewLifecycleOwner, Observer {
+            //view.shipment_address_selector.setModel(it)
+            view.billing_address_selector.setModel(it)
         })
+
+        view.billing_address_selector.setOnSelectedListener {
+            sharedViewModel.billingAddressSelected(it)
+        }
 
         view.shipment_address_selector.setOnSelectedListener {
             sharedViewModel.shipmentAddressSelected(it)
@@ -43,14 +48,6 @@ class CheckoutSummaryFragment : Fragment() {
             findNavController().navigate(R.id.action_checkoutSummaryFragment_to_newAddressFragment)
         }
 
-        sharedViewModel.billingAddresses.observe(viewLifecycleOwner, Observer {
-            view.billing_address_selector.setModel((it))
-        })
-
-        view.billing_address_selector.setOnSelectedListener {
-            sharedViewModel.billingAddressSelected(it)
-        }
-
         view.billing_address_selector.setNewAddressListener {
             findNavController().navigate(R.id.action_checkoutSummaryFragment_to_newAddressFragment)
         }
@@ -58,11 +55,11 @@ class CheckoutSummaryFragment : Fragment() {
         sharedViewModel.productInBasket.observe(viewLifecycleOwner, Observer { list ->
             val root = checkout_product_list
             root.removeAllViews()
-
-            var total: Float = 0.0F
+            var basketTotal = 0.0F
 
             list.forEach {
-                total += it.price * it.numbersInBasket
+                basketTotal += it.numbersInBasket * it.price
+
                 val v = LayoutInflater
                     .from(context)
                     .inflate(R.layout.item_checkout, root, false)
@@ -74,14 +71,10 @@ class CheckoutSummaryFragment : Fragment() {
 
                 root.addView(v)
             }
+            checkout_total.text = context!!.getString(R.string.price, basketTotal)
+            sharedViewModel.basketTotal.postValue(basketTotal)
             root.invalidate()
             root.requestLayout()
-
-            checkout_total.text = context!!.getString(R.string.price, total)
-
         })
-
-        sharedViewModel.getProducts()
-
     }
 }

@@ -52,4 +52,8 @@ class BasketViewModel(val appRepository: AppRepository) : ViewModel() {
         Timber.d("Subtract not implemented")
     }
 
+    fun isLoggedIn(): Boolean {
+        return appRepository.isLoggedIn()
+    }
+
 }

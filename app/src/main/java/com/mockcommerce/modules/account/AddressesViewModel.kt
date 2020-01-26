@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.mockcommerce.AppRepository
 
 class AddressesViewModel(val repository: AppRepository) : ViewModel() {
-    val userModel = repository.getUser()
+    val addresses = repository.getAddresses()
 
     fun addressSelected(id: String) {
         repository.setDefaultAddress(id)

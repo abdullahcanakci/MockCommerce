@@ -10,7 +10,6 @@ import com.mockcommerce.R
 import com.mockcommerce.databinding.LayoutAddressBinding
 import com.mockcommerce.models.AddressModel
 import kotlinx.android.synthetic.main.view_address_selector.view.*
-import timber.log.Timber
 
 class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
@@ -21,6 +20,8 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
     private val models = ArrayList<AddressModel>(listOf())
 
     private var onAddressSelectedListener: ((String) -> Unit)? = null
+
+    private var selectedAddressId: String? = null
 
     private var newAddressListener: (() -> Unit)? = null
 
@@ -54,11 +55,13 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
         listLayout.removeAllViews()
 
         models.forEach {
+            it.selected = it.id == selectedAddressId
             if (isCollapsed) {
-                if (it.selected) {
+                if (it.id == selectedAddressId) {
                     val b = LayoutAddressBinding.inflate(LayoutInflater.from(context))
                     b.root.setOnClickListener { _ ->
                         onAddressSelectedListener?.invoke(it.id)
+                        selectedAddressId = it.id
                         collapse()
                     }
                     b.model = it
@@ -68,19 +71,26 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
                 val b = LayoutAddressBinding.inflate(LayoutInflater.from(context))
                 b.root.setOnClickListener { _ ->
                     onAddressSelectedListener?.invoke(it.id)
+                    selectedAddressId = it.id
                     collapse()
                 }
                 b.model = it
                 listLayout.addView(b.root)
             }
         }
-        Timber.d("Number of childs" + listLayout.childCount)
         listLayout.invalidate()
         listLayout.requestLayout()
     }
 
     fun setModel(model: ArrayList<AddressModel>) {
         models.clear()
+        if (selectedAddressId == null) {
+            model.forEach {
+                if (it.selected) {
+                    selectedAddressId = it.id
+                }
+            }
+        }
         models.addAll(model)
         layoutAddresses()
     }
