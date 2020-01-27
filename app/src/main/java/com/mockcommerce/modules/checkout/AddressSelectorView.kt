@@ -88,6 +88,7 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
             model.forEach {
                 if (it.selected) {
                     selectedAddressId = it.id
+                    onAddressSelectedListener?.invoke(it.id)
                 }
             }
         }
@@ -97,6 +98,9 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
 
     fun setOnSelectedListener(listener: ((id: String) -> Unit)) {
         onAddressSelectedListener = listener
+        if (selectedAddressId != null) {
+            onAddressSelectedListener?.invoke(selectedAddressId!!)
+        }
     }
 
     fun setNewAddressListener(listener: () -> Unit) {

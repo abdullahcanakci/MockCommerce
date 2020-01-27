@@ -32,7 +32,7 @@ class CheckoutSummaryFragment : Fragment() {
         }
 
         sharedViewModel.addresses.observe(viewLifecycleOwner, Observer {
-            //view.shipment_address_selector.setModel(it)
+            view.shipment_address_selector.setModel(it)
             view.billing_address_selector.setModel(it)
         })
 

@@ -6,5 +6,7 @@ data class OrderModel(
     val total: Float,
     val paymentType: String,
     val status: String,
+    val shippingAddressId: String,
+    val billingAddressId: String,
     val products: ArrayList<ProductModel>
 )

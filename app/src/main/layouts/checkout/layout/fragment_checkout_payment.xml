@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="model"
-            type="com.mockcommerce.modules.checkout.CheckoutViewModel" />
+            name="card"
+            type="com.mockcommerce.models.CardModel" />
     </data>
 
     <LinearLayout
@@ -57,7 +57,7 @@
                         android:inputType="number"
                         android:maxLength="16"
                         android:singleLine="true"
-                        android:text="@={model.paymentCardNumber}" />
+                        android:text="@={card.number}" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                         android:autofillHints="AUTOFILL_HINT_NAME"
                         android:inputType="textPersonName"
                         android:singleLine="true"
-                        android:text="@={model.paymentCardHolder}" />
+                        android:text="@={card.holder}" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -134,7 +134,7 @@
                             android:inputType="number"
                             android:maxLength="3"
                             android:singleLine="true"
-                            android:text="@={model.paymentCardCode}" />
+                            android:text="@={card.securityCode}" />
 
                         <View
                             android:layout_width="0dp"
@@ -229,7 +229,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@{model.basketTotal}"
                         android:textSize="16sp" />
 
                 </LinearLayout>

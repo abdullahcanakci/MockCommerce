@@ -2,6 +2,8 @@ package com.mockcommerce.modules.checkout
 
 import androidx.lifecycle.ViewModel
 import com.mockcommerce.AppRepository
+import com.mockcommerce.models.CardModel
+import timber.log.Timber
 
 class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
 
@@ -15,16 +17,7 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
 
     var basketTotal = appRepository.basketTotal
 
-    // Card information
-    var paymentCardNumber: String? = null
-
-    var paymentCardHolder: String? = null
-
-    var paymentCardValidMonth: String? = null
-
-    var paymentCardValidYear: String? = null
-
-    var paymentCardCode: String? = null
+    val cardModel = CardModel("", "", 0, 0, "")
 
     fun shipmentAddressSelected(id: String) {
         selectedShipmentAddressId = id
@@ -35,6 +28,7 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
     }
 
     fun completePayment() {
-        appRepository.confirmPayment()
+        Timber.d("Shipment $selectedShipmentAddressId Billing $selectedBillingAddressId")
+        appRepository.confirmPayment(selectedShipmentAddressId!!, selectedBillingAddressId!!)
     }
 }

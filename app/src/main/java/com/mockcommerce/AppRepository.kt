@@ -218,7 +218,7 @@ class AppRepository(val client: OkHttpClient) {
         })
     }
 
-    fun confirmPayment() {
+    fun confirmPayment(shipmentId: String, billingId: String) {
         val temp = orders.value
         val order = OrderModel(
             UUID.randomUUID().toString(),
@@ -226,8 +226,11 @@ class AppRepository(val client: OkHttpClient) {
             basketTotal.value!!,
             "Kredi Kartı",
             "Hazırlanıyor",
+            shipmentId,
+            billingId,
             basket.value!!
         )
+        Timber.d("Order is " + order.toString())
         temp!!.add(order)
         orders.postValue(temp)
         basket.postValue(ArrayList())
@@ -301,6 +304,19 @@ class AppRepository(val client: OkHttpClient) {
 
     fun getAddresses(): LiveData<ArrayList<AddressModel>> {
         return addresses
+    }
+
+    fun getAddress(id: String): LiveData<AddressModel?> {
+        val response = MutableLiveData<AddressModel?>(null)
+
+        addresses.value!!.forEach { address ->
+            if (address.id == id) {
+                response.postValue(address.copy())
+            }
+        }
+
+        return response
+
     }
 
     fun setDefaultAddress(id: String) {
