@@ -70,5 +70,12 @@
         <item name="cardPreventCornerOverlap">false</item>
     </style>
 
+    <style name="Padding">
+        <item name="android:paddingLeft">@dimen/paddingHorizontal</item>
+        <item name="android:paddingRight">@dimen/paddingHorizontal</item>
+        <item name="android:paddingTop">@dimen/paddingVertical</item>
+        <item name="android:paddingBottom">@dimen/paddingVertical</item>
+    </style>
+
 
 </resources>

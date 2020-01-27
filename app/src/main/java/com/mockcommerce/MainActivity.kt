@@ -11,6 +11,7 @@ import com.mockcommerce.modules.account.RegisterViewModel
 import com.mockcommerce.modules.basket.BasketViewModel
 import com.mockcommerce.modules.categories.CategoriesViewModel
 import com.mockcommerce.modules.checkout.CheckoutViewModel
+import com.mockcommerce.modules.orders.OrderViewModel
 import com.mockcommerce.modules.orders.OrdersViewModel
 import com.mockcommerce.modules.shared.newaddress.NewAddressViewModel
 import com.mockcommerce.modules.shared.product_list.ProductListViewModel
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             viewModel { AccountViewModel(get()) }
             viewModel { AddressesViewModel(get()) }
             viewModel { OrdersViewModel(get()) }
+            viewModel { OrderViewModel(get()) }
         }
 
         try {

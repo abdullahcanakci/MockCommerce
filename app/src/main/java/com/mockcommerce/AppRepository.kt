@@ -234,6 +234,7 @@ class AppRepository(val client: OkHttpClient) {
         temp!!.add(order)
         orders.postValue(temp)
         basket.postValue(ArrayList())
+        updateBasketTotal()
     }
 
     fun login(email: String, password: String): Boolean {
@@ -306,8 +307,8 @@ class AppRepository(val client: OkHttpClient) {
         return addresses
     }
 
-    fun getAddress(id: String): LiveData<AddressModel?> {
-        val response = MutableLiveData<AddressModel?>(null)
+    fun getAddress(id: String): LiveData<AddressModel> {
+        val response = MutableLiveData<AddressModel>()
 
         addresses.value!!.forEach { address ->
             if (address.id == id) {
@@ -329,5 +330,17 @@ class AppRepository(val client: OkHttpClient) {
 
     inline fun <reified T> Gson.fromJson(json: String) =
         this.fromJson<T>(json, object : TypeToken<T>() {}.type)
+
+    fun getOrder(id: String): LiveData<OrderModel> {
+        val response = MutableLiveData<OrderModel>()
+
+        orders.value!!.forEach { order ->
+            if (order.id == id) {
+                response.postValue(order)
+            }
+        }
+
+        return response
+    }
 
 }

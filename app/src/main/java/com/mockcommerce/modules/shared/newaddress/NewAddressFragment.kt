@@ -37,7 +37,7 @@ class NewAddressFragment() : Fragment() {
         ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             view.city_spinner.adapter = it
-            view.city_spinner.setSelection(viewModel.city)
+            view.city_spinner.setSelection(viewModel.selectedCityIndex)
         }
 
         view.city_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -47,8 +47,9 @@ class NewAddressFragment() : Fragment() {
                 position: Int,
                 p3: Long
             ) {
-                if (viewModel.city != position) {
-                    viewModel.city = position
+                if (viewModel.selectedCityIndex != position) {
+                    viewModel.selectedCityIndex = position
+                    viewModel.city = resources.getStringArray(R.array.cityArrayList)[position]
                 }
             }
 

@@ -1,6 +1,10 @@
+### App general flow
+
 [![](http://img.youtube.com/vi/TNF79CbXICU/0.jpg)](https://www.youtube.com/watch?v=TNF79CbXICU "")
 
+### App user flow and mock checkout
 
+[![](http://img.youtube.com/vi/-41XZlTxcyk/0.jpg)](https://www.youtube.com/watch?v=-41XZlTxcyk "")
 
 
 

@@ -10,7 +10,8 @@ class NewAddressViewModel(val appRepository: AppRepository) : ViewModel() {
     var surname: String = ""
     var phone: String = ""
 
-    var city: Int = 0
+    var selectedCityIndex = 0
+    var city: String = ""
     var district: String = ""
 
     var address: String = ""
@@ -26,7 +27,7 @@ class NewAddressViewModel(val appRepository: AppRepository) : ViewModel() {
             address,
             "$name $surname",
             phone,
-            city.toString(),
+            city,
             district,
             false
         )

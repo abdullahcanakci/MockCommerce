@@ -61,9 +61,12 @@
     <string name="go_back">GERİ DÖN</string>
     <string name="add_new">Yeni girdi ekle</string>
     <string name="search_in_orders">Şiparişlerde ara</string>
-    <string name="track_shipment">Siparişi takip et.</string>
+    <string name="track_shipment">Siparişi takip et</string>
     <string name="order_date">Tarih:</string>
     <string name="forward">İleri</string>
+    <string name="order_no">Sipariş Numarası: </string>
+    <string name="adress_info">Adres Bilgileri</string>
+    <string name="order_products">Ürünler</string>
 
     <string-array name="card_expiration_month">
         <item>Ay</item>
