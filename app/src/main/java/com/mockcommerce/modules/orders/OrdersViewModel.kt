@@ -1,7 +1,8 @@
 package com.mockcommerce.modules.orders
 
 import androidx.lifecycle.ViewModel
+import com.mockcommerce.AppRepository
 
-class OrdersViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class OrdersViewModel(val appRepository: AppRepository) : ViewModel() {
+    val orders = appRepository.orders
 }

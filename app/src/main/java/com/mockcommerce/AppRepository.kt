@@ -4,13 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.mockcommerce.models.AddressModel
-import com.mockcommerce.models.CategoryModel
-import com.mockcommerce.models.ProductModel
-import com.mockcommerce.models.UserModel
+import com.mockcommerce.models.*
 import okhttp3.*
 import timber.log.Timber
 import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AppRepository(val client: OkHttpClient) {
     private val CACHE_POLICY = CacheControl.FORCE_NETWORK
@@ -21,9 +20,11 @@ class AppRepository(val client: OkHttpClient) {
 
     private var products = ArrayList<ProductModel>()
 
-    private var addresses = MutableLiveData<ArrayList<AddressModel>>()
-    private var basket = MutableLiveData<ArrayList<ProductModel>>()
-    private var postponed = MutableLiveData<ArrayList<ProductModel>>()
+    var addresses = MutableLiveData<ArrayList<AddressModel>>(ArrayList())
+    var basket = MutableLiveData<ArrayList<ProductModel>>(ArrayList())
+    var postponed = MutableLiveData<ArrayList<ProductModel>>(ArrayList())
+    var orders = MutableLiveData<ArrayList<OrderModel>>(ArrayList())
+    var basketTotal = MutableLiveData<Float>(0.0F)
 
     private var loggedInUser: UserModel? = null
 
@@ -98,7 +99,23 @@ class AppRepository(val client: OkHttpClient) {
     }
 
     fun addToBasket(id: Int): Boolean {
-        return addToList(id, basket)
+        val r = addToList(id, basket)
+        updateBasketTotal()
+        return r
+    }
+
+    fun subtract(id: Int) {
+        val temp = basket.value
+        temp!!.forEach {
+            if (it.id == id) {
+                if (it.numbersInBasket > 1) {
+                    it.numbersInBasket--
+                    basket.postValue(temp)
+                    updateBasketTotal()
+                    return
+                }
+            }
+        }
     }
 
     fun addToPostponed(id: Int): Boolean {
@@ -106,11 +123,25 @@ class AppRepository(val client: OkHttpClient) {
     }
 
     fun moveToPostponed(id: Int): Boolean {
+        updateBasketTotal()
         return removeFromBasket(id) && addToPostponed(id)
     }
 
     fun moveToBasket(id: Int): Boolean {
+        updateBasketTotal()
         return removeFromPostponed(id) && addToBasket(id)
+    }
+
+    fun updateBasketTotal() {
+        var temp = 0.0F
+
+        basket.value!!.forEach {
+            temp += it.price * it.numbersInBasket
+        }
+
+        Timber.d("Basket value is $temp")
+
+        basketTotal.postValue(temp)
     }
 
     private fun addToList(id: Int, list: MutableLiveData<ArrayList<ProductModel>>): Boolean {
@@ -134,13 +165,13 @@ class AppRepository(val client: OkHttpClient) {
 
     }
 
-
     fun removeFromBasket(id: Int): Boolean {
         val temp = basket.value
         temp!!.forEach { product ->
             if (product.id == id) {
                 temp.remove(product)
                 basket.postValue(temp)
+                updateBasketTotal()
                 return true
             }
         }
@@ -187,13 +218,33 @@ class AppRepository(val client: OkHttpClient) {
         })
     }
 
+    fun confirmPayment() {
+        val temp = orders.value
+        val order = OrderModel(
+            UUID.randomUUID().toString(),
+            Date().time,
+            basketTotal.value!!,
+            "Kredi Kartı",
+            "Hazırlanıyor",
+            basket.value!!
+        )
+        temp!!.add(order)
+        orders.postValue(temp)
+        basket.postValue(ArrayList())
+    }
+
     fun login(email: String, password: String): Boolean {
         users.forEach { user ->
             if (user.email == email && user.password == password) {
                 loggedInUser = user
                 addresses.postValue(loggedInUser!!.addresses)
-                basket.postValue(loggedInUser!!.basket)
-                postponed.postValue(loggedInUser!!.postponed)
+                val tempBasket = loggedInUser!!.basket
+                tempBasket.addAll(basket.value!!)
+                basket.postValue(tempBasket)
+                val tempPostpone = loggedInUser!!.postponed
+                tempPostpone.addAll(postponed.value!!)
+                postponed.postValue(tempPostpone)
+                orders.postValue(loggedInUser!!.orders)
                 return true
             }
         }
@@ -210,6 +261,7 @@ class AppRepository(val client: OkHttpClient) {
         loggedInUser!!.basket = basket.value!!
         loggedInUser!!.addresses = addresses.value!!
         loggedInUser!!.postponed = postponed.value!!
+        loggedInUser!!.orders = orders.value!!
         addresses.postValue(ArrayList())
         basket.postValue(ArrayList())
         postponed.postValue(ArrayList())

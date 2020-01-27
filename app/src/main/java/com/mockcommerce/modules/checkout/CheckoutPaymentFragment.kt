@@ -25,6 +25,7 @@ class CheckoutPaymentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.checkout_complete.setOnClickListener {
+            sharedViewModel.completePayment()
             findNavController().navigate(R.id.action_checkoutPaymentFragment_to_checkoutEndFragment)
         }
 

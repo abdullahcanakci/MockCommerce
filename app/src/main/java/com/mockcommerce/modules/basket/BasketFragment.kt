@@ -20,7 +20,7 @@ import timber.log.Timber
 
 class BasketFragment : Fragment() {
 
-    enum class ADAPTER_ACTION {DELETE, ADD, SUBSTRACT, POSTPONE, ADD_TO_CART, VIEW}
+    enum class ADAPTER_ACTION { DELETE, ADD, SUBSTRACT, POSTPONE, ADD_TO_CART, VIEW }
 
     lateinit var basketAdapter: BasketListAdapter
     lateinit var postponedAdapter: PostponedListAdapter
@@ -40,8 +40,8 @@ class BasketFragment : Fragment() {
         val basketRecycler = v.list
         basketRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         basketRecycler.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
-        basketAdapter = BasketListAdapter() {product, action ->
-            when(action) {
+        basketAdapter = BasketListAdapter() { product, action ->
+            when (action) {
                 ADAPTER_ACTION.DELETE -> {
                     viewModel.removeFromBasket(product)
                 }
@@ -70,9 +70,10 @@ class BasketFragment : Fragment() {
         })
 
         val postponedRecycler = v.list_postpone
-        postponedRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        postponedRecycler.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         postponedAdapter = PostponedListAdapter { product, action ->
-            when (action){
+            when (action) {
                 ADAPTER_ACTION.ADD_TO_CART -> {
                     viewModel.addToBasket(product)
                 }
@@ -93,24 +94,32 @@ class BasketFragment : Fragment() {
             postponedAdapter.updateItems(t)
         })
 
-        viewModel.basketTotal.observe(this.viewLifecycleOwner, Observer { t ->
-            v.basket_total.text = v.context!!.getString(R.string.price, t)
-            // TODO extract formatting to external method
-        })
-
         v.basket_purchase.setOnClickListener {
-            if (viewModel.isLoggedIn()) {
+            if (viewModel.isLoggedIn() && viewModel.isBasketPopulated()) {
                 val intent = Intent(context, CheckoutActivity::class.java).apply {}
                 startActivity(intent)
-            } else {
+            } else if (!viewModel.isLoggedIn()) {
                 Toast.makeText(
                     context,
                     "Kullanıcı oturumu açık değil. Oturum açın",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (!viewModel.isBasketPopulated()) {
+                Toast.makeText(
+                    context,
+                    "Sepette ürün bulunmuyor.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
         }
 
         return v
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.basketTotal.observe(viewLifecycleOwner, Observer {
+            view.basket_total.text = view.context!!.getString(R.string.price, it)
+        })
     }
 }

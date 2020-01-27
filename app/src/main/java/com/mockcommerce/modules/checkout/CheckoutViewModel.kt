@@ -1,6 +1,5 @@
 package com.mockcommerce.modules.checkout
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mockcommerce.AppRepository
 
@@ -14,7 +13,7 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
 
     var selectedShipmentAddressId: String? = null
 
-    var basketTotal = MutableLiveData<Float>(7.0F)
+    var basketTotal = appRepository.basketTotal
 
     // Card information
     var paymentCardNumber: String? = null
@@ -33,5 +32,9 @@ class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
 
     fun billingAddressSelected(id: String) {
         selectedBillingAddressId = id
+    }
+
+    fun completePayment() {
+        appRepository.confirmPayment()
     }
 }

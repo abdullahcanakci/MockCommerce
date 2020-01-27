@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mockcommerce.R
+import kotlinx.android.synthetic.main.fragment_orders.view.*
+import org.koin.android.ext.android.inject
 
 class OrdersFragment : Fragment() {
 
@@ -14,7 +18,7 @@ class OrdersFragment : Fragment() {
         fun newInstance() = OrdersFragment()
     }
 
-    private lateinit var viewModel: OrdersViewModel
+    private val viewModel by inject<OrdersViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +29,28 @@ class OrdersFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(OrdersViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val adapter = OrderAdapter()
+        view.orders_recycler.adapter = adapter
+        view.orders_recycler.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        viewModel.orders.observe(viewLifecycleOwner, Observer {
+            adapter.update(it)
+        })
+
+        ArrayAdapter.createFromResource(
+            view.context,
+            R.array.order_qualifier,
+            R.layout.item_spinner
+        ).also {
+            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            view.spinner_order_qualifier.adapter = it
+        }
+
+
+    }
 }

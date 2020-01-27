@@ -8,5 +8,6 @@ data class UserModel(
     val phone: String,
     var addresses: ArrayList<AddressModel> = ArrayList(),
     var basket: ArrayList<ProductModel> = ArrayList(),
-    var postponed: ArrayList<ProductModel> = ArrayList()
+    var postponed: ArrayList<ProductModel> = ArrayList(),
+    var orders: ArrayList<OrderModel> = ArrayList()
 )

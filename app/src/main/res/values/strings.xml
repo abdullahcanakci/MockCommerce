@@ -36,9 +36,9 @@
     <string name="sort">SIRALA</string>
     <string name="filter">FİLTRELE</string>
     <string name="promotions">Kampanyalar</string>
-    <string name="add_to_basket">SEPETE_EKLE</string>
+    <string name="add_to_basket">SEPETE EKLE</string>
     <string name="add_to_basket_together">BİRLİKTE EKLE</string>
-    <string name="category_image_description">Kategory resmi</string>
+    <string name="category_image_description">Kategori resmi</string>
     <string name="shipment_receiver">Alıcı Bilgileri</string>
     <string name="shipment_address">Adres</string>
     <string name="name_person">Ad</string>
@@ -53,6 +53,17 @@
     <string name="settings">Ayarlar</string>
     <string name="my_favourites">Favorilerim</string>
     <string name="logout">Çıkış Yap</string>
+
+    <string name="email">E-Posta</string>
+    <string name="password">Parola</string>
+    <string name="login">GİRİŞ YAP</string>
+    <string name="register">KAYIT OL</string>
+    <string name="go_back">GERİ DÖN</string>
+    <string name="add_new">Yeni girdi ekle</string>
+    <string name="search_in_orders">Şiparişlerde ara</string>
+    <string name="track_shipment">Siparişi takip et.</string>
+    <string name="order_date">Tarih:</string>
+    <string name="forward">İleri</string>
 
     <string-array name="card_expiration_month">
         <item>Ay</item>
@@ -167,14 +178,13 @@
         <item>Düzce</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="email">E-Posta</string>
-    <string name="password">Parola</string>
-    <string name="login">GİRİŞ YAP</string>
-    <string name="register">KAYIT OL</string>
-    <string name="go_back">GERİ DÖN</string>
-    <string name="add_new">Yeni girdi ekle</string>
-
+    <string-array name="order_qualifier">
+        <item>Tümü</item>
+        <item>Son 30 Gün</item>
+        <item>Son 6 Ay</item>
+        <item>Son 1 Yıl</item>
+        <item>Son 2 Yıl</item>
+        <item>Son 3 Yıl</item>
+    </string-array>
 
 </resources>
