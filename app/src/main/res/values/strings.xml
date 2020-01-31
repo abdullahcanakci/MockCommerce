@@ -67,6 +67,7 @@
     <string name="order_no">Sipariş Numarası: </string>
     <string name="adress_info">Adres Bilgileri</string>
     <string name="order_products">Ürünler</string>
+    <string name="no_orders">Listelenecek şipariş bulunmuyor.</string>
 
     <string-array name="card_expiration_month">
         <item>Ay</item>

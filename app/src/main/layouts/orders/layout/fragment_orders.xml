@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".modules.orders.OrdersFragment">
 
     <LinearLayout
@@ -38,11 +39,19 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <include
+            android:id="@+id/textview"
+            layout="@layout/item_empty_list" />
+
+        <com.mockcommerce.shared.CustomRecycler
             android:id="@+id/orders_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_order" />
+            app:message="@string/no_orders"
+            app:textview="@id/textview"
+            tools:listitem="@layout/item_order"
+            tools:visibility="visible" />
+
     </LinearLayout>
 
 </ScrollView>

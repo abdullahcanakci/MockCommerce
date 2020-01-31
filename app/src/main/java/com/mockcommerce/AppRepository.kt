@@ -269,6 +269,7 @@ class AppRepository(val client: OkHttpClient) {
         addresses.postValue(ArrayList())
         basket.postValue(ArrayList())
         postponed.postValue(ArrayList())
+        orders.postValue(ArrayList())
         loggedInUser = null
         return true
     }
