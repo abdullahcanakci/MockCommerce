@@ -46,7 +46,7 @@ class AccountFragment : Fragment() {
 
     fun onLogout() {
         viewModel.logout()
-        findNavController().navigate(AccountFragmentDirections.actionAccountLandingFragmentToAccount())
+        findNavController().navigate(R.id.account)
     }
 
     fun onFavourite() {

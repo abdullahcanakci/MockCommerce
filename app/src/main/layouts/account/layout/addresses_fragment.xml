@@ -27,12 +27,21 @@
                 app:header_title="@string/my_addresses" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/addresses"
+            <include
+                android:id="@+id/textview"
+                layout="@layout/item_empty_list" />
+
+            <com.mockcommerce.shared.CustomRecycler
+                android:id="@+id/address_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:message="@string/no_addresses"
+                app:textview="@id/textview"
                 tools:itemCount="5"
-                tools:listitem="@layout/layout_address" />
+                tools:listitem="@layout/layout_address"
+                tools:visibility="visible" />
+
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

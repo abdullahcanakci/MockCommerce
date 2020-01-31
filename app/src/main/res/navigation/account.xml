@@ -11,10 +11,6 @@
         android:label="account_fragment"
         tools:layout="@layout/fragment_account">
         <action
-            android:id="@+id/action_accountLandingFragment_to_account"
-            app:destination="@id/account"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_accountLandingFragment_to_addressesFragment"
             app:destination="@id/addressesFragment" />
     </fragment>

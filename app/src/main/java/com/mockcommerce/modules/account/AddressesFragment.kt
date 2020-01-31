@@ -46,9 +46,9 @@ class AddressesFragment : Fragment() {
             adapter.update(it)
         })
 
-        view.addresses.layoutManager =
+        view.address_recycler.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        view.addresses.adapter = adapter
+        view.address_recycler.adapter = adapter
     }
 
     fun onGoBack() {
