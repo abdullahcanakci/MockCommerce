@@ -164,10 +164,10 @@
 
                     <ImageButton
                         style="@style/ButtonSecondary"
+                        android:id="@+id/button_favourite"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-
                         android:src="@drawable/ic_favorite_border" />
 
                     <ImageButton

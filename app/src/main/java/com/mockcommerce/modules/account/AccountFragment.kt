@@ -50,11 +50,7 @@ class AccountFragment : Fragment() {
     }
 
     fun onFavourite() {
-        Toast.makeText(
-            context,
-            "Favori ürünler henüz eklenmedi.",
-            Toast.LENGTH_SHORT
-        ).show()
+        findNavController().navigate(AccountFragmentDirections.actionAccountLandingFragmentToFavouritesFragment())
     }
 
     fun onAddress() {

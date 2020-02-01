@@ -8,6 +8,7 @@ open class ProductModel(
     val price: Float,
     val oldPrice: Float? = null,
     var numbersInBasket: Int = 0,
+    var favourite: Boolean = false,
     val images: ArrayList<String>
 ) {
 
@@ -32,7 +33,7 @@ open class ProductModel(
 
     fun copy() : ProductModel {
         return ProductModel(
-            id, name,price, oldPrice, numbersInBasket, images
+            id, name, price, oldPrice, numbersInBasket, favourite, images
         )
     }
 

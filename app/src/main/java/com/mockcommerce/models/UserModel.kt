@@ -9,5 +9,6 @@ data class UserModel(
     var addresses: ArrayList<AddressModel> = ArrayList(),
     var basket: ArrayList<ProductModel> = ArrayList(),
     var postponed: ArrayList<ProductModel> = ArrayList(),
-    var orders: ArrayList<OrderModel> = ArrayList()
+    var orders: ArrayList<OrderModel> = ArrayList(),
+    var favorites: ArrayList<Int> = ArrayList()
 )

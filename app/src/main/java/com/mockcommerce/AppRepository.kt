@@ -24,6 +24,7 @@ class AppRepository(val client: OkHttpClient) {
     var basket = MutableLiveData<ArrayList<ProductModel>>(ArrayList())
     var postponed = MutableLiveData<ArrayList<ProductModel>>(ArrayList())
     var orders = MutableLiveData<ArrayList<OrderModel>>(ArrayList())
+    var favourites = MutableLiveData<ArrayList<Int>>(ArrayList())
     var basketTotal = MutableLiveData<Float>(0.0F)
 
     private var loggedInUser: UserModel? = null
@@ -82,10 +83,38 @@ class AppRepository(val client: OkHttpClient) {
 
         products.forEach { product ->
             if (product.id == id) {
-                return product.copy()
+                val temp = product.copy()
+                temp.favourite = false
+                if (favourites.value!!.contains(id)) {
+                    temp.favourite = true
+                }
+                return temp
             }
         }
         return null
+    }
+
+    fun getFavouriteProducts(): LiveData<ArrayList<ProductModel>> {
+        val temp = ArrayList<ProductModel>()
+        loggedInUser?.favorites!!.forEach { productId ->
+            getProduct(productId)?.let { temp.add(it) }
+        }
+        return MutableLiveData(temp)
+    }
+
+    fun setFavourite(productId: Int, addToFav: Boolean) {
+        val temp = favourites.value!!
+        if (addToFav) {
+            if (!temp.contains(productId)) {
+                temp.add(productId)
+            }
+        } else {
+            if (temp.contains(productId)) {
+                temp.remove(productId)
+            }
+        }
+        Timber.d("Number of items in favourite is ${temp.size}, Product id is $productId")
+        favourites.value = temp
     }
 
     fun getBasket(): LiveData<ArrayList<ProductModel>> {
@@ -249,6 +278,9 @@ class AppRepository(val client: OkHttpClient) {
                 tempPostpone.addAll(postponed.value!!)
                 postponed.postValue(tempPostpone)
                 orders.postValue(loggedInUser!!.orders)
+                val tempFavourites = loggedInUser!!.favorites
+                tempFavourites.addAll(favourites.value!!)
+                favourites.postValue(tempFavourites)
                 return true
             }
         }
@@ -266,10 +298,12 @@ class AppRepository(val client: OkHttpClient) {
         loggedInUser!!.addresses = addresses.value!!
         loggedInUser!!.postponed = postponed.value!!
         loggedInUser!!.orders = orders.value!!
+        loggedInUser!!.favorites = favourites.value!!
         addresses.postValue(ArrayList())
         basket.postValue(ArrayList())
         postponed.postValue(ArrayList())
         orders.postValue(ArrayList())
+        favourites.postValue(ArrayList())
         loggedInUser = null
         return true
     }
