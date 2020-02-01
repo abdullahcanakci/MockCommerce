@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
 import timber.log.Timber
 
-class CustomRecycler(context: Context, attrs: AttributeSet) : RecyclerView(context, attrs) {
+class NotifierRecycler(context: Context, attrs: AttributeSet) : RecyclerView(context, attrs) {
     var textView: TextView? = null
     val observer = AdapterObserver()
 
@@ -16,11 +16,11 @@ class CustomRecycler(context: Context, attrs: AttributeSet) : RecyclerView(conte
     var textId = 0
 
     init {
-        val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.CustomRecycler)
+        val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.NotifierRecycler)
 
-        textId = attributeSet.getResourceId(R.styleable.CustomRecycler_textview, -1)
+        textId = attributeSet.getResourceId(R.styleable.NotifierRecycler_textview, -1)
 
-        message = attributeSet.getString(R.styleable.CustomRecycler_message).toString()
+        message = attributeSet.getString(R.styleable.NotifierRecycler_message).toString()
 
         attributeSet.recycle()
     }
@@ -31,7 +31,7 @@ class CustomRecycler(context: Context, attrs: AttributeSet) : RecyclerView(conte
             textView = rootView.findViewById<TextView>(textId)
             textView!!.text = message
         } catch (e: IllegalArgumentException) {
-            Timber.d("Illegal argument at CustomRecycler\n $e")
+            Timber.d("Illegal argument at NotifierRecycler\n $e")
         }
     }
 

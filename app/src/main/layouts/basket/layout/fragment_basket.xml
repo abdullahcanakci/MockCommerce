@@ -41,11 +41,18 @@
                         android:layout_height="wrap_content"
                         app:header_title="@string/basket_products_title" />
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <include
+                        android:id="@+id/textview_basket"
+                        layout="@layout/item_empty_list" />
+
+                    <com.mockcommerce.shared.NotifierRecycler
                         android:id="@+id/list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:itemCount="5"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:message="@string/no_basket_items"
+                        app:textview="@id/textview_basket"
                         tools:listitem="@layout/item_basket_main" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -61,16 +68,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-
                     <com.mockcommerce.shared.views.Header
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:header_title="@string/basket_postponed_title" />
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <include
+                        android:id="@+id/textview_postponed"
+                        layout="@layout/item_empty_list" />
+
+                    <com.mockcommerce.shared.NotifierRecycler
                         android:id="@+id/list_postpone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:message="@string/no_basket_items"
+                        app:textview="@id/textview_postponed"
                         tools:itemCount="5"
                         tools:listitem="@layout/item_basket_postponed"
                         tools:orientation="horizontal" />

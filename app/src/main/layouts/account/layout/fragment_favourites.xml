@@ -15,7 +15,7 @@
             android:id="@+id/textview"
             layout="@layout/item_empty_list" />
 
-        <com.mockcommerce.shared.CustomRecycler
+        <com.mockcommerce.shared.NotifierRecycler
             android:id="@+id/product_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

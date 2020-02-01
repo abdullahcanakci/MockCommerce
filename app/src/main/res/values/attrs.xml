@@ -47,7 +47,7 @@
         <attr name="button_icon" />
     </declare-styleable>
 
-    <declare-styleable name="CustomRecycler">
+    <declare-styleable name="NotifierRecycler">
         <attr name="textview" format="reference" />
         <attr name="message" format="string" localization="suggested" />
     </declare-styleable>
