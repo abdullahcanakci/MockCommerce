@@ -3,10 +3,9 @@ package com.mockcommerce.modules.categories
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.mockcommerce.R
 import com.mockcommerce.databinding.ItemCategoryBinding
 import com.mockcommerce.models.CategoryModel
+import com.mockcommerce.shared.loadImage
 
 class CategoryItemAdapter (private val onSelectListener: ((id: String, isCategory: Boolean) -> Unit)) : RecyclerView.Adapter<CategoryItemAdapter.CategoryItemHolder>(){
 
@@ -44,11 +43,7 @@ class CategoryItemAdapter (private val onSelectListener: ((id: String, isCategor
             binding.root.setOnClickListener{
                 onSelectListener(model.id, model.destinationCategoryId != null)
             }
-
-            Glide.with(binding.root)
-                .load("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/" + model.image)
-                .placeholder(R.drawable.ic_product_image)
-                .into(binding.categoryImage)
+            binding.categoryImage.loadImage("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${model.image}")
         }
     }
 }

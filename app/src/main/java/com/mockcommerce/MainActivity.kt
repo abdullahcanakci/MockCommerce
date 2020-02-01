@@ -16,6 +16,7 @@ import com.mockcommerce.modules.orders.OrdersViewModel
 import com.mockcommerce.modules.shared.newaddress.NewAddressViewModel
 import com.mockcommerce.modules.shared.product_list.ProductListViewModel
 import com.mockcommerce.modules.shared.product_page.ProductViewModel
+import com.mockcommerce.shared.setupWithNavController
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel

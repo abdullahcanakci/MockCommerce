@@ -1,4 +1,4 @@
-package com.mockcommerce
+package com.mockcommerce.shared
 
 import android.content.Intent
 import android.util.SparseArray
@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mockcommerce.R
 
 /**
  * Manages the various graphs needed for a [BottomNavigationView].
@@ -56,7 +57,11 @@ fun BottomNavigationView.setupWithNavController(
         if (this.selectedItemId == graphId) {
             // Update livedata with the selected graph
             selectedNavController.value = navHostFragment.navController
-            attachNavHostFragment(fragmentManager, navHostFragment, index == 0)
+            attachNavHostFragment(
+                fragmentManager,
+                navHostFragment,
+                index == 0
+            )
         } else {
             detachNavHostFragment(fragmentManager, navHostFragment)
         }
@@ -90,7 +95,8 @@ fun BottomNavigationView.setupWithNavController(
                             R.anim.nav_default_enter_anim,
                             R.anim.nav_default_exit_anim,
                             R.anim.nav_default_pop_enter_anim,
-                            R.anim.nav_default_pop_exit_anim)
+                            R.anim.nav_default_pop_exit_anim
+                        )
                         .attach(selectedFragment)
                         .setPrimaryNavigationFragment(selectedFragment)
                         .apply {

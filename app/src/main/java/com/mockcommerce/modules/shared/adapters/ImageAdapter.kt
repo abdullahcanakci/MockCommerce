@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mockcommerce.R
+import com.mockcommerce.shared.loadImage
 import kotlinx.android.synthetic.main.view_image.view.*
 
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
@@ -26,10 +26,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val v = holder.itemView.product_image as ImageView
         val id = imageUrls[position]
-        Glide.with(v)
-            .load("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/$id")
-            .placeholder(R.drawable.ic_product_image)
-            .into(v)
+        v.loadImage("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${id}")
     }
 
     fun update(newURLs: ArrayList<String>){

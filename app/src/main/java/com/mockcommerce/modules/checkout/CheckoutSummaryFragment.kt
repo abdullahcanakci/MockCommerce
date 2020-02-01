@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.mockcommerce.R
+import com.mockcommerce.shared.loadImage
 import kotlinx.android.synthetic.main.fragment_checkout_summary.*
 import kotlinx.android.synthetic.main.fragment_checkout_summary.view.*
 import kotlinx.android.synthetic.main.item_checkout.view.*
@@ -64,10 +64,7 @@ class CheckoutSummaryFragment : Fragment() {
                     .from(context)
                     .inflate(R.layout.item_checkout, root, false)
                 v.item_checkout_product_name.text = it.name
-                Glide.with(root)
-                    .load("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/" + it.images[0])
-                    .placeholder(R.drawable.ic_product_image)
-                    .into(v.item_checkout_product_image)
+                v.item_checkout_product_image.loadImage("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${it.images[0]}")
 
                 root.addView(v)
             }
