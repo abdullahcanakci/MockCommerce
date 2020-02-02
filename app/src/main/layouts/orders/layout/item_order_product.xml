@@ -23,6 +23,7 @@
             android:layout_height="64dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/product_image_description"
+            app:imageUrl="@{product.images}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

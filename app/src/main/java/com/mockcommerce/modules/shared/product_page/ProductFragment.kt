@@ -43,7 +43,7 @@ class ProductFragment : Fragment() {
 
         viewModel.product.observe(this.viewLifecycleOwner, Observer { t ->
             adapter.update(t.images)
-            binding.model = t
+            binding.product = t
         })
 
         return binding.root

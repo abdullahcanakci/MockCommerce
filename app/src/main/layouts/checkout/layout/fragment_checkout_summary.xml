@@ -39,12 +39,14 @@
                     android:layout_height="wrap_content"
                     app:header_title="@string/checkout_product_list_title" />
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/checkout_product_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_checkout" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

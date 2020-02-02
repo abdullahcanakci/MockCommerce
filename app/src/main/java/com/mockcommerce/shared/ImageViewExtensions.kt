@@ -6,7 +6,7 @@ import com.mockcommerce.R
 
 fun ImageView.loadImage(url: String) {
     Glide.with(rootView)
-        .load(url)
+        .load("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${url}")
         .placeholder(R.drawable.ic_product_image)
         .into(this)
 }

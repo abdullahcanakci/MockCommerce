@@ -1,4 +1,4 @@
-package com.mockcommerce.modules.basket
+package com.mockcommerce.modules.shared.adapters
 
 import androidx.recyclerview.widget.DiffUtil
 import com.mockcommerce.models.ProductModel

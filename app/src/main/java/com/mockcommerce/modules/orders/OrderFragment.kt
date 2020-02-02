@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mockcommerce.R
 import com.mockcommerce.databinding.FragmentOrderBinding
+import com.mockcommerce.modules.shared.adapters.GenericProductAdapter
 import kotlinx.android.synthetic.main.fragment_order.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,7 +34,7 @@ class OrderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val orderId = args.orderId
 
-        val adapter = OrderProductAdapter()
+        val adapter = GenericProductAdapter(R.layout.item_order_product, null)
 
         recycler_order.adapter = adapter
         recycler_order.layoutManager =
@@ -43,7 +44,7 @@ class OrderFragment : Fragment() {
         val binding = FragmentOrderBinding.bind(view)
         viewModel.getOrder(orderId).observe(viewLifecycleOwner, Observer { order ->
             binding.order = order
-            adapter.update(order.products)
+            adapter.updateProducts(order.products)
 
             viewModel.getAddress(order.billingAddressId)
                 .observe(viewLifecycleOwner, Observer { address ->

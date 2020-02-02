@@ -8,7 +8,7 @@
     <data>
 
         <variable
-            name="model"
+            name="product"
             type="com.mockcommerce.models.ProductModel" />
     </data>
 
@@ -32,7 +32,7 @@
                 android:maxLines="2"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="@{model.name}"
+                android:text="@{product.name}"
                 android:textAlignment="center"
                 android:textSize="@dimen/text_primary"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -84,10 +84,10 @@
                                 android:background="@drawable/square"
                                 android:backgroundTint="@color/promotion_background_red"
                                 android:gravity="center"
-                                android:text="@{model.discount}"
+                                android:text="@{product.discount}"
                                 android:textColor="@color/text_white"
                                 android:textSize="@dimen/text_secondary"
-                                android:visibility="@{model.discountVisibility}"
+                                android:visibility="@{product.discountVisibility}"
                                 tools:text="%50" />
 
                             <LinearLayout
@@ -107,17 +107,17 @@
                                     android:id="@+id/product_price_original"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{model.oldPrice}"
+                                    android:text="@{product.oldPrice}"
                                     android:textColor="@color/text_faint"
                                     android:textSize="@dimen/text_secondary"
-                                    android:visibility="@{model.discountVisibility}"
+                                    android:visibility="@{product.discountVisibility}"
                                     tools:text="169.90 TL" />
 
                                 <TextView
                                     android:id="@+id/product_price"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{model.price}"
+                                    android:text="@{product.price}"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/text_primary"
                                     tools:text="99.90 TL" />

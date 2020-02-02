@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.databinding.ItemBasketMainBinding
 import com.mockcommerce.models.ProductModel
-import com.mockcommerce.shared.loadImage
+import com.mockcommerce.modules.shared.adapters.ProductModelDiffCallback
 
 class BasketListAdapter(val listener: ((product: ProductModel, action: BasketFragment.ADAPTER_ACTION) -> Unit)) : RecyclerView.Adapter<BasketListAdapter.BasketListItemHolder>() {
     private val items: ArrayList<ProductModel> = ArrayList()
@@ -25,7 +25,7 @@ class BasketListAdapter(val listener: ((product: ProductModel, action: BasketFra
     }
 
     override fun onBindViewHolder(holder: BasketListItemHolder, position: Int) {
-        holder.bind(items.get(position))
+        holder.binding.product = items[position]
         holder.binding.buttonAdd.setOnClickListener{
             listener(items[position], BasketFragment.ADAPTER_ACTION.ADD)
         }
@@ -53,7 +53,8 @@ class BasketListAdapter(val listener: ((product: ProductModel, action: BasketFra
             notifyDataSetChanged()
         }
         else {
-            val diffUtil = ProductModelDiffCallback(items, newItems)
+            val diffUtil =
+                ProductModelDiffCallback(items, newItems)
             val result = DiffUtil.calculateDiff(diffUtil)
 
             items.clear()
@@ -66,11 +67,6 @@ class BasketListAdapter(val listener: ((product: ProductModel, action: BasketFra
     }
 
     inner class BasketListItemHolder(val binding: ItemBasketMainBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: ProductModel) {
-            binding.model = model
-            binding.productImage.loadImage("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${model.images[0]}")
-        }
-    }
+        RecyclerView.ViewHolder(binding.root)
 
 }

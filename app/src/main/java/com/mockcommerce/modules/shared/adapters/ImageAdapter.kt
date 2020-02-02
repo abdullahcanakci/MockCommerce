@@ -26,7 +26,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val v = holder.itemView.product_image as ImageView
         val id = imageUrls[position]
-        v.loadImage("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${id}")
+        v.loadImage(id)
     }
 
     fun update(newURLs: ArrayList<String>){

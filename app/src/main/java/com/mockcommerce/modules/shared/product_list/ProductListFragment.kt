@@ -10,15 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.R
+import com.mockcommerce.modules.shared.adapters.GenericProductAdapter
 import kotlinx.android.synthetic.main.fragment_productlist.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class ProductListFragment : Fragment() {
 
     val viewModel: ProductListViewModel by viewModel()
-
-    lateinit var adapter: ProductListItemAdapter
 
     companion object {
         fun newInstance() = ProductListFragment()
@@ -32,15 +30,14 @@ class ProductListFragment : Fragment() {
 
         v.product_list.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
 
-        adapter = ProductListItemAdapter { id ->
+        val adapter = GenericProductAdapter(R.layout.item_productlist) { id ->
             val action = ProductListFragmentDirections.actionDestProductListToProduct(id)
             findNavController().navigate(action)
         }
         v.product_list.adapter = adapter
 
         viewModel.productList.observe(this.viewLifecycleOwner, Observer { t ->
-            Timber.d("Number of elements in the productlist is ${t.size}")
-            adapter.update(t)
+            adapter.updateProducts(t)
         })
 
         return v

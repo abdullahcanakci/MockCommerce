@@ -43,7 +43,7 @@ class CategoryItemAdapter (private val onSelectListener: ((id: String, isCategor
             binding.root.setOnClickListener{
                 onSelectListener(model.id, model.destinationCategoryId != null)
             }
-            binding.categoryImage.loadImage("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${model.image}")
+            binding.categoryImage.loadImage(model.image)
         }
     }
 }

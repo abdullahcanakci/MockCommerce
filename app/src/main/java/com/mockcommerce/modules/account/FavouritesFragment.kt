@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mockcommerce.AppRepository
 import com.mockcommerce.R
-import com.mockcommerce.modules.shared.product_list.ProductListItemAdapter
+import com.mockcommerce.modules.shared.adapters.GenericProductAdapter
 import kotlinx.android.synthetic.main.fragment_favourites.*
 import org.koin.android.ext.android.inject
 
@@ -36,13 +36,13 @@ class FavouritesFragment : Fragment() {
 
         product_list.layoutManager =
             GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
-        val adapter = ProductListItemAdapter { id ->
+        val adapter = GenericProductAdapter(R.layout.item_productlist) { id ->
             val action = FavouritesFragmentDirections.actionFavouritesFragmentToProduct(id)
             findNavController().navigate(action)
         }
         product_list.adapter = adapter
         repository.getFavouriteProducts().observe(viewLifecycleOwner, Observer {
-            adapter.update(it)
+            adapter.updateProducts(it)
         })
     }
 }

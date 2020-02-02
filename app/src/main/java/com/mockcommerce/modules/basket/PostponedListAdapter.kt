@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.databinding.ItemBasketPostponedBinding
 import com.mockcommerce.models.ProductModel
-import com.mockcommerce.shared.loadImage
+import com.mockcommerce.modules.shared.adapters.ProductModelDiffCallback
 
 class PostponedListAdapter(val listener: ((product: ProductModel, action: BasketFragment.ADAPTER_ACTION) -> Unit)) : RecyclerView.Adapter<PostponedListAdapter.PostponedViewHolder>() {
     private val items: ArrayList<ProductModel> = ArrayList()
@@ -29,7 +29,7 @@ class PostponedListAdapter(val listener: ((product: ProductModel, action: Basket
         if(position >= itemCount){
             return
         }
-        holder.bind(items[position])
+        holder.binding.product = items[position]
         holder.binding.buttonDelete.setOnClickListener{
             listener(items[position], BasketFragment.ADAPTER_ACTION.DELETE)
         }
@@ -52,7 +52,8 @@ class PostponedListAdapter(val listener: ((product: ProductModel, action: Basket
             notifyDataSetChanged()
         }
         else {
-            val diffUtil = ProductModelDiffCallback(items, newItems)
+            val diffUtil =
+                ProductModelDiffCallback(items, newItems)
             val result = DiffUtil.calculateDiff(diffUtil)
 
             items.clear()
@@ -65,10 +66,5 @@ class PostponedListAdapter(val listener: ((product: ProductModel, action: Basket
     }
 
     inner class PostponedViewHolder(val binding: ItemBasketPostponedBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: ProductModel){
-            binding.model = model
-            binding.productImage.loadImage("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${model.images[0]}")
-        }
-    }
+        RecyclerView.ViewHolder(binding.root)
 }

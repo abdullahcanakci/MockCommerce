@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="model"
+            name="product"
             type="com.mockcommerce.models.ProductModel" />
     </data>
 
@@ -20,10 +20,11 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:paddingRight="16dp"
-            android:src="@drawable/ic_product_image"
+            app:imageUrl="@{product.images}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_product_image" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/product_name"
@@ -34,7 +35,7 @@
             android:lines="1"
             android:maxLines="1"
             android:paddingTop="8dp"
-            android:text="@{model.name}"
+            android:text="@{product.name}"
             android:textColor="@color/text_main"
             android:textSize="16sp"
             app:layout_constraintLeft_toRightOf="@id/product_image"
@@ -72,7 +73,7 @@
             android:id="@+id/product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.price}"
+            android:text="@{product.price}"
             android:textColor="@color/text_main"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -98,7 +99,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:textSize="16sp"
-            android:text="@{model.numbersInBasket}"
+            android:text="@{product.numbersInBasket}"
             app:layout_constraintBottom_toBottomOf="@id/button_add"
             app:layout_constraintRight_toLeftOf="@id/button_add"
             app:layout_constraintTop_toTopOf="@id/button_add"

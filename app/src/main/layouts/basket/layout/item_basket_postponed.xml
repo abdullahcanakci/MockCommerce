@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="model"
+            name="product"
             type="com.mockcommerce.models.ProductModel" />
     </data>
 
@@ -17,11 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_product_image"
+            app:imageUrl="@{product.images}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:padding="16dp"
+            tools:src="@drawable/ic_product_image"
             />
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="@dimen/text_secondary"
-            android:text="@{model.price}"
+            android:text="@{product.price}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_image"
             tools:text="390.50₺"
@@ -55,7 +56,7 @@
             android:lines="2"
             android:maxLines="2"
             android:ellipsize="end"
-            android:text="@{model.name}"
+            android:text="@{product.name}"
             android:textAlignment="center"
             android:textSize="@dimen/text_primary"
             app:layout_constraintTop_toBottomOf="@id/product_price"

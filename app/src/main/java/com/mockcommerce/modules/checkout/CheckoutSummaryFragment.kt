@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mockcommerce.R
-import com.mockcommerce.shared.loadImage
+import com.mockcommerce.modules.shared.adapters.GenericProductAdapter
 import kotlinx.android.synthetic.main.fragment_checkout_summary.*
 import kotlinx.android.synthetic.main.fragment_checkout_summary.view.*
-import kotlinx.android.synthetic.main.item_checkout.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CheckoutSummaryFragment : Fragment() {
@@ -52,26 +52,22 @@ class CheckoutSummaryFragment : Fragment() {
             findNavController().navigate(R.id.action_checkoutSummaryFragment_to_newAddressFragment)
         }
 
+        val adapter = GenericProductAdapter(R.layout.item_checkout, null)
+        view.checkout_product_list.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        view.checkout_product_list.adapter = adapter
+
+
         sharedViewModel.productInBasket.observe(viewLifecycleOwner, Observer { list ->
-            val root = checkout_product_list
-            root.removeAllViews()
+            adapter.updateProducts(list)
+
             var basketTotal = 0.0F
 
             list.forEach {
                 basketTotal += it.numbersInBasket * it.price
-
-                val v = LayoutInflater
-                    .from(context)
-                    .inflate(R.layout.item_checkout, root, false)
-                v.item_checkout_product_name.text = it.name
-                v.item_checkout_product_image.loadImage("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${it.images[0]}")
-
-                root.addView(v)
             }
             checkout_total.text = context!!.getString(R.string.price, basketTotal)
             sharedViewModel.basketTotal.postValue(basketTotal)
-            root.invalidate()
-            root.requestLayout()
         })
     }
 }

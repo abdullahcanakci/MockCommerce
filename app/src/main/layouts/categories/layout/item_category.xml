@@ -30,10 +30,11 @@
                 android:id="@+id/category_image"
                 android:layout_width="@dimen/category_image_size"
                 android:layout_height="@dimen/category_image_size"
-                android:src="@drawable/ic_product_image"
+                android:contentDescription="@string/category_image_description"
                 android:background="@drawable/ic_circle"
                 android:layout_margin="4dp"
-                android:contentDescription="@string/category_image_description" />
+                app:imageUrl="@{model.image}"
+                tools:src="@drawable/ic_product_image" />
 
             <TextView
                 android:layout_width="0dp"
