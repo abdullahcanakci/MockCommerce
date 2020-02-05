@@ -23,6 +23,7 @@
     <color name="status_bar_color">#ffffff</color>
     <color name="button_delete">@color/failure</color>
     <color name="black">#000000</color>
+    <color name="star">#FFCA28</color>
 
 
     <color name="failure">#EF5350</color>

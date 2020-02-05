@@ -282,37 +282,18 @@
                     android:orientation="vertical">
 
                     <Button
+                        style="@style/WideButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:drawableEnd="@drawable/ic_arrow_forward"
-                        android:drawableTint="@color/colorPrimary"
-                        android:paddingStart="@dimen/paddingHorizontal"
-                        android:paddingEnd="@dimen/paddingHorizontal"
-                        android:text="Ürün Açıklamaları"
-                        android:textAlignment="textStart" />
+                        android:text="@string/button_product_info" />
 
                     <Button
+                        android:id="@+id/button_comments"
+                        style="@style/WideButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:drawableEnd="@drawable/ic_arrow_forward"
-                        android:drawableTint="@color/colorPrimary"
-                        android:paddingStart="@dimen/paddingHorizontal"
-                        android:paddingEnd="@dimen/paddingHorizontal"
-                        android:text="Ürün Özellikleri"
-                        android:textAlignment="textStart" />
+                        android:text="@string/button_product_comment" />
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:drawableEnd="@drawable/ic_arrow_forward"
-                        android:drawableTint="@color/colorPrimary"
-                        android:paddingStart="@dimen/paddingHorizontal"
-                        android:paddingEnd="@dimen/paddingHorizontal"
-                        android:text="Ürün Yorumlar"
-                        android:textAlignment="textStart" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

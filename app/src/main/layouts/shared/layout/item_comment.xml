@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="comment"
+            type="com.mockcommerce.models.CommentModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Padding"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{comment.title}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_primary"
+                tools:text="Yorum başlığı" />
+
+            <com.mockcommerce.modules.shared.views.StarsView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:disabled="true"
+                app:stars="@{comment.points}" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:minLines="3"
+            android:text="@{comment.comment}"
+            android:textSize="@dimen/text_primary"
+            tools:text="Hello\na\nbb" />
+
+        <LinearLayout
+            style="@style/Padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@{comment.author}"
+                tools:text="Author" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{comment.date}"
+                tools:text="23 Ocak" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Padding"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/button_star_1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/button_star_desc"
+        android:src="@drawable/ic_star_border" />
+
+    <ImageButton
+        android:id="@+id/button_star_2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/button_star_desc"
+        android:src="@drawable/ic_star_border" />
+
+    <ImageButton
+        android:id="@+id/button_star_3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/button_star_desc"
+        android:src="@drawable/ic_star_border" />
+
+    <ImageButton
+        android:id="@+id/button_star_4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/button_star_desc"
+        android:src="@drawable/ic_star_border" />
+
+    <ImageButton
+        android:id="@+id/button_star_5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/button_star_desc"
+        android:src="@drawable/ic_star_border" />
+</LinearLayout>

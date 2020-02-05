@@ -16,8 +16,16 @@
         <action
             android:id="@+id/action_productFragment_self"
             app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_productFragment2"
         app:destination="@id/productFragment" />
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.mockcommerce.modules.shared.product_page.CommentsFragment"
+        android:label="fragment_comments"
+        tools:layout="@layout/fragment_comments" />
 </navigation>

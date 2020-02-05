@@ -25,4 +25,5 @@
     <dimen name="paddingHorizontalSmall">8dp</dimen>
     <dimen name="paddingVerticalSmall">4dp</dimen>
     <dimen name="item_empty_height">120dp</dimen>
+    <dimen name="appbar_height">64dp</dimen>
 </resources>
