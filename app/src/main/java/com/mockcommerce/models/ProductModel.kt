@@ -3,7 +3,7 @@ package com.mockcommerce.models
 import android.view.View
 
 open class ProductModel(
-    val id: Int,
+    val id: String,
     val name: String,
     val price: Float,
     val oldPrice: Float? = null,

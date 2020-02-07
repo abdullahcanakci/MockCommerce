@@ -12,7 +12,7 @@ import com.mockcommerce.models.ProductModel
 
 class GenericProductAdapter(
     private val layoutId: Int,
-    private val onClickListener: ((id: Int) -> Unit)?
+    private val onClickListener: ((id: String) -> Unit)?
 ) : RecyclerView.Adapter<GenericProductAdapter.GenericProductViewHolder>() {
 
     private val products = ArrayList<ProductModel>()

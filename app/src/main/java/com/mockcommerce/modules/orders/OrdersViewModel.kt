@@ -4,5 +4,4 @@ import androidx.lifecycle.ViewModel
 import com.mockcommerce.AppRepository
 
 class OrdersViewModel(val appRepository: AppRepository) : ViewModel() {
-    val orders = appRepository.orders
 }

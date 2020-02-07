@@ -60,7 +60,7 @@
             app:destination="@id/product">
             <argument
                 android:name="productId"
-                app:argType="integer" />
+                app:argType="string" />
         </action>
     </fragment>
     <include app:graph="@navigation/product" />

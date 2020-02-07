@@ -35,26 +35,19 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var requestId: Int? = null
-        val id = args.categoryId
-
-        if( id != 0 ){
-            requestId = id
-        }
-
         val adapter = CategoryItemAdapter{selectId, isCategory ->
             if(isCategory){
-                val action = CategoriesFragmentDirections.actionCategoriesSelf(selectId.toInt())
+                val action = CategoriesFragmentDirections.actionCategoriesSelf(selectId)
                 findNavController().navigate(action)
             } else {
-                val action = CategoriesFragmentDirections.actionCategoriesToProductList(selectId.toInt())
+                val action = CategoriesFragmentDirections.actionCategoriesToProductList(selectId)
                 this.findNavController().navigate(action)
             }
         }
         view.category_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         view.category_list.adapter = adapter
 
-        viewModel.getCategoryList(requestId).observe(viewLifecycleOwner, Observer {
+        viewModel.categoryList.observe(viewLifecycleOwner, Observer {
             adapter.update(it)
         })
 

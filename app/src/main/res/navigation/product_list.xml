@@ -14,11 +14,11 @@
             app:destination="@id/product" >
             <argument
                 android:name="productId"
-                app:argType="integer" />
+                app:argType="string" />
         </action>
         <argument
             android:name="listIdentifier"
-            app:argType="integer" />
+            app:argType="string" />
     </fragment>
     <include app:graph="@navigation/product">
     </include><action android:id="@+id/action_global_dest_product_list2" app:destination="@id/dest_product_list"/>

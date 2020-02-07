@@ -22,9 +22,6 @@ class ProductFragment : Fragment() {
     val args: ProductFragmentArgs by navArgs()
     val viewModel: ProductViewModel by viewModel()
 
-    lateinit var binding: FragmentProductBinding
-    lateinit var adapter: ImageAdapter
-
     companion object {
         fun newInstance() = ProductFragment()
     }
@@ -34,34 +31,30 @@ class ProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProductBinding.inflate(inflater)
-        adapter = ImageAdapter()
-
-        binding.imageCarousel.adapter = adapter
-        binding.imageCarousel.setPageTransformer(ZoomOutPageTransformer())
-
-        viewModel.product.observe(this.viewLifecycleOwner, Observer { t ->
-            adapter.update(t.images)
-            binding.product = t
-        })
-
-        return binding.root
+        return inflater.inflate(R.layout.fragment_product, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val id = args.productId
-        viewModel.productId = id
 
-        view.add_to_basket.setOnClickListener{
+        val binding = FragmentProductBinding.bind(view)
+        viewModel.productId = args.productId
+
+        val imageAdapter = ImageAdapter()
+        binding.imageCarousel.adapter = imageAdapter
+        binding.imageCarousel.setPageTransformer(ZoomOutPageTransformer())
+
+        view.add_to_basket.setOnClickListener {
             viewModel.addToBasket()
         }
 
-        viewModel.product.observe(viewLifecycleOwner, Observer { product ->
-            viewModel.favourite = product.favourite
-            setFavouriteButton()
+        viewModel.getProduct(null).observe(viewLifecycleOwner, Observer { product ->
+
+            binding.product = product
+            imageAdapter.update(product.images)
+
         })
 
-        view.button_favourite.setOnClickListener { _ ->
+        view.button_favourite.setOnClickListener {
             viewModel.toggleFavourite()
         }
 

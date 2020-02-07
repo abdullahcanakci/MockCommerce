@@ -7,13 +7,8 @@ import com.mockcommerce.models.CategoryModel
 
 class CategoriesViewModel(val appRepository: AppRepository) : ViewModel() {
 
-    private val categoryList = MutableLiveData<ArrayList<CategoryModel>>(ArrayList<CategoryModel>())
+    val categoryList = appRepository.getCategory()
 
-    fun getCategoryList(id: Int?) : MutableLiveData<ArrayList<CategoryModel>> {
-        appRepository.getCategory(id) {
-            categoryList.postValue(it)
-        }
-        return categoryList
-    }
+
 
 }

@@ -43,9 +43,8 @@ class OrdersFragment : Fragment() {
         view.orders_recycler.adapter = adapter
         view.orders_recycler.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        viewModel.orders.observe(viewLifecycleOwner, Observer {
-            adapter.update(it)
-        })
+
+        //TODO retrieve orders and update adapter
 
         ArrayAdapter.createFromResource(
             view.context,
