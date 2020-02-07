@@ -5,10 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mockcommerce.models.*
-import okhttp3.*
-import kotlin.collections.ArrayList
+import com.mockcommerce.utils.MockCommerceApi
+import com.mockcommerce.utils.NetworkCall
+import com.mockcommerce.utils.Resource
+import okhttp3.CacheControl
 
-class AppRepository(val client: OkHttpClient) {
+class AppRepository(val client: MockCommerceApi) {
+
     private val CACHE_POLICY = CacheControl.FORCE_NETWORK
 
     var basket = MutableLiveData<ArrayList<ProductModel>>(ArrayList())
@@ -84,11 +87,8 @@ class AppRepository(val client: OkHttpClient) {
         return false
     }
 
-    fun getCategory(): LiveData<ArrayList<CategoryModel>> {
-        val response = MutableLiveData<ArrayList<CategoryModel>>()
-
-        //TODO implement
-        return response
+    fun getCategory(): MutableLiveData<Resource<List<CategoryModel>>> {
+        return NetworkCall<List<CategoryModel>>().makeCall(client.getCategories())
     }
 
     fun confirmPayment(shipmentId: String, billingId: String) {

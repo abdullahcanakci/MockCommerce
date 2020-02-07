@@ -5,11 +5,12 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.bumptech.glide.Glide
+import com.mockcommerce.BuildConfig
 import com.mockcommerce.R
 
 fun ImageView.loadImage(url: String) {
     Glide.with(rootView)
-        .load("https://raw.githubusercontent.com/abdullahcanakci/MockCommerce/master/mockserver/${url}")
+        .load("${BuildConfig.SERVER_ROOT}/images/${url}")
         .placeholder(R.drawable.ic_product_image)
         .into(this)
 }

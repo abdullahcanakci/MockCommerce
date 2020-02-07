@@ -17,7 +17,7 @@ import com.mockcommerce.modules.shared.newaddress.NewAddressViewModel
 import com.mockcommerce.modules.shared.product_list.ProductListViewModel
 import com.mockcommerce.modules.shared.product_page.ProductViewModel
 import com.mockcommerce.shared.setupWithNavController
-import okhttp3.OkHttpClient
+import com.mockcommerce.utils.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
 
         val dataModule = module {
-            single { OkHttpClient() }
             single { AppRepository(get()) }
             viewModel { ProductViewModel(get()) }
             viewModel { ProductListViewModel(get()) }
@@ -67,6 +66,7 @@ class MainActivity : AppCompatActivity() {
             startKoin {
                 androidContext(applicationContext)
                 modules(dataModule)
+                modules(networkModule)
             }
         } catch (e: KoinAppAlreadyStartedException) {
             Timber.e("Koin already started")

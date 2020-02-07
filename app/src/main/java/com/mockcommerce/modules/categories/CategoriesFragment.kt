@@ -6,14 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mockcommerce.R
-import com.mockcommerce.models.CategoryModel
 import kotlinx.android.synthetic.main.fragment_categories.view.*
-import kotlinx.android.synthetic.main.item_category.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CategoriesFragment : Fragment() {
@@ -47,11 +44,10 @@ class CategoriesFragment : Fragment() {
         view.category_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         view.category_list.adapter = adapter
 
-        viewModel.categoryList.observe(viewLifecycleOwner, Observer {
-            adapter.update(it)
+        viewModel.categoryList.observe(viewLifecycleOwner, Observer { resource ->
+            if (resource.isSuccess()) {
+                adapter.update(resource.data)
+            }
         })
-
-
-
     }
 }

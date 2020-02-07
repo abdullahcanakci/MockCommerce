@@ -31,9 +31,9 @@ class CategoryItemAdapter (private val onSelectListener: ((id: String, isCategor
         holder.bind(models[position])
     }
 
-    fun update(list: ArrayList<CategoryModel>) {
+    fun update(list: List<CategoryModel>?) {
         models.clear()
-        models.addAll(list)
+        list?.let { models.addAll(it) }
         notifyDataSetChanged()
     }
 

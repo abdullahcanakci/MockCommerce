@@ -10,43 +10,44 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface MockCommerceApi {
-    @POST("user/")
-    fun register(user: UserModel) : Call<UserModel>
+    @POST("/api/user/")
+    fun register(user: UserModel): Call<UserModel>
 
-    @GET("user/")
-    fun getUserInfo() : Call<UserModel>
+    @GET("/api/user/")
+    fun getUserInfo(): Call<UserModel>
 
-    @GET("user/addresses")
-    fun getAddresses() : Call<List<AddressModel>>
+    @GET("/api/user/addresses")
+    fun getAddresses(): Call<List<AddressModel>>
 
-    @POST("user/addresses")
+    @POST("/api/user/addresses")
     fun addAddress(address: AddressModel)
 
-    @GET("user/addresses/{id}")
-    fun getAddressById(@Path("id") addressId: String) : Call<AddressModel>
+    @GET("/api/user/addresses/{id}")
+    fun getAddressById(@Path("id") addressId: String): Call<AddressModel>
 
-    @POST("user/basket")
+    @POST("/api/user/basket")
     fun addToBasket(product_id: String, amount: Int = 1)
 
-    @GET("user/basket")
-    fun getBasket() : Call<List<ProductModel>>
+    @GET("/api/user/basket")
+    fun getBasket(): Call<List<ProductModel>>
 
-    @POST("user/postponed")
+    @POST("/api/user/postponed")
     fun addToPostponed(product_id: String, amount: Int = 1)
 
-    @GET("user/postponed")
-    fun getPostponed() : Call<List<ProductModel>>
+    @GET("/api/user/postponed")
+    fun getPostponed(): Call<List<ProductModel>>
+
+    @GET("/api/products/")
+    fun getAllProducts(): Call<List<ProductModel>>
+
+    @GET("/api/products/{id}")
+    fun getProduct(@Path("id") productId: String): Call<ProductModel>
+
+    @GET("/api/categories/")
+    fun getCategories(): Call<List<CategoryModel>>
+
+    @GET("/api/categories/{id}")
+    fun getProductsByCategory(@Path("id") categoryId: String): Call<List<ProductModel>>
 
 
-    @GET("products/")
-   fun getAllProducts() : Call<List<ProductModel>>
-
-    @GET("products/{id}")
-    fun getProduct(@Path("id") productId: String) : Call<ProductModel>
-
-    @GET("categories/")
-    fun getCategories() : Call<List<CategoryModel>>
-
-    @GET("categories/{id}")
-    fun getProductsByCategory(@Path("id") categoryId: String) : Call<List<ProductModel>>
 }

@@ -20,6 +20,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "SERVER_ROOT", "\"http://192.168.1.102:3000\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -79,7 +82,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
 
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation "org.koin:koin-core:$koin_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
     implementation "org.koin:koin-android:$koin_version"
     // Koin AndroidX ViewModel features
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
