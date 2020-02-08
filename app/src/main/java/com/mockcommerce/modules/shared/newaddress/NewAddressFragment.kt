@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.mockcommerce.AppRepository
 import com.mockcommerce.R
 import com.mockcommerce.databinding.FragmentNewAddressBinding
+import com.mockcommerce.utils.BaseFragment
 import kotlinx.android.synthetic.main.fragment_new_address.view.*
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
-class NewAddressFragment() : Fragment() {
+class NewAddressFragment() : BaseFragment() {
 
     private val viewModel by viewModel<NewAddressViewModel>()
 
@@ -57,8 +60,19 @@ class NewAddressFragment() : Fragment() {
         }
 
         view.button_address_save.setOnClickListener {
-            viewModel.saveAddress()
-            findNavController().navigateUp()
+
+            val appRepository = get<AppRepository>()
+            val disposable = appRepository
+                .addAddress(viewModel.getAddress())
+                .subscribe(
+                    {
+                        findNavController().navigateUp()
+                    },
+                    { error ->
+                        Timber.d("Error while saving the address \n $error")
+                    }
+                )
+            addToDisposable(disposable)
         }
     }
 }

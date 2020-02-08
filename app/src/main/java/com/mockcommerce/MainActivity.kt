@@ -5,11 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mockcommerce.modules.account.AccountViewModel
-import com.mockcommerce.modules.account.AddressesViewModel
 import com.mockcommerce.modules.account.RegisterViewModel
 import com.mockcommerce.modules.basket.BasketViewModel
-import com.mockcommerce.modules.categories.CategoriesViewModel
 import com.mockcommerce.modules.checkout.CheckoutViewModel
 import com.mockcommerce.modules.orders.OrderViewModel
 import com.mockcommerce.modules.orders.OrdersViewModel
@@ -48,16 +45,13 @@ class MainActivity : AppCompatActivity() {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
 
         val dataModule = module {
-            single { AppRepository(get()) }
+            single { AppRepository(get(), get()) }
             viewModel { ProductViewModel(get()) }
-            viewModel { ProductListViewModel(get()) }
+            viewModel { ProductListViewModel() }
             viewModel { BasketViewModel(get()) }
             viewModel { CheckoutViewModel(get()) }
             viewModel { NewAddressViewModel(get()) }
-            viewModel { CategoriesViewModel(get()) }
             viewModel { RegisterViewModel(get()) }
-            viewModel { AccountViewModel(get()) }
-            viewModel { AddressesViewModel(get()) }
             viewModel { OrdersViewModel(get()) }
             viewModel { OrderViewModel(get()) }
         }

@@ -12,11 +12,12 @@ class RegisterViewModel(val repository: AppRepository) : ViewModel() {
     var email: String = ""
     var phone: String = ""
 
-    fun register() {
-        repository.register(
-            UserModel(
-                name, surname, password, email, phone
-            )
-        )
+
+    fun getUser(): UserModel {
+        return UserModel(name, surname, password, email, phone)
+    }
+
+    fun isUserValid(): Boolean {
+        return name.isEmpty() && surname.isEmpty() && password.isEmpty() && email.isEmpty() && phone.isEmpty()
     }
 }

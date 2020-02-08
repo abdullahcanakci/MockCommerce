@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mockcommerce.R
+import com.mockcommerce.utils.BaseFragment
+import com.mockcommerce.utils.TokenInterceptor
 import kotlinx.android.synthetic.main.fragment_account.view.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.get
 
-class AccountFragment : Fragment() {
-
-    val viewModel by viewModel<AccountViewModel>()
+class AccountFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = AccountFragment()
@@ -45,7 +44,9 @@ class AccountFragment : Fragment() {
     }
 
     fun onLogout() {
-        viewModel.logout()
+        val tokenInterceptor = get<TokenInterceptor>()
+        tokenInterceptor.token = ""
+
         findNavController().navigate(R.id.account)
     }
 

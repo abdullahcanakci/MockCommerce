@@ -43,7 +43,7 @@ class BasketListAdapter(val listener: ((product: ProductModel, action: BasketFra
         }
     }
 
-    fun updateItems(newItems: ArrayList<ProductModel>){
+    fun updateItems(newItems: List<ProductModel>) {
         if(items.isEmpty()){
             items.addAll(newItems)
             notifyDataSetChanged()

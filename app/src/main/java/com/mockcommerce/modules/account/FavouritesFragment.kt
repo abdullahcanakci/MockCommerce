@@ -16,12 +16,9 @@ import com.mockcommerce.modules.shared.adapters.GenericProductAdapter
 import kotlinx.android.synthetic.main.fragment_favourites.*
 import org.koin.android.ext.android.inject
 
-/**
- * A simple [Fragment] subclass.
- */
 class FavouritesFragment : Fragment() {
 
-    val repository by inject<AppRepository>()
+    private val repository by inject<AppRepository>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

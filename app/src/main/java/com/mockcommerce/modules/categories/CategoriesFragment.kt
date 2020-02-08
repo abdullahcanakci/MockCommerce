@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mockcommerce.AppRepository
 import com.mockcommerce.R
+import com.mockcommerce.utils.BaseFragment
 import kotlinx.android.synthetic.main.fragment_categories.view.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.get
+import timber.log.Timber
 
-class CategoriesFragment : Fragment() {
+class CategoriesFragment : BaseFragment() {
 
     val args: CategoriesFragmentArgs by navArgs()
-    private val viewModel by viewModel<CategoriesViewModel>()
 
     companion object {
         fun newInstance() = CategoriesFragment()
@@ -32,8 +32,8 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CategoryItemAdapter{selectId, isCategory ->
-            if(isCategory){
+        val adapter = CategoryItemAdapter { selectId, isCategory ->
+            if (isCategory) {
                 val action = CategoriesFragmentDirections.actionCategoriesSelf(selectId)
                 findNavController().navigate(action)
             } else {
@@ -41,13 +41,16 @@ class CategoriesFragment : Fragment() {
                 this.findNavController().navigate(action)
             }
         }
-        view.category_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        view.category_list.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         view.category_list.adapter = adapter
 
-        viewModel.categoryList.observe(viewLifecycleOwner, Observer { resource ->
-            if (resource.isSuccess()) {
-                adapter.update(resource.data)
-            }
-        })
+        val appRepository = get<AppRepository>()
+
+        val disposable = appRepository
+            .getCategory()
+            .subscribe({ result -> adapter.update(result) }, { error -> Timber.d("$error") })
+
+        addToDisposable(disposable)
     }
 }

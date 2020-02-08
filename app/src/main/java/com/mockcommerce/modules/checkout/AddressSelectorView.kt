@@ -60,7 +60,7 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
                 if (it.id == selectedAddressId) {
                     val b = LayoutAddressBinding.inflate(LayoutInflater.from(context))
                     b.root.setOnClickListener { _ ->
-                        onAddressSelectedListener?.invoke(it.id)
+                        onAddressSelectedListener?.invoke(it.id!!)
                         selectedAddressId = it.id
                         collapse()
                     }
@@ -70,7 +70,7 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
             } else {
                 val b = LayoutAddressBinding.inflate(LayoutInflater.from(context))
                 b.root.setOnClickListener { _ ->
-                    onAddressSelectedListener?.invoke(it.id)
+                    onAddressSelectedListener?.invoke(it.id!!)
                     selectedAddressId = it.id
                     collapse()
                 }
@@ -82,13 +82,13 @@ class AddressSelectorView(context: Context, attrs: AttributeSet) : FrameLayout(c
         listLayout.requestLayout()
     }
 
-    fun setModel(model: ArrayList<AddressModel>) {
+    fun setModel(model: List<AddressModel>) {
         models.clear()
         if (selectedAddressId == null) {
             model.forEach {
                 if (it.selected) {
                     selectedAddressId = it.id
-                    onAddressSelectedListener?.invoke(it.id)
+                    onAddressSelectedListener?.invoke(it.id!!)
                 }
             }
         }

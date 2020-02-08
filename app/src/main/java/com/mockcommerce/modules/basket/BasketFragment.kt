@@ -6,19 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mockcommerce.AppRepository
 import com.mockcommerce.R
 import com.mockcommerce.modules.checkout.CheckoutActivity
+import com.mockcommerce.utils.BaseFragment
+import com.mockcommerce.utils.TokenInterceptor
 import kotlinx.android.synthetic.main.fragment_basket.view.*
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class BasketFragment : Fragment() {
+class BasketFragment : BaseFragment() {
 
     enum class ADAPTER_ACTION { DELETE, ADD, SUBSTRACT, POSTPONE, ADD_TO_CART, VIEW }
 
@@ -40,7 +43,8 @@ class BasketFragment : Fragment() {
         val basketRecycler = v.list
         basketRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         basketRecycler.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
-        basketAdapter = BasketListAdapter() { product, action ->
+
+        basketAdapter = BasketListAdapter { product, action ->
             when (action) {
                 ADAPTER_ACTION.DELETE -> {
                     viewModel.removeFromBasket(product)
@@ -72,6 +76,7 @@ class BasketFragment : Fragment() {
         val postponedRecycler = v.list_postpone
         postponedRecycler.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+
         postponedAdapter = PostponedListAdapter { product, action ->
             when (action) {
                 ADAPTER_ACTION.ADD_TO_CART -> {
@@ -95,7 +100,9 @@ class BasketFragment : Fragment() {
         })
 
         v.basket_purchase.setOnClickListener {
-            if (viewModel.isLoggedIn() && viewModel.isBasketPopulated()) {
+            val tokenInterceptor: TokenInterceptor = get()
+
+            if (tokenInterceptor.token.isNotEmpty()) {
                 val intent = Intent(context, CheckoutActivity::class.java).apply {}
                 startActivity(intent)
             } else if (!viewModel.isLoggedIn()) {
@@ -112,7 +119,6 @@ class BasketFragment : Fragment() {
                 ).show()
             }
         }
-
         return v
     }
 
@@ -121,5 +127,26 @@ class BasketFragment : Fragment() {
         viewModel.basketTotal.observe(viewLifecycleOwner, Observer {
             view.basket_total.text = view.context!!.getString(R.string.price, it)
         })
+
+        val repository: AppRepository = get()
+
+        val disposable = repository
+            .getBasket()
+            .subscribe(
+                { result -> viewModel.basketItems.postValue(result) },
+                { error -> Timber.d("Error while retrieving basket items $error") }
+            )
+
+        addToDisposable(disposable)
+
+
+        val disposable1 = repository
+            .getBasketPostponed()
+            .subscribe(
+                { result -> viewModel.postponedItems.postValue(result) },
+                { error -> Timber.d("Error while retrieving basket items $error") }
+            )
+
+        addToDisposable(disposable1)
     }
 }

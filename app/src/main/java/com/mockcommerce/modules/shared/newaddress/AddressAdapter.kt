@@ -27,11 +27,11 @@ class AddressAdapter(val onItemSelectedListener: ((id: String) -> Unit)) :
     override fun onBindViewHolder(holder: AddressHolder, position: Int) {
         holder.binding.model = addresses[position]
         holder.binding.root.setOnClickListener {
-            onItemSelectedListener(addresses[position].id)
+            onItemSelectedListener(addresses[position].id!!)
         }
     }
 
-    fun update(list: ArrayList<AddressModel>) {
+    fun update(list: List<AddressModel>) {
         addresses.clear()
         addresses.addAll(list)
         notifyDataSetChanged()

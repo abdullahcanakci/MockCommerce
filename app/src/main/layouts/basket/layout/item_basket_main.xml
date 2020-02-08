@@ -99,7 +99,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:textSize="16sp"
-            android:text="@{product.numbersInBasket}"
+            android:text="@{product.amount}"
             app:layout_constraintBottom_toBottomOf="@id/button_add"
             app:layout_constraintRight_toLeftOf="@id/button_add"
             app:layout_constraintTop_toTopOf="@id/button_add"

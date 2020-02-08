@@ -4,23 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.mockcommerce.AppRepository
 import com.mockcommerce.R
 import com.mockcommerce.databinding.FragmentProductBinding
 import com.mockcommerce.modules.shared.adapters.ImageAdapter
 import com.mockcommerce.shared.ZoomOutPageTransformer
 import com.mockcommerce.shared.setDrawable
+import com.mockcommerce.utils.BaseFragment
 import kotlinx.android.synthetic.main.fragment_product.view.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.get
 import timber.log.Timber
 
-class ProductFragment : Fragment() {
+class ProductFragment : BaseFragment() {
 
     val args: ProductFragmentArgs by navArgs()
-    val viewModel: ProductViewModel by viewModel()
+
+    val appRepository = get<AppRepository>()
+    private lateinit var binding: FragmentProductBinding
+    private val imageAdapter = ImageAdapter()
 
     companion object {
         fun newInstance() = ProductFragment()
@@ -36,38 +39,51 @@ class ProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val binding = FragmentProductBinding.bind(view)
-        viewModel.productId = args.productId
+        binding = FragmentProductBinding.bind(view)
 
-        val imageAdapter = ImageAdapter()
         binding.imageCarousel.adapter = imageAdapter
         binding.imageCarousel.setPageTransformer(ZoomOutPageTransformer())
 
         view.add_to_basket.setOnClickListener {
-            viewModel.addToBasket()
+            val disposable = appRepository.addToBasket(args.productId).subscribe()
+            addToDisposable(disposable)
         }
 
-        viewModel.getProduct(null).observe(viewLifecycleOwner, Observer { product ->
-
-            binding.product = product
-            imageAdapter.update(product.images)
-
-        })
 
         view.button_favourite.setOnClickListener {
-            viewModel.toggleFavourite()
+            val disp = appRepository
+                .setFavourite(args.productId)
+                .subscribe { result -> binding.product = result }
+            setFavouriteButton()
+            addToDisposable(disp)
         }
 
+        updateProduct()
         view.button_comments.setOnClickListener {
             findNavController().navigate(R.id.action_productFragment_to_commentsFragment)
         }
+    }
+
+    fun updateProduct() {
+        val disposable = appRepository
+            .getProduct(args.productId)
+            .subscribe(
+                { result ->
+                    binding.product = result
+                    imageAdapter.update(result.images)
+                    setFavouriteButton()
+                },
+                { error -> Timber.d("Error while retrieving product \n $error") }
+            )
+
+        addToDisposable(disposable)
     }
 
     private fun setFavouriteButton() {
         view?.let {
             val button = it.button_favourite
 
-            if (viewModel.favourite) {
+            if (binding.product!!.favourite) {
                 button.setDrawable(R.drawable.ic_favorite, R.color.colorPrimary)
             } else {
                 button.setDrawable(R.drawable.ic_favorite_border, R.color.black)

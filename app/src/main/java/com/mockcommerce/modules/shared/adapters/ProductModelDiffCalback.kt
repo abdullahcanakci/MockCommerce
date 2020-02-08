@@ -3,7 +3,8 @@ package com.mockcommerce.modules.shared.adapters
 import androidx.recyclerview.widget.DiffUtil
 import com.mockcommerce.models.ProductModel
 
-class ProductModelDiffCallback(val old: ArrayList<ProductModel>, val new: ArrayList<ProductModel>) : DiffUtil.Callback() {
+class ProductModelDiffCallback(val old: List<ProductModel>, val new: List<ProductModel>) :
+    DiffUtil.Callback() {
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return old[oldItemPosition].id == new[newItemPosition].id
     }
@@ -22,9 +23,5 @@ class ProductModelDiffCallback(val old: ArrayList<ProductModel>, val new: ArrayL
         return (o.name == n.name &&
                 o.price == n.price &&
                 o.oldPrice == n.oldPrice)
-    }
-
-    override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-        return super.getChangePayload(oldItemPosition, newItemPosition)
     }
 }

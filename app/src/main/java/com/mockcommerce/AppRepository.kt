@@ -6,30 +6,37 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mockcommerce.models.*
 import com.mockcommerce.utils.MockCommerceApi
-import com.mockcommerce.utils.NetworkCall
-import com.mockcommerce.utils.Resource
+import com.mockcommerce.utils.TokenInterceptor
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.CacheControl
+import okhttp3.ResponseBody
 
-class AppRepository(val client: MockCommerceApi) {
+class AppRepository(val client: MockCommerceApi, val tokenInterceptor: TokenInterceptor) {
 
     private val CACHE_POLICY = CacheControl.FORCE_NETWORK
 
-    var basket = MutableLiveData<ArrayList<ProductModel>>(ArrayList())
-    var postponed = MutableLiveData<ArrayList<ProductModel>>(ArrayList())
+    private val offlineBasket = MutableLiveData<ArrayList<String>>(ArrayList())
+    private val offlinePostponed = MutableLiveData<ArrayList<String>>(ArrayList())
     var favourites = MutableLiveData<ArrayList<Int>>(ArrayList())
     var basketTotal = MutableLiveData<Float>(0.0F)
 
     private var loggedInUser: UserModel? = null
 
-    fun getProductList(): LiveData<ArrayList<ProductModel>> {
-        val responseList = MutableLiveData<ArrayList<ProductModel>>()
-
-        return responseList
+    fun getProductList(id: String): Single<List<ProductModel>> {
+        return client
+            .getProductsByCategory(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getProduct(id: String): MutableLiveData<ProductModel> {
-        val response = MutableLiveData<ProductModel>()
-        return response
+    fun getProduct(id: String): Single<ProductModel> {
+        return client
+            .getProduct(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun getFavouriteProducts(): LiveData<ArrayList<ProductModel>> {
@@ -38,27 +45,37 @@ class AppRepository(val client: MockCommerceApi) {
         return MutableLiveData(temp)
     }
 
-    fun setFavourite(productId: Int, addToFav: Boolean) {
-
+    fun setFavourite(productId: String): Single<ProductModel> {
+        return client
+            .toggleFavouriteProduct(productId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getBasket(): LiveData<ArrayList<ProductModel>> {
-        return basket
-        // Removed network request for more streamlined user feel for demo
+    fun getBasket(): Single<List<ProductModel>> {
+        return client
+            .getBasket()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getBasketPostponed(): LiveData<ArrayList<ProductModel>> {
-        return postponed
-        // Removed network request for more streamlined user feel for demo
+    fun getBasketPostponed(): Single<List<ProductModel>> {
+        return client
+            .getPostponed()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun addToBasket(id: String?): Boolean {
-        //TODO implement
-        return false
+    fun addToBasket(id: String): Single<ResponseBody> {
+        return client
+            .addToBasket(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun subtract(id: String) {
-        //TODO implement
+    fun setBasketAmount(id: String, amount: Int): Single<ResponseBody> {
+        return client
+            .setBasket(id, amount)
     }
 
     fun addToPostponed(id: Int): Boolean {
@@ -87,41 +104,49 @@ class AppRepository(val client: MockCommerceApi) {
         return false
     }
 
-    fun getCategory(): MutableLiveData<Resource<List<CategoryModel>>> {
-        return NetworkCall<List<CategoryModel>>().makeCall(client.getCategories())
+    fun getCategory(): Single<List<CategoryModel>> {
+        return client
+            .getCategories()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun confirmPayment(shipmentId: String, billingId: String) {
         //TODO implement
     }
 
-    fun login(email: String, password: String): Boolean {
-        //TODO implement
-        return false
-    }
+    fun login(email: String, password: String): Single<String> {
+        return client
+            .login(UserModel("", "", password, email, ""))
+            .subscribeOn(Schedulers.io())
+            .map { result -> result.token }
+            .observeOn(AndroidSchedulers.mainThread())
 
-    fun logout(): Boolean {
-        //TODO implement
-        return false
     }
 
     fun isLoggedIn(): Boolean {
         return loggedInUser != null
     }
 
-    fun register(user: UserModel): Boolean {
-        //TODO implement
-        return false
+    fun register(user: UserModel): Single<UserModel> {
+        return client
+            .register(user)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun addAddress(address: AddressModel) {
-        //TODO implement
+    fun addAddress(address: AddressModel): Single<ResponseBody> {
+        return client
+            .addAddress(address)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getAddresses(): LiveData<ArrayList<AddressModel>> {
-        val response = MutableLiveData<ArrayList<AddressModel>>()
-        //TODO implement
-        return response
+    fun getAddresses(): Observable<List<AddressModel>> {
+        return client
+            .getAddresses()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun getAddress(id: String): LiveData<AddressModel> {

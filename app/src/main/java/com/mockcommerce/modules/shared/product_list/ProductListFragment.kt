@@ -4,19 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mockcommerce.AppRepository
 import com.mockcommerce.R
 import com.mockcommerce.modules.shared.adapters.GenericProductAdapter
+import com.mockcommerce.utils.BaseFragment
 import kotlinx.android.synthetic.main.fragment_productlist.view.*
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProductListFragment : Fragment() {
+class ProductListFragment : BaseFragment() {
 
     val viewModel: ProductListViewModel by viewModel()
+    val args: ProductListFragmentArgs by navArgs()
 
     companion object {
         fun newInstance() = ProductListFragment()
@@ -36,8 +40,18 @@ class ProductListFragment : Fragment() {
         }
         v.product_list.adapter = adapter
 
-        viewModel.productList.observe(this.viewLifecycleOwner, Observer { t ->
-            adapter.updateProducts(t)
+
+        val appRepository = get<AppRepository>()
+
+        val disposable = appRepository
+            .getProductList(args.listIdentifier)
+            .subscribe { result -> viewModel.products.postValue(result) }
+
+        addToDisposable(disposable)
+
+
+        viewModel.products.observe(this.viewLifecycleOwner, Observer { list ->
+            adapter.updateProducts(list)
         })
 
         return v

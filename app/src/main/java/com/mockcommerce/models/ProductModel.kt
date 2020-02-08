@@ -7,10 +7,20 @@ open class ProductModel(
     val name: String,
     val price: Float,
     val oldPrice: Float? = null,
-    var numbersInBasket: Int = 0,
+    var amount: Int = 0,
     var favourite: Boolean = false,
     val images: ArrayList<String>
 ) {
+
+    constructor(id: String, numbersInBasket: Int) : this(
+        id,
+        "",
+        0F,
+        0F,
+        numbersInBasket,
+        false,
+        ArrayList()
+    )
 
     fun getOldPrice(): String {
         return oldPrice.toString()
@@ -33,8 +43,7 @@ open class ProductModel(
 
     fun copy() : ProductModel {
         return ProductModel(
-            id, name, price, oldPrice, numbersInBasket, favourite, images
+            id, name, price, oldPrice, amount, favourite, images
         )
     }
-
 }

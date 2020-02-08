@@ -1,7 +1,7 @@
 package com.mockcommerce.models
 
 data class AddressModel(
-    val id: String,
+    val id: String?,
     val title: String,
     val address: String,
     val receiver: String,

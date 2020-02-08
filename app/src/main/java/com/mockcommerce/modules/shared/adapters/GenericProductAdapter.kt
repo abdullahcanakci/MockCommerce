@@ -41,7 +41,7 @@ class GenericProductAdapter(
         }
     }
 
-    fun updateProducts(newProducts: ArrayList<ProductModel>) {
+    fun updateProducts(newProducts: List<ProductModel>) {
         val diffUtil = ProductModelDiffCallback(products, newProducts)
         val result = DiffUtil.calculateDiff(diffUtil)
 

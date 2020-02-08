@@ -12,17 +12,17 @@ class TokenInterceptor : Interceptor {
         val original = chain.request()
 
         // Only endpoints in the "/user" and "/checkout" requires jwt tokens
-        if(!original.url.encodedPath.contains("/user") || !original.url.encodedPath.contains(("/checkout"))) {
-            return chain.proceed(original)
+        if (original.url.encodedPath.contains("/user") || original.url.encodedPath.contains(("/checkout"))) {
+            val request = original
+                .newBuilder()
+                .addHeader("Authorization", "bearer $token")
+                .url(original.url)
+                .build()
+
+            return chain.proceed(request)
+
         }
-
-        val request = original
-            .newBuilder()
-            .addHeader("Authorization", token)
-            .url(original.url)
-            .build()
-
-        return chain.proceed(request)
+        return chain.proceed(original)
     }
 
 }

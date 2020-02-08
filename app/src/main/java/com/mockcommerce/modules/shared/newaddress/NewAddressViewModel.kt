@@ -3,7 +3,6 @@ package com.mockcommerce.modules.shared.newaddress
 import androidx.lifecycle.ViewModel
 import com.mockcommerce.AppRepository
 import com.mockcommerce.models.AddressModel
-import java.util.*
 
 class NewAddressViewModel(val appRepository: AppRepository) : ViewModel() {
     var name: String = ""
@@ -20,9 +19,9 @@ class NewAddressViewModel(val appRepository: AppRepository) : ViewModel() {
     var isBilling = false
 
 
-    fun saveAddress() {
+    fun getAddress(): AddressModel {
         val addressModel = AddressModel(
-            UUID.randomUUID().toString(),
+            null,
             addressName,
             address,
             "$name $surname",
@@ -32,6 +31,6 @@ class NewAddressViewModel(val appRepository: AppRepository) : ViewModel() {
             false
         )
 
-        appRepository.addAddress(addressModel)
+        return addressModel
     }
 }

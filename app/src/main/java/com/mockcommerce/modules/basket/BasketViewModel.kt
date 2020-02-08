@@ -1,39 +1,73 @@
 package com.mockcommerce.modules.basket
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mockcommerce.AppRepository
 import com.mockcommerce.models.ProductModel
 
 class BasketViewModel(val appRepository: AppRepository) : ViewModel() {
-    val basketItems: LiveData<ArrayList<ProductModel>> = appRepository.getBasket()
+    val basketItems = MutableLiveData<List<ProductModel>>()
 
-    var postponedItems: LiveData<ArrayList<ProductModel>> = appRepository.getBasketPostponed()
+    var postponedItems = MutableLiveData<List<ProductModel>>()
 
     var basketTotal = appRepository.basketTotal
 
     fun removeFromPostponed(product: ProductModel) {
-        appRepository.removeFromPostponed(product.id)
+        val tempPostponed = postponedItems.value as ArrayList
+
+        tempPostponed.remove(product)
+
+        postponedItems.postValue(tempPostponed)
     }
 
     fun removeFromBasket(product: ProductModel) {
-        appRepository.removeFromBasket(product.id)
+        val tempBasket = basketItems.value as ArrayList
+
+        tempBasket.remove(product)
+
+        basketItems.postValue(tempBasket)
     }
 
     fun postpone(product: ProductModel) {
-        appRepository.moveToPostponed(product.id)
+        val tempPostponed = postponedItems.value as ArrayList
+        val tempBasket = basketItems.value as ArrayList
+        tempPostponed.add(product)
+        tempBasket.remove(product)
+        postponedItems.postValue(tempPostponed)
+        basketItems.postValue(tempBasket)
     }
 
     fun addToBasket(product: ProductModel) {
-        appRepository.moveToBasket(product.id)
+        val tempPostponed = postponedItems.value as ArrayList
+        val tempBasket = basketItems.value as ArrayList
+        tempPostponed.remove(product)
+        tempBasket.add(product)
+        postponedItems.postValue(tempPostponed)
+        basketItems.postValue(tempBasket)
     }
 
     fun add(product: ProductModel) {
-        appRepository.addToBasket(product.id)
+        val tempBasket = basketItems.value as ArrayList
+
+        tempBasket.forEach {
+            if (it.id == product.id) {
+                it.amount++
+            }
+        }
+
+        basketItems.postValue(tempBasket)
     }
 
     fun subtract(product: ProductModel) {
-        appRepository.subtract(product.id)
+        val tempBasket = basketItems.value as ArrayList
+
+        tempBasket.forEach {
+            if (it.id == product.id && it.amount > 1) {
+                it.amount--
+            }
+        }
+
+        basketItems.postValue(tempBasket)
     }
 
     fun isLoggedIn(): Boolean {
@@ -41,7 +75,7 @@ class BasketViewModel(val appRepository: AppRepository) : ViewModel() {
     }
 
     fun isBasketPopulated(): Boolean {
-        return basketItems.value!!.size > 0
+        return basketItems.value!!.isNotEmpty()
 
     }
 
