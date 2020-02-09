@@ -1,7 +1,6 @@
 package com.mockcommerce.utils
 
 import com.mockcommerce.models.*
-import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -21,7 +20,7 @@ interface MockCommerceApi {
     fun getUserInfo(): Single<UserModel>
 
     @GET("/api/user/addresses")
-    fun getAddresses(): Observable<List<AddressModel>>
+    fun getAddresses(): Single<List<AddressModel>>
 
     @POST("/api/user/favourite/{id}")
     fun toggleFavouriteProduct(@Path("id") id: String): Single<ProductModel>
@@ -36,7 +35,7 @@ interface MockCommerceApi {
     fun getBasket(): Single<List<ProductModel>>
 
     @POST("/api/user/basket/{id}")
-    fun addToBasket(@Path("id") productId: String): Single<ResponseBody>
+    fun addToBasket(@Path("id") productId: String): Single<ProductModel>
 
     @POST("/api/user/basket/{id}/{amount}")
     fun setBasket(@Path("id") productId: String, @Path("amount") amount: Int): Single<ResponseBody>

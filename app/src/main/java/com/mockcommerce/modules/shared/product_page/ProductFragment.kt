@@ -12,6 +12,7 @@ import com.mockcommerce.databinding.FragmentProductBinding
 import com.mockcommerce.modules.shared.adapters.ImageAdapter
 import com.mockcommerce.shared.ZoomOutPageTransformer
 import com.mockcommerce.shared.setDrawable
+import com.mockcommerce.usecases.BasketUseCase
 import com.mockcommerce.utils.BaseFragment
 import kotlinx.android.synthetic.main.fragment_product.view.*
 import org.koin.android.ext.android.get
@@ -45,8 +46,8 @@ class ProductFragment : BaseFragment() {
         binding.imageCarousel.setPageTransformer(ZoomOutPageTransformer())
 
         view.add_to_basket.setOnClickListener {
-            val disposable = appRepository.addToBasket(args.productId).subscribe()
-            addToDisposable(disposable)
+            val basketUseCase: BasketUseCase = get()
+            basketUseCase.addToBasket(args.productId)
         }
 
 

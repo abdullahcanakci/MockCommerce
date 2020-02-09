@@ -6,14 +6,17 @@ import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mockcommerce.modules.account.RegisterViewModel
-import com.mockcommerce.modules.basket.BasketViewModel
 import com.mockcommerce.modules.checkout.CheckoutViewModel
 import com.mockcommerce.modules.orders.OrderViewModel
 import com.mockcommerce.modules.orders.OrdersViewModel
 import com.mockcommerce.modules.shared.newaddress.NewAddressViewModel
 import com.mockcommerce.modules.shared.product_list.ProductListViewModel
 import com.mockcommerce.modules.shared.product_page.ProductViewModel
+import com.mockcommerce.shared.Notifier
+import com.mockcommerce.shared.UserSession
 import com.mockcommerce.shared.setupWithNavController
+import com.mockcommerce.usecases.BasketUseCase
+import com.mockcommerce.usecases.UserUseCase
 import com.mockcommerce.utils.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -46,9 +49,12 @@ class MainActivity : AppCompatActivity() {
 
         val dataModule = module {
             single { AppRepository(get(), get()) }
+            single { UserSession() }
+            single { Notifier(get()) }
+            single { UserUseCase(get(), get(), get(), get()) }
+            single { BasketUseCase(get(), get()) }
             viewModel { ProductViewModel(get()) }
             viewModel { ProductListViewModel() }
-            viewModel { BasketViewModel(get()) }
             viewModel { CheckoutViewModel(get()) }
             viewModel { NewAddressViewModel(get()) }
             viewModel { RegisterViewModel(get()) }

@@ -13,6 +13,7 @@
         android:id="@+id/login_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="ac@mail"
         android:autofillHints="AUTOFILL_HINT_EMAIL_ADDRESS"
         android:hint="@string/email"
         android:inputType="textEmailAddress" />
@@ -21,6 +22,7 @@
         android:id="@+id/login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="123456"
         android:autofillHints="AUTOFILL_HINT_PASSWORD"
         android:hint="@string/password"
         android:inputType="textPassword" />

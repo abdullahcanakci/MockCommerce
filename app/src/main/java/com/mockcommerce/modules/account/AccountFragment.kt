@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.mockcommerce.R
+import com.mockcommerce.usecases.UserUseCase
 import com.mockcommerce.utils.BaseFragment
-import com.mockcommerce.utils.TokenInterceptor
 import kotlinx.android.synthetic.main.fragment_account.view.*
 import org.koin.android.ext.android.get
 
@@ -44,9 +44,8 @@ class AccountFragment : BaseFragment() {
     }
 
     fun onLogout() {
-        val tokenInterceptor = get<TokenInterceptor>()
-        tokenInterceptor.token = ""
-
+        val useruseCase: UserUseCase = get()
+        useruseCase.logout()
         findNavController().navigate(R.id.account)
     }
 

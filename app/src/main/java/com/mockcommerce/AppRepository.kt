@@ -7,7 +7,6 @@ import com.google.gson.reflect.TypeToken
 import com.mockcommerce.models.*
 import com.mockcommerce.utils.MockCommerceApi
 import com.mockcommerce.utils.TokenInterceptor
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -66,7 +65,7 @@ class AppRepository(val client: MockCommerceApi, val tokenInterceptor: TokenInte
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun addToBasket(id: String): Single<ResponseBody> {
+    fun addToBasket(id: String): Single<ProductModel> {
         return client
             .addToBasket(id)
             .subscribeOn(Schedulers.io())
@@ -142,7 +141,7 @@ class AppRepository(val client: MockCommerceApi, val tokenInterceptor: TokenInte
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getAddresses(): Observable<List<AddressModel>> {
+    fun getAddresses(): Single<List<AddressModel>> {
         return client
             .getAddresses()
             .subscribeOn(Schedulers.io())

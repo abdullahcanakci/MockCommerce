@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.mockcommerce.AppRepository
 import com.mockcommerce.R
+import com.mockcommerce.shared.RequestStatus
+import com.mockcommerce.shared.UserSession
+import com.mockcommerce.usecases.UserUseCase
 import com.mockcommerce.utils.BaseFragment
-import com.mockcommerce.utils.TokenInterceptor
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 class LoginFragment : BaseFragment() {
     private val repo: AppRepository by inject()
@@ -26,7 +26,7 @@ class LoginFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (repo.isLoggedIn()) {
+        if (get<UserSession>().isLogged) {
             findNavController().navigate(LoginFragmentDirections.actionAccountToAccountLandingFragment())
         }
 
@@ -47,18 +47,13 @@ class LoginFragment : BaseFragment() {
     }
 
     fun onLogin() {
-        val disposable = repo.login(email?.text.toString(), password?.text.toString())
-            .subscribe(
-                { token ->
-                    val tokenInterceptor: TokenInterceptor = get()
-                    tokenInterceptor.token = token
+        val userUseCase: UserUseCase = get()
+        val disposable = userUseCase.login(email?.text.toString(), password?.text.toString())
+            .subscribe { result ->
+                if (result == RequestStatus.COMPLETED) {
                     findNavController().navigate(LoginFragmentDirections.actionAccountToAccountLandingFragment())
-                },
-                { error ->
-                    Timber.d(error.message)
-                    Toast.makeText(context, "Yanlış kimlik bilgileri!", Toast.LENGTH_SHORT).show()
                 }
-            )
+            }
 
         addToDisposable(disposable)
     }

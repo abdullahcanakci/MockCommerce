@@ -7,10 +7,6 @@ import timber.log.Timber
 
 class CheckoutViewModel(val appRepository: AppRepository) : ViewModel() {
 
-    var addresses = appRepository.getAddresses()
-
-    var productInBasket = appRepository.getBasket()
-
     var selectedBillingAddressId: String? = null
 
     var selectedShipmentAddressId: String? = null

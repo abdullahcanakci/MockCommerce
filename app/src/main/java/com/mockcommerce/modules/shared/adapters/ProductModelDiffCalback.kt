@@ -22,6 +22,7 @@ class ProductModelDiffCallback(val old: List<ProductModel>, val new: List<Produc
         val  n = new[newItemPosition]
         return (o.name == n.name &&
                 o.price == n.price &&
-                o.oldPrice == n.oldPrice)
+                o.oldPrice == n.oldPrice &&
+                o.amount == n.amount)
     }
 }

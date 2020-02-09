@@ -2,11 +2,9 @@ package com.mockcommerce.modules.basket
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mockcommerce.databinding.ItemBasketPostponedBinding
 import com.mockcommerce.models.ProductModel
-import com.mockcommerce.modules.shared.adapters.ProductModelDiffCallback
 
 class PostponedListAdapter(val listener: ((product: ProductModel, action: BasketFragment.ADAPTER_ACTION) -> Unit)) : RecyclerView.Adapter<PostponedListAdapter.PostponedViewHolder>() {
     private val items: ArrayList<ProductModel> = ArrayList()
@@ -43,26 +41,9 @@ class PostponedListAdapter(val listener: ((product: ProductModel, action: Basket
     }
 
     fun updateItems(newItems: List<ProductModel>) {
-        if(items.isEmpty()){
-            items.addAll(newItems)
-            notifyDataSetChanged()
-        }
-        else if(newItems.isEmpty()){
-            items.clear()
-            notifyDataSetChanged()
-        }
-        else {
-            val diffUtil =
-                ProductModelDiffCallback(items, newItems)
-            val result = DiffUtil.calculateDiff(diffUtil)
-
-            items.clear()
-            items.addAll(newItems)
-            result.dispatchUpdatesTo(this)
-        }
-        //Don't change, for some reason result.dispatchUpdates won't update itemrange and will
-        //cause indexOutOfRangeException
-        notifyItemRangeChanged(0, itemCount)
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
     }
 
     inner class PostponedViewHolder(val binding: ItemBasketPostponedBinding) :
