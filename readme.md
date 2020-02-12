@@ -10,7 +10,7 @@ There is 1 predefined users in the app
 name        |pw
 "ac@mail"  "123456"
 
-Backend server can be found at https://mockcommercebackend.herokuapp.com/api/products . Because it is heroku it might be sleeping so connection may fail, try again in few minutes.
+Backend server can be found at https://mockcommercebackend.herokuapp.com/ . Because it is heroku it might be sleeping so connection may fail, try again in few minutes.
 
 Backend repo can be found at https://github.com/abdullahcanakci/MockCommerceBackend. 
 
